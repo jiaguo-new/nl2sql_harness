@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+*.eggs/
+*.so
+*.pyd
+*.whl
+*.log
+
+# Virtual environments
+venv/
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Data and databases (do not commit large datasets)
+datasets/*/
+!datasets/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# Models and outputs
+models/
+*.safetensors
+*.bin
+*.ckpt
+*.pt
+*.pth
+
+# Runs, predictions, traces, metrics
+runs/*/
+!runs/.gitkeep
+traces/*/
+!traces/.gitkeep
+predictions/*/
+!predictions/.gitkeep
+metrics/*/
+!metrics/.gitkeep
+errors/*/
+!errors/.gitkeep
+
+# Secrets
+.envrc
+secrets.yaml
+secrets.json
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
