@@ -92,7 +92,7 @@ def run_e4(config_path: Path | str) -> None:
     repair_stats = {"attempted": 0, "success": 0, "damage": 0}
     total_start = time.time()
 
-    for ex in examples:
+    for idx, ex in enumerate(examples):
         qid = ex.get("question_id")
         db_id = ex["db_id"]
         question = ex["question"]
@@ -142,10 +142,12 @@ def run_e4(config_path: Path | str) -> None:
         repair_history = [{"sql": pred_sql, "result": exec_result}]
 
         # Repair loop
+        repairs_done = 0
         for r in range(max_repairs):
             if exec_result["ok"] and exec_result.get("rows"):
                 break
             repair_stats["attempted"] += 1
+            repairs_done += 1
             error_msg = exec_result.get("error") or "empty result set"
             repair_prompt = render_prompt(
                 repair_template,
@@ -185,6 +187,9 @@ def run_e4(config_path: Path | str) -> None:
             except Exception as e:
                 errors.append({"question_id": qid, "stage": f"repair_{r}", "error": str(e)})
                 break
+
+        if (idx + 1) % 5 == 0 or idx + 1 == len(examples):
+            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']} repairs={repairs_done}")
 
         predictions.append({
             "question_id": qid,
