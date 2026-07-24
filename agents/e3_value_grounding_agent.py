@@ -180,7 +180,7 @@ def run_e3(config_path: Path | str) -> None:
     errors = []
     total_start = time.time()
 
-    for ex in examples:
+    for idx, ex in enumerate(examples):
         qid = ex.get("question_id")
         db_id = ex["db_id"]
         question = ex["question"]
@@ -264,6 +264,8 @@ def run_e3(config_path: Path | str) -> None:
             gen_request_id = None
 
         exec_result = db.execute(pred_sql) if pred_sql else {"ok": False, "error": "empty prediction"}
+        if (idx + 1) % 5 == 0 or idx + 1 == len(examples):
+            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']}")
 
         predictions.append({
             "question_id": qid,
