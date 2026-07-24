@@ -1,0 +1,43 @@
+run_id: e4_bird_dev20_glm5.2_20260724
+experiment: E4
+experiment_name: Execution Repair Agent
+description: Direct SQL with execution-feedback repair loop (max 2 repairs) on BIRD dev 20-subset using GLM 5.2.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_20.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_20.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  generate: prompts/e0_direct_sql.md
+  repair: prompts/e4_repair_sql.md
+
+agent:
+  max_repairs: 2
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true
