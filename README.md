@@ -1420,3 +1420,51 @@ Stage-A 定义：假设已经知道 k5 在哪 210 题失败，并用 ORM v2 band
 | 1503 | debit_card_specializing | non-empty | False | False | omnisql | 0.6225 | 非空/非报错，ORM 未选对 |
 | 1520 | debit_card_specializing | non-empty | False | False | omnisql-921 | 0.2451 | 非空/非报错，ORM 未选对 |
 
+---
+
+## Test Submission Preparation (2026-07-27)
+
+After the dev result was frozen at **1333/1534 = 86.90% EX**, we started preparing the BIRD official test submission.
+
+### What we have
+
+- A complete submission package under `submission/`:
+  - `README.md` — package overview and status
+  - `model_description.md` — full model/pipeline description for the leaderboard
+  - `email_draft.md` — draft email to `bird.bench23@gmail.com`
+  - `format_notes.md` — prediction formats (JSONL / JSON / plain SQL)
+  - `test_generation_plan.md` — frozen pipeline for generating test predictions once data is available
+  - `audit_checklist.md` — compliance checklist
+  - `predictions_dev_reference.jsonl` + `.sha256` — final dev predictions as format reference
+  - `package_dev_reference/` — example of a fully packaged submission
+- Scripts:
+  - `scripts/prepare_test_submission.py` — converts internal JSONL to official formats and writes manifests/SHA256
+  - `scripts/audit_submission.py` — final format/compliance audit
+- Data manifest template:
+  - `datasets/test_blind/data_manifest_TEMPLATE.json`
+
+### What is blocked
+
+The BIRD **test set is not present in this workspace**.  The BIRD website only says:
+
+> "Please follow the Submission Guideline ... and contact `bird.bench23@gmail.com` for test evaluation."
+
+We tried to fetch the linked Google Doc / Notion page and the public `test.zip` URLs, but the network environment blocks Google Docs and returns `403 Forbidden` for the OSS test zip.  Therefore the test data must be obtained by emailing the organizers.
+
+### Next action
+
+1. Send `submission/email_draft.md` to `bird.bench23@gmail.com`.
+2. Receive the BIRD test questions (and test databases if released to participants) and the exact prediction format.
+3. Place the test data into `datasets/test_blind/` (read-only) and fill `data_manifest.json`.
+4. Run the frozen E6 pipeline documented in `submission/test_generation_plan.md`.
+5. Package with `scripts/prepare_test_submission.py` and audit with `scripts/audit_submission.py`.
+6. Attach the packaged predictions to the final submission email.
+
+### Submission method
+
+- Email address: `bird.bench23@gmail.com`
+- Subject: `BIRD-SQL Test Submission Request — nl2sql_harness E6 Hybrid (dev EX 86.90%)`
+- Attachments: `model_description.md`, `predictions_dev_reference.jsonl`, `README.md` (or the full `submission/` directory).
+
+All materials are committed to the `main` branch as `86f6c65`.
+
