@@ -1,0 +1,26 @@
+{
+  "dataset": "BIRD",
+  "split": "test_blind",
+  "source": "datasets/test_blind/test.json (to be obtained from BIRD organizers)",
+  "db_root": "datasets/test_blind/test_databases (to be obtained from BIRD organizers)",
+  "contains_gold": false,
+  "allowed_usage": [
+    "official_test_submission_inference",
+    "execution_for_prediction_validation"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "rl",
+    "preference_optimization",
+    "retrieval_corpus",
+    "prompt_engineering",
+    "few_shot_selection",
+    "model_selection",
+    "manual_gold_inspection"
+  ],
+  "download_date": "TO_FILL",
+  "version": "TO_FILL",
+  "sha256": "TO_FILL",
+  "loaded_at": "TO_FILL"
+}

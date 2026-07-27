@@ -22,8 +22,14 @@ venv/
 *~
 
 # Data and databases (do not commit large datasets)
-datasets/*/
-!datasets/.gitkeep
+datasets/**/*.json
+datasets/**/*.jsonl
+datasets/**/*.db
+datasets/**/*.sqlite
+datasets/**/*.sqlite3
+datasets/**/*.zip
+!datasets/**/data_manifest*.json
+!datasets/**/.gitkeep
 *.db
 *.sqlite
 *.sqlite3

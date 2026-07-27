@@ -1,0 +1,50 @@
+{
+  "run_id": "e6_hybrid_dev_reference_20260727",
+  "date": "2026-07-27T07:49:01.613904+00:00",
+  "type": "test_submission",
+  "code_commit": "9a704ca9da8d9520c3295e0442874c9c0bfcaa9e",
+  "model_description": {
+    "submission_name": "nl2sql_harness E6 Hybrid",
+    "method": "k5 retrieval baseline + empty/error trigger + ORM v2 band selection",
+    "models": {
+      "baseline_generator": "GLM-5.2 API (temperature=0, top_p=1, max_tokens=4096)",
+      "repair": "deterministic value-grounding string-literal case repair",
+      "candidate_pool": [
+        "agentar",
+        "omnisql",
+        "omnisql-921",
+        "qwen3"
+      ],
+      "orm": "qwen3-14b-orm-v2-merged-bf16",
+      "orm_backend": "vLLM bfloat16, first-token logprob True/False score"
+    },
+    "selector": {
+      "trigger": "baseline SQL result is empty or execution error",
+      "rule": "band",
+      "band_delta": 0.1,
+      "tie_break": "result-hash group size"
+    },
+    "training_data": "ORM trained only on BIRD train-split candidates with execution-verified labels",
+    "dev_result": {
+      "total": 1534,
+      "em": 1072,
+      "ex": 1333,
+      "valid": 1529,
+      "em_rate": 69.88,
+      "ex_rate": 86.9,
+      "valid_rate": 99.67,
+      "join_total": 1140,
+      "join_ex": 984,
+      "join_ex_rate": 86.32
+    }
+  },
+  "input_predictions": "/home/dameng/project/nl2sql_harness/submission/predictions_dev_reference.jsonl",
+  "output_dir": "/home/dameng/project/nl2sql_harness/submission/package_dev_reference",
+  "num_questions": 1534,
+  "predictions_sha256": "e1d73146dc42996f7389078a6fda0f13cc5b6890f7b3f5515079496988994645",
+  "compliance": {
+    "no_gold_in_prompt": true,
+    "no_test_data_in_training": true,
+    "manual_prediction_edits": 0
+  }
+}
