@@ -1,0 +1,46 @@
+run_id: e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726_chunk1
+experiment: E4
+experiment_name: Execution Repair Agent on retrieval+detVG failure examples
+description: |
+  Run the E4 execution-repair agent from scratch on the 210 examples where
+  retrieval k5 v2 + deterministic value-grounding fails.  Output is intended as
+  an additional candidate source for the full-dev selector.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: datasets/dev/e4_failures_210_chunk1.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  generate: prompts/e0_direct_sql_cot.md
+  repair: prompts/e4_repair_sql.md
+
+agent:
+  max_repairs: 2
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

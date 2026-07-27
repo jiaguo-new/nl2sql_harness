@@ -1,0 +1,39 @@
+run_id: e5b_bird_dev200_selector_repair_20260724
+experiment: E5b-SELECTOR-REPAIR
+experiment_name: e5b_bird_dev200_selector_repair_20260724
+description: >
+  E5b selector with deterministic repairs on top of the k5/v2/k3/tf candidate pool.
+  Selects the valid candidate with the fewest JOINs, then applies (1) row-count tie-break
+  for list questions, (2) fewest-SELECT-column tie-break when the question does not
+  explicitly ask for multiple output fields, and (3) source priority (k5, v2, k3, tf).
+  After selection, applies deterministic repairs: ABS(longitude) for "highest longitude"
+  and conservative value repair when the SQL returns an empty result.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_200.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+candidate_sources:
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_v2_merged_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_tfidf_16k_20260724/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

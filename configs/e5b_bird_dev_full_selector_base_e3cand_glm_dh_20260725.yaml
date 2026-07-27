@@ -1,0 +1,45 @@
+run_id: e5b_bird_dev_full_selector_base_e3cand_glm_dh_20260725
+experiment: E5b-SELECTOR-REPAIR
+experiment_name: E5b selector + detVG on full BIRD dev (base + E3 GLM + financial DH)
+description: >
+  E5b selector with deterministic repairs on full BIRD dev.
+  Candidate pool: E0 GLM base predictions, E3 GLM schema/value-grounding candidates
+  for base errors, and financial district-hint candidates for financial base errors.
+
+source_names:
+  - base
+  - e3cand
+  - glm_dh
+
+source_priority:
+  - base
+  - e3cand
+  - glm_dh
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev.json
+
+candidate_sources:
+  - predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions.jsonl
+  - predictions/e3_glm_candidates_full_dev_merged_20260725/predictions.jsonl
+  - predictions/e0_financial_district_hint_full_dev_errors_20260725/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

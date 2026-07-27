@@ -1,0 +1,8 @@
+[
+  {"name": "k5_detvg", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e5b_retrieval_k5_v2_merged_detvg_20260725/predictions.jsonl"},
+  {"name": "retrieval_k3_v2", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e0_bird_dev_full_glm5.2_cot8k_retrieval_k3_v2_merged_20260726/predictions.jsonl"},
+  {"name": "e4_failures", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726/predictions_full.jsonl"},
+  {"name": "base", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions.jsonl"},
+  {"name": "e3cand", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e3_glm_candidates_full_dev_merged_20260725/predictions_full.jsonl"},
+  {"name": "glm_dh", "pred_path": "/home/dameng/project/nl2sql_harness_dev/predictions/e0_financial_district_hint_full_dev_errors_20260725/predictions_full.jsonl"}
+]

@@ -1,0 +1,39 @@
+run_id: e5b_bird_dev200_selector_repair_e3cand_glm_dh_full_20260724
+experiment: E5b-SELECTOR-REPAIR
+experiment_name: e5b_bird_dev200_selector_repair_e3cand_glm_dh_full_20260724
+description: >
+  E5b selector with deterministic repairs on top of k5/v2/k3/tf + local 32B E3 + full GLM district-hint candidate pool.
+  The GLM district-hint source is run on all 106 financial BIRD dev examples and prioritised for db_id=financial.
+  Selects the valid candidate with the fewest JOINs, then row-count / SELECT-column tie-breaks and source priority.
+  After selection, applies deterministic value-grounding repairs.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_200.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+candidate_sources:
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_v2_merged_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_tfidf_16k_20260724/predictions.jsonl
+  - predictions/e3_local_candidates_20260724_155614/predictions.jsonl
+  - predictions/e0_financial_district_hint_glm5.2_financial_full_20260724/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

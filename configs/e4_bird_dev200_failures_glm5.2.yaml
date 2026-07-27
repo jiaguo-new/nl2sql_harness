@@ -1,0 +1,44 @@
+run_id: e4_bird_dev200_failures_glm5.2_20260724
+experiment: E4
+experiment_name: Execution Repair Agent on E5b failures
+description: Repair the 18 failure cases from the best E5b+deterministic value-grounding run (91.0 EX) using GLM 5.2 with full-schema execution feedback. Starts from the current prediction and asks the model to revise it.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_200.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  repair: prompts/e4_repair_sql.md
+
+base_predictions: predictions/e5b_e3cand_detvg_20260724/predictions.jsonl
+
+agent:
+  max_repairs: 1
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true
