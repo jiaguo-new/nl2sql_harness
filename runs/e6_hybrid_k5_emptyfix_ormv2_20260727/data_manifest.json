@@ -1,0 +1,13 @@
+{
+  "dataset": "BIRD dev",
+  "source": "/home/dameng/project/text2sql_agent/NL2SQL360/data/bird/dev",
+  "files": [
+    "dev.json",
+    "dev_tables.json",
+    "dev_databases/"
+  ],
+  "contains_gold": true,
+  "allowed_use": "development evaluation, threshold selection, error analysis",
+  "prohibited_use": "training, prompt few-shot, RAG corpus, router/reranker/judge training",
+  "access": "read-only sqlite (mode=ro), SELECT only"
+}

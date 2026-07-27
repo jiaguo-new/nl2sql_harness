@@ -1,0 +1,16 @@
+{
+  "trigger": "k5 result is empty or execution error",
+  "selection_rule": "band: max orm_score pool, delta=0.1, tie-break by result-hash group size then orm_score",
+  "selection_pool_models": [
+    "agentar",
+    "omnisql",
+    "omnisql-921",
+    "qwen3"
+  ],
+  "orm_model": "/home/dameng/Sql+text2sql/models/qwen3-14b-orm-v2-merged-bf16",
+  "orm_score": "P(True)/(P(True)+P(False)) at first generated token",
+  "stopping": {
+    "max_repairs": 0,
+    "note": "single-pass replacement, no execution repair loop"
+  }
+}

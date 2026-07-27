@@ -45,6 +45,7 @@ models/
 # Runs, predictions, traces, metrics
 runs/*/
 !runs/.gitkeep
+!runs/e6_hybrid_k5_emptyfix_ormv2_20260727/
 traces/*/
 !traces/.gitkeep
 predictions/*/
