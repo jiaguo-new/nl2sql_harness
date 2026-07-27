@@ -1,0 +1,12 @@
+{base_prompt}
+
+---
+Candidate SQL:
+```sql
+{candidate_sql}
+```
+
+Execution result of the candidate SQL:
+{result_preview}
+
+Does the candidate SQL correctly answer the question? Answer only True or False.

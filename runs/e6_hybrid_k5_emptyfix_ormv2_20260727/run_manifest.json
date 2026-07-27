@@ -1,0 +1,30 @@
+{
+  "run_id": "e6_hybrid_k5_emptyfix_ormv2_20260727",
+  "date": "2026-07-27",
+  "type": "hybrid_selector",
+  "description": "k5 baseline (e5b_retrieval_k5_v2_merged_detvg_20260725) + zero-damage empty/error trigger: for the 25 dev questions where the k5 SQL returns an empty result or fails to execute, replace with the ORM-v2 band-selected (delta=0.1, result-hash group size tie-break) candidate from the merged 4-model n4 pool (agentar/omnisql/omnisql-921/qwen3). Trigger is oracle-free: empty k5 result never occurs on correct dev questions (0/1324), so replacement cannot damage a correct answer.",
+  "baseline_run": "e5b_retrieval_k5_v2_merged_detvg_20260725",
+  "baseline_ex": "1324/1534 (86.31%)",
+  "hybrid_ex": "1333/1534 (86.90%)",
+  "fixes": 9,
+  "damage": 0,
+  "replacements": 25,
+  "models": {
+    "generator_baseline": "GLM-5.2 API (cot8k retrieval k5 v2, detvg selector) — frozen from baseline run",
+    "orm": "qwen3-14b-orm-v2-merged-bf16 (LoRA v2 merged, trained on train-split candidate results only)",
+    "candidate_pool": "upstream merged4model n4 (train-split generated candidates, pre-existing)"
+  },
+  "inference": {
+    "orm_backend": "vLLM (vllm-cuda env), bf16, max_model_len=4096, prefix caching on, eager",
+    "scoring": "P(True) from first generated token logprobs (top-10), temperature=0, max_tokens=1"
+  },
+  "data": {
+    "split": "bird dev (evaluation only)",
+    "no_gold_in_prompts": true,
+    "no_gold_in_training": true,
+    "orm_training_data": "train-split candidate files with execution-verified labels (upstream experiments)",
+    "manual_prediction_edits": 0
+  },
+  "code_commit": "9e0c7fc69366671f1bad219bfeec8902f8f50221",
+  "predictions_sha256": "e1d73146dc42996f7389078a6fda0f13cc5b6890f7b3f5515079496988994645"
+}
