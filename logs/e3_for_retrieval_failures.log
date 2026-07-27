@@ -1,0 +1,1029 @@
+
+[1/210] qid=21 db=california_schools
+  ok latency=6.9s sql=SELECT COUNT(*) FROM frpm WHERE `County Name` = 'Los Angeles' AND `Free Meal Count (K-12)` > 500 AND `FRPM Count (K-12)`
+
+[2/210] qid=24 db=california_schools
+  ok latency=17.1s sql=SELECT s.School
+FROM schools s
+JOIN frp  ok latency=2.7s sql=SELECT s.School AS school_name, sat.AvgScrWrite AS writing_score, s.Phone AS communication_number
+  ok latency=9.9s sql=SELECT s.School, sc.AvgScrWrite, s.Phon  ok latency=19.3s sql=SELECT COALESCE(AdmFName1 || ' ' || AdmLName1, AdmFName2 || ' ' || AdmLName2, AdmFName3 || ' ' || AdmLName3) AS full_nam
+
+[5/210] qid=49 db=california_schools
+  ok latency=2.9s sql=SELECT School, ClosedDate
+FROM schools
+WHERE StatusType = 'Closed'
+  AND County = (
+    SELECT County
+    FROM schools
+ 
+
+[6/210] qid=70 db=california_schools
+  ok latency=34.1s sql=
+
+[7/210] qid=77 db=california_schools
+  ok latency=23.3s sql=
+
+[8/210] qid=82 db=california_schools
+  ok latency=1.7s sql=SELECT GSoffered
+FROM schools
+ORDER BY Longitude DESC
+LIMIT 1
+
+[9/210] qid=84 db=california_schools
+  ok latency=28.8s sql=
+
+[10/210] qid=86 db=california_schools
+  ok latency=2.7s sql=SELECT AdmLName1, District, County, School FROM schools WHERE CharterNum = '40'
+
+[11/210] qid=94 db=financial
+  ok latency=34.0s sql=
+
+[12/210] qid=99 db=financial
+  ok latency=7.9s sql=SELECT a.account_id
+FROM account a
+JOIN loan l ON a.account_id = l.account_id
+WHERE l.duration > 12
+  AND strftime('%Y',
+
+[13/210] qid=100 db=financial
+  ok latency=23.7s sql=SELECT COUNT(DISTINCT c.client_id)
+FROM client c
+JOIN disp d ON c.client_id = d.client_id
+JOIN account a ON d.account_id
+
+[14/210] qid=106 db=financial
+  ok latency=9.2s sql=SELECT MAX(t.amount) AS max_amount
+FROM trans t
+JOIN disp d ON t.account_id = d.account_id
+JOIN card c ON c.disp_id = d.
+
+[15/210] qid=113 db=financial
+  ok latency=3.6s sql=SELECT c.birth_date
+FROM loan l
+JOIN disp d ON l.account_id = d.account_id
+JOIN client c ON d.client_id = c.client_id
+WH
+
+[16/210] qid=122 db=financial
+  ok latency=2.8s sql=SELECT d.A2, d.A3
+FROM loan l
+JOIN account a ON l.account_id = a.account_id
+JOIN district d ON a.district_id = d.distric
+
+[17/210] qid=129 db=financial
+  ok latency=10.1s sql=SELECT d.A2 AS district_name, SUM(t.amount) AS total_withdrawals
+FROM trans t
+JOIN account a ON t.account_id = a.account
+
+[18/210] qid=132 db=financial
+  ok latency=6.6s sql=SELECT AVG(T1.amount) FROM loan AS T1 JOIN disp AS T2 ON T1.account_id = T2.account_id JOIN client AS T3 ON T2.client_id
+
+[19/210] qid=133 db=financial
+  ok latency=2.1s sql=SELECT A3, A2 FROM district ORDER BY A13 DES  ok latency=21.7s sql=SELECT AVG(amount)  ok latency=7.7s sql=SELECT DISTINCT T1.account_id
+FROM `order` AS T1
+JOIN account AS T2 ON T1.account_id = T2.account_id
+JOIN district AS T3
+
+[21/210] qid=143 db=financial
+  ok latency=5.0s sql=SELECT a.account_id
+FROM account a
+JOIN disp d ON a.account_id = d.account_id
+JOIN card c ON d.disp_id = c.disp_id
+WHERE
+
+[22/210] qid=162 db=financial
+  ok latency=2.1s sql=SELECT d.A3 FROM client c JOIN district d ON c.district_id = d.  ok latency=5.8s sql=SELECT a.account_id
+FROM account a
+JOIN disp d ON d.account_id = a.account_id
+JOIN card c ON c.disp_id = d.disp_id
+WHERE
+
+[22/210] qid=162 db=financial
+  ok latency=2.1s sql=SELECT d.A3 FROM clien  ok latency=10.6s sql=SELECT SUM(t.amount)
+FROM client c
+JOIN disp d ON c.client_id = d.client_id
+JOIN account a ON d.account_id = a.account_i
+
+[25/210] qid=181 db=financial
+  ok latency=3.2s sql=SELECT client.client_id
+FROM client
+JOIN disp ON client.client  ok latency=23.8s sql=
+
+[25/210] qid=181 db=financial
+  ok latency=10.2s sql=SELECT client.client_id
+FROM client
+JOIN disp ON client.client_id = disp.client_id
+JOIN loan ON disp.account_id = loan.a
+
+[26/210] qid=182 db=financial
+  ok latency=29.0s sql=
+
+[27/210] qid=185 db=financial
+  ok latency=5.1s sql=SELECT 
+  CAST(SUM(CASE WHEN c.gender = 'F' THEN 1 ELSE 0 END) AS REAL) / COUNT(*) * 100 AS proportion_female
+FROM clien
+
+[28/210] qid=192 db=financial
+  ok latency=4.5s sql=SELECT AVG(l.amount)
+FROM loan l
+JOIN account a ON l.account_id = a.account_id
+WHERE l.status IN ('C', 'D')
+  AND a.freq
+
+[29/210] qid=205 db=toxicology
+  ok latency=2.6s sql=SELECT DISTINCT molecule_id FROM atom WHERE element = 'si'
+
+[30/210] qid=207 db=toxicology
+  ok latency=3.2s sql=SELECT DISTINCT a.element
+FROM connected c
+JOIN bond b ON c.bond_id = b.bond_id
+JOIN atom a ON c.atom_id = a.atom_id
+WHE
+
+[31/210] qid=212 db=toxicology
+  ok latency=2.8s sql=SELECT element
+FROM atom
+JOIN molecule ON atom.molecule_id = molecule.molecule_id
+WHERE molecule.label = '-'
+GROUP BY el
+
+[32/210] qid=214 db=toxicology
+  ok latency=21.7s sql=
+
+[33/210] qid=215 db=toxicology
+  ok latency=7.3s sql=SELECT COUNT(*)
+FROM atom a
+WHERE a.element IN ('i', 's')
+  AND a.molecule_id IN (
+    SELECT b.molecule_id FROM bond b 
+
+[34/210] qid=  ok latency=30.0s  ok latency=30.5s sql=
+
+[35/210] qid=  ok latency=5.4s   ok latency=10.6s sql=SELECT bond_type, label
+FROM bond
+JOIN molecule ON bond.molecule_id = molecule.molecule_id
+WHERE bond.molecule_id = 'TR0
+
+[36/210] qid  ok latency=24.2s   ok latency=26.1s sql=SELECT COUNT(DISTINCT bond_id) FROM connected WHERE atom_id = 'TR009_12' OR atom_id2 = 'TR009_12'
+
+[37/210] qid=252 db=toxicology
+  ok latency=8.9s sql=SELECT DISTINCT c.atom_id2
+FROM connected c
+JOIN atom a ON c.atom_id = a.atom_id
+WHERE a.element = 'pb'
+
+[38/210] qid=269 db=toxicology
+  ok latency=24.5s sql=
+
+[39/210] qid=281 db=toxicology
+  ok latency=11.1s sql=SELECT T1.element, COUNT(*) 
+FROM atom AS T1 
+JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id 
+WHERE T2.label = '
+
+[40/210] qid=286 db=toxicology
+  ok latency=6.3s sql=SELECT 
+  CAST((SELECT COUNT(DISTINCT molecule_id) FROM bond WHERE bond_type = '#') AS FLOAT) / 
+  (SELECT COUNT(*) FROM
+
+[41/210] qid=288 db=toxicology
+  ok latency=9.8s sql=SELECT T1.label FROM molecule AS T1 JOIN atom AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.atom_id = 'TR001_1'
+
+[42/210] qid=290 db=toxicology
+  ok latency=18.8s sql=SELECT DISTINCT element FROM atom WHERE molecule_id = 'TR151' AND element IN ('cl', 'br', 'f', 'i', 'sn', 'pb', 'te')
+
+[43/210] qid=296 db=toxicology
+  ok latency=8.3s sql=SELECT b.molecule_id
+FROM bond b
+JOIN connected c ON b.bond_id = c.bond_id
+JOIN atom a ON c.atom_id = a.atom_id
+WHERE b.
+
+[44/210] qid=310 db=toxicology
+  ok latency=6.7s sql=SELECT 
+  COUNT(DISTINCT m.molecule_id) AS total_double_bond_molecules,
+  COUNT(DISTINCT CASE WHEN m.label = '+' THEN m.
+
+[45/210] qid=340 db=card_games
+  ok latency=2.9s sql=SELECT name
+FROM cards
+WHERE cardKingdomFoilId = cardKingdomId
+  AND cardKingdomId IS NOT NULL
+
+[46/210] qid=341 db=card_games
+  ok latency=4.0s sql=SELECT name
+FROM cards
+WHERE borderColor = 'borderless'
+  AND NOT (cardKingdomFoilId IS NOT NULL AND cardKingdomId IS NO
+
+[47/210] qid=342 db=card_games
+  ok latency=5.4s sql=SELECT name
+FROM cards
+WHERE faceConvertedManaCost = (SELECT MAX(faceConvertedManaCost) FROM cards)
+
+[48/210] qid=343 db=card_games
+  ok latency=3.1s sql=SELECT name FROM cards WHERE frameVersion = '2015' AND edhrecRank < 100
+
+[49/210] qid=349 db=card_games
+  ok latency=4.7s sql=SELECT c.name, c.artist, c.isPromo
+FROM cards c
+JOIN rulings r ON c.uuid = r.uuid
+GROUP BY c.uuid, c.name, c.artist, c.i
+
+[50/210] qid=359 db=card_games
+  ok latency=2.4s sql=SELECT originalType FROM cards WHERE name = 'Ancestor''s Chosen' LIMIT 1
+
+[51/210] qid=360 db=card_games
+  ok latency=10.2s sql=SELECT DISTINCT st.language
+FROM cards c
+JOIN sets s ON c.setCode = s.code
+JOIN set_translations st ON s.code = st.setCo
+
+[52/210] qid=376 db=card_games
+  ok latency=8.0s sql=SELECT DISTINCT layout FROM cards WHERE keywords LIKE '%Flying%'
+
+[53/210] qid=386 db=card_games
+  ok latency=25.4s sql=
+
+[54/210] qid=387 db=card_games
+  ok latency=1.9s sql=SELECT name, colors FROM cards WHERE setCode = 'OGW'
+
+[55/210] qid=388 db=card_games
+  ok latency=4.7s sql=SELECT c.name, fd.language
+FROM cards c
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE c.setCode = '10E' AND c.converted
+
+[56/210] qid=389 db=card_games
+  ok latency=3.1s sql=SELECT c.name, r.date
+FROM cards c
+JOIN rulings r ON c.uuid = r.uuid
+WHERE c.originalType = 'Creature - Elf'
+
+[57/210] qid=395 db=card_games
+  ok latency=5.9s sql=SELECT COUNT(*) FROM cards WHERE artist = 'UDON' AND availability LIKE '%mtgo%' AND hand = '-1'
+
+[58/210] qid=400 db=card_games
+  ok latency=2.7s sql=SELECT DISTINCT c.setCode
+FROM cards c
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE fd.language = 'Spanish'
+
+[59/210] qid=405 db=card_games
+  ok latency=4.9s sql=SELECT COUNT(*)
+FROM set_translations
+JOIN sets ON set_translations.setCode = sets.code
+WHERE sets.block = 'Commander' A
+
+[60/210] qid=406 db=card_games
+  ok latency=26.0s sql=
+
+[61/210] qid=408 db=card_games
+  ok latency=3.2s sql=SELECT COUNT(*) FROM cards WHERE power IS NULL AND (text LIKE '%When%' OR text LIKE '%Whenever%' OR text LIKE '%At %')
+
+[62/210] qid=428 db=card_games
+  ok latency=1.8s sql=SELECT s.name, st.translation
+FROM sets s
+JOIN set_translations st ON s.code = st.setCode
+WHERE s.id = 5
+
+[63/210] qid=432 db=card_games
+  ok latency=6.9s sql=SELECT s.name
+FROM sets s
+JOIN set_translations st ON s.code = st.setCode
+WHERE st.language = 'Russian'
+ORDER BY s.baseS
+
+[64/210] qid=441 db=card_games
+  ok latency=3.6s sql=SELECT code FROM sets WHERE releaseDate = '2007-07-13'
+
+[65/210] qid=444 db=card_games
+  ok latency=13.7s sql=SELECT fd.name, fd.type
+FROM cards c
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE c.watermark = 'Boros'
+
+[66/210] qid=445 db=card_games
+  ok latency=10.4s sql=SELECT fd.language, fd.flavorText, c.type
+FROM cards c
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE c.watermark = 'col
+
+[67/210] qid=448 db=card_games
+  ok latency=4.7s sql=SELECT fd.name, fd.type
+FROM cards c
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE c.watermark = 'Abzan'
+
+[68/210] qid=453 db=card_games
+  ok latency=6.6s sql=SELECT manaCost FROM cards WHERE name = 'Ancestor''s Chosen'
+
+[69/210] qid=454 db=card  error: HTTPError('500 Server Error: Internal Server Error for url: https://open.bigmodel.cn/api/paas/v4/chat/completions')
+
+[70/210] qid=482 db=card_games
+  ok latency=3.5s sql=SELECT T2.type
+FROM cards AS T1
+JOIN foreign_data AS T2 ON T1.uuid = T2.uuid
+WHERE T1.name = 'Ancestor''s Chosen' AND T2
+
+[71/210] qid=483 db=card_games
+  ok latency=9.9s sql=SELECT fd.text
+FROM cards c
+JOIN sets s ON c.setCode = s.code
+JOIN foreign_data fd ON c.uuid = fd.uuid
+WHERE s.name = 'C
+
+[72/210] qid=484 db=card_games
+  ok latency=15.4s sql=SELECT T1.name
+FROM foreign_data AS T1
+JOIN cards AS T2 ON T1.uuid = T2.uuid
+JOIN sets AS T3 ON T2.setCode = T3.code
+WHE
+
+[73/210] qid=487 db=card_games
+  ok latency=15.8s sql=SELECT 
+    SUM(CASE WHEN cardKingdomFoilId = cardKingdomId AND cardKingdomId IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / C
+
+[74/210] qid=500 db=card_games
+  ok latency=3.2s sql=SELECT st.translation
+FROM cards c
+JOIN set_translations st ON c.setCode = st.setCode
+WHERE c.name = 'Fellwar Stone' AND
+
+[75/210] qid=515 db=card_games
+  ok latency=8.0s sql=SELECT c.originalReleaseDate, l.format
+FROM cards c
+JOIN legalities l ON c.uuid = l.uuid
+WHERE c.rarity = 'mythic'
+  AND
+
+[76/210] qid=516 db=card_games
+  ok latency=3.0s sql=SELECT COUNT(*)
+FROM cards
+JOIN foreign_data ON cards.uuid = foreign_data.uuid
+WHERE cards.artist = 'Volkan Baga' AND fo
+
+[77/210] qid=517 db=card_games
+  ok latency=8.8s sql=SELECT COUNT(*)
+FROM cards c
+WHERE c.rarity = 'rare'
+  AND c.types = 'Enchantment'
+  AND c.name = 'Abundance'
+  AND NOT 
+
+[78/210] qid=519 db=card_games
+  ok latency=3.1s sql=SELECT T.language
+FROM sets S
+JOIN set_translations T ON S.code = T.setCode
+WHERE S.name = 'Battlebond'
+
+[79/210] qid=529 db=card_games
+  ok latency=22.6s sql=SELECT name
+FROM sets
+WHERE code IN (
+    SELECT setCode
+    FROM set_translations
+    WHERE language = 'Korean'
+)
+AND c
+
+[80/210] qid=556 db=codebase_community
+  ok latency=10.4s sql=SELECT CAST(COUNT(b.Id) AS REAL) / COUNT(DISTINCT u.DisplayName) AS avg_badges
+FROM badges b
+JOIN users u ON b.UserId = 
+
+[81/210] qid=581 db=codebase_community
+  ok latency=5.5s sql=SELECT u.DisplayName
+FROM posts p
+JOIN users u ON p.LastEditorUserId = u.Id
+WHERE p.Title = 'Open source tools for visua
+
+[82/210] qid=582 db=codebase_community
+  ok latency=2.3s sql=SELECT T1.Title
+FROM posts AS T1
+JOIN users AS T2 ON T1.LastEditorUserId = T2.Id
+WHERE T2.DisplayName = 'Vebjorn Ljosa'
+
+[83/210] qid=583 db=codebase_community
+  ok latency=4.6s sql=SELECT SUM(p.Score) AS TotalScore, u.WebsiteUrl
+FROM posts p
+JOIN users u ON p.LastEditorUserId = u.Id
+WHERE u.DisplayNa
+
+[84/210] qid=586 db=codebase_community
+  ok latency=6.2s sql=SELECT T1.DisplayName
+FROM users AS T1
+JOIN votes AS T2 ON T1.Id = T2.UserId
+JOIN posts AS T3 ON T2.PostId =   ok latency=37.8s sql=
+
+[87/210] qid=594 db=codebase_community
+  ok latency=3.5s sql=SELECT u.DisplayName, u.Reputation
+FROM posts p
+JOIN users u ON p.OwnerUserId = u.Id
+WHERE p.Id = 1
+
+[88/210] qid=596 db=codebase_community
+  ok latency=11.1s sql=SELECT b.Name
+FROM badges b
+WHERE b.UserId = (
+    SELECT UserId
+    FROM comments
+    WHERE UserId IS NOT NULL
+    GROU
+
+[89/210] qid=602 db=codebase_community
+  ok latency=1.7s sql=SELECT Id, OwnerUserId FROM posts WHERE Score > 60
+
+[90/210] qid=606 db=codebase_community
+  ok latency=3.4s sql=SELECT Name FROM badges WHERE Date = '2010-07-19 19:39:08'
+
+[91/210] qid=608 db=codebase_community
+  ok latency=2.8s sql=SELECT Text FROM comments WHERE CreationDate = '2010-07-19 19:25:47.0'
+
+[92/210] qid=628 db=codebase_community
+  ok latency=5.7s sql=SELECT DisplayName FROM users WHERE Views = (SELECT MAX(Views) FROM users)
+
+[93/210] qid=630 db=codebase_community
+  ok latency=8.4s sql=SELECT T1.Tags FROM posts AS T1 JOIN users AS T2 ON T1.OwnerUserId = T2.Id WHERE T2.DisplayName = 'John Stauffer'
+
+[94/210] qid=631 db=codebase_community
+  ok latency=4.9s sql=SELECT COUNT(p.Id)
+FROM posts p
+JOIN users u ON p.OwnerUserId = u.Id
+WHERE u.DisplayName = 'Daniel Vassallo'
+
+[95/210] qid=632 db=codebase_community
+  ok latency=4.6s sql=SELECT COUNT(*)
+FROM votes AS v
+JOIN users AS u ON v.UserId = u.Id
+WHERE u.DisplayName = 'Harlan'
+
+[96/210] qid=639 db=codebase_community
+  ok latency=28.0s sql=
+
+[97/210] qid=640 db=codebase_community
+  ok latency=11.9s sql=SELECT
+(SELECT SUM(ViewCount) FROM posts JOIN users ON posts.OwnerUserId = users.Id WHERE DisplayName = 'Mornington') -
+
+
+[98/210] qid=642 db=codebase_community
+  ok latency=13.4s sql=SELECT COUNT(*) FROM posts WHERE CreaionDate BETWEEN '2010-07-21 00:00:00' AND '2012-07-21 23:59:59'
+
+[99/210] qid=646 db=codebase_community
+  ok latency=3.1s sql=SELECT p.Title, u.DisplayName
+FROM comments c
+JOIN posts p ON c.PostId = p.Id  ok latency=20.1s sql=
+
+[99/210] qid=646 db=codebase_community
+  ok latency=3.3s sql=SELECT T1.Title, T2.DisplayName
+FROM posts AS T1
+JOIN comments AS T3 ON T1.Id = T3.PostId
+JOIN users AS T2 ON T3.UserId 
+
+[100/210] qid=649 db=codebase_community
+  ok latency=4.3s sql=SELECT COUNT(ph.Id) AS PostHistoryCount, p.LastEditDate
+FROM posts p
+LEFT JOIN postHistory ph ON ph.PostId = p.Id
+WHER  ok latency=7.2s sql=SELECT p.Id, COALESCE(u.DisplayName, p.OwnerDisplayName) AS DisplayName
+FROM posts p
+LEFT JOIN users u ON p.OwnerUserId 
+
+[103/210] qid=686 d  ok latency=8.0s sql=SELECT p.Id, u.DisplayName
+FROM posts p
+LEFT JOIN users u ON p.OwnerUserId = u.Id
+WHERE strftime('%Y', p.CreaionDate) = 
+
+[103/210] qid=686 db  ok latency=12.0s sql=SELECT COUNT(*) 
+FROM comments 
+WHERE PostId IN (SELECT Id FROM posts WHERE Score = (SELECT MAX(Score) FROM posts))
+
+[105/210] qid=694 db=co  ok latency=19.0  ok latency=13.4s sql=SELECT c.Text, COALESCE(c.UserDisplayName, u.DisplayName) AS DisplayName
+FROM comments c
+JOIN posts p ON c.PostId = p.Id
+
+[106/210] qid=70  ok latency=3.2s sql=SE  ok latency=6.7s sql=SELECT 
+  CAST(SUM(CASE WHEN p.Score >= 50 THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100 AS percentage
+FROM posts p
+JOIN
+
+[107/210] qid=70  ok latency=8.8s sql=SE  ok latency=4.8s sql=SELECT T1.Text FROM comments AS T1 JOIN posts AS T2 ON T1.PostId = T2.Id WHERE T2.Title = 'How can I adapt ANOVA for bin
+
+[108/210] qid=70  ok latency=19.1s sql=SELECT T1.Text FROM comments AS T1 JOIN posts AS T2 ON T1.PostId = T2.Id WHERE T2.Title = 'How can I adapt ANOVA for bin
+
+[108/210] qid=709 db=codebase_community
+  ok latency=7.0s sql=SELECT COUNT(DISTINCT posts.Id)
+FROM comments
+JOIN posts ON comments.PostId = posts.Id
+WHERE comments.Score = 0 AND post
+
+[109/210] qid=710 db=codebase_community
+  ok latency=3.4s sql=SELECT COUNT(*) FROM comments AS c JOIN posts AS p ON c.PostId = p.Id WHERE p.CommentCount = 1 AND c.Score = 0
+
+[110/210] qid=715 db=codebase_community
+  ok latency=3.4s sql=SELECT DISTINCT u.DisplayName
+FROM comments c
+JOIN users u ON c.UserId = u.Id
+WHERE c.Score BETWEEN 1 AND 5
+  AND u.Down
+
+[111/210] qid=720 db=superhero
+  ok latency=5.7s sql=SELECT T1.full_name
+FROM superhero AS T1
+JOIN hero_power AS T2 ON T1.id = T2.hero_id
+GROUP BY T1.id
+HAVING COUNT(T1.full
+
+[112/210] qid=766 db=superhero
+  ok latency=4.1s sql=SELECT s.full_name
+FROM superhero s
+JOIN hero_attribute ha ON s.id = ha.hero_id
+JOIN attribute a ON ha.attribute_id = a.
+
+[113/210] qid=805 db=superhero
+  ok latency=4.6s sql=SELECT full_name
+FROM superhero
+WHERE weight_kg = 0 OR weight_kg IS NULL
+
+[114/210] qid=811 db=superhero
+  ok latency=5.6s sql=SELECT a.alignment, s.power_name
+FROM superhero sh
+JOIN alignment a ON sh.alignment_id = a.id
+JOIN hero_power hp ON sh.i
+
+[115/210] qid=812 db=superhero
+  ok latency=3.0s sql=SELECT s.full_name
+FROM superhero s
+JOIN colour c ON s.eye_colour_id = c.id
+WHERE c.colour = 'Blue'
+LIMIT 5
+
+[116/210] qid=828 db=superhero
+  ok latency=3.8s sql=SELECT COUNT(T1.hero_id)
+FROM hero_attribute AS T1
+JOIN attribute AS T2 ON T1.attribute_id = T2.id
+WHERE T2.attribute_na
+
+[117/210] qid=837 db=superhero
+  ok latency=3.2s sql=SELECT hero_id FROM hero_attribute ORDER BY attribute_value ASC LIMIT 1
+
+[118/210] qid=847 db=formula_1
+  ok latency=5.1s sql=SELECT d.surname
+FROM drivers d
+JOIN qualifying q ON d.driverId = q.driverId
+WHERE q.raceId = 19
+  AND q.q2 = (SELECT MI
+
+[119/210] qid=849 db=formula_1
+  ok l  ok latency=27.6s sql=
+
+[121/210] qid=855 db=formula_1
+  ok latency=4.0s sql=SELECT T1.url
+FROM races AS T1
+JOIN circuits AS T2 ON T1.circuitId = T2.circuitId
+WHERE T2.name = 'Sepang International 
+
+[122/210] qid=857 db=formula_1
+  ok latency=2.9s sql=SELECT T1.lat, T1.lng FROM circuits AS T1 JOIN races AS T2 ON T1.circuitId = T2.circuitId WHERE T2.name = 'Abu Dhabi Gra
+
+[123/210] qid=866 db=formula_1
+  ok latency=25.9s sql=
+
+[124/210] qid=888 db=formula_1
+  ok latency=6.2s sql=SELECT T1.country, T1.name, T1.location
+FROM circuits AS T1
+JOIN races AS T2 ON T1.circuitId = T2.circuitId
+WHERE T2.nam
+
+[125/210] qid=889 db=formula_1
+  ok latency=3.5s sql=SELECT MAX(r.year) FROM races r JOIN  ok latency=35.4s sql=
+
+[124/210] qid=888 db=formula_1
+  ok latency=5.9s sql=SELECT T1.country, T1.name, T1.location  ok latency=8.3s sql=SELECT T1.forename, T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverId = T2.dri  ok latency=2.6s sql=SELECT MAX(r.year) FROM races r JOIN ci  ok latency=8.1s sql=SELECT T.time, drivers.forename, drivers.surname, races.name
+FROM lapTimes T
+JOIN drivers ON T.driverId = drivers.driver
+
+[128/210] qid=895 db=formula_1
+  ok latency=16.7s sql=SELECT AVG(lapTimes.time)
+FROM lapTimes
+JOIN races ON lapTimes.raceId = races.raceId
+JOIN drivers ON lapTimes.driverId =
+
+[129/210] qid=897 db=formula_1
+  ok latency=21.9s sql=
+
+[130/210] qid=898 db=formula_1
+  ok latency=4.4s sql=SELECT 2022 - CAST(strftime('%Y', dob) AS INTEGER) + 1 AS age, forename || ' ' || surname AS name
+FROM drivers
+WHERE nat
+
+[131/210] qid=908 db=formula_1
+  ok latency=5.6s sql=SELECT DISTINCT r.name, r.year, c.loc  ok latency=28.3s sql=
+
+[130/210] qid=898 db=formula_1
+  ok latency=3.6s sql=SELECT 2022 - CAST(strftime('%Y', dob) AS INTEGER) + 1 AS age, forename || ' ' || surname AS name
+FROM drivers
+WHERE nat
+
+[131/210] qid=908 db=formula_1
+  ok latency=4.3s sql=SELECT r.name, r.year, c.location
+FROM races r
+JOIN circuits c ON r.circuitId = c.circuitId
+WHERE r.raceId IN (
+    SELE
+
+[132/210] qid=915 db=formula_1
+  ok latency=3.0s sql=SELECT nationality FROM drivers ORDER BY dob ASC LIMIT 1
+
+[133/210] qid=922 db=formula_1
+  ok latency=2.5s sql=SELECT r.time
+FROM races r
+JOIN circuits c ON r.circuitId = c.circuitId
+WHERE c.name LIKE '%Abu Dhabi%' AND r.year BETWE
+
+[134/210] qid=928 db=formula_1
+  ok latency=3.9s sql=SELECT d.driverRef
+FROM races r
+JOIN results res ON r.raceId = res.raceId
+JOIN drivers d ON res.driverId = d.driverId
+WH
+
+[135/210] qid=937 db=formula_1
+  ok latency=3.0s sql=SELECT r.time
+FROM results r
+JOIN races ra ON r.raceId = ra.raceId
+WHERE ra.year = 2008
+  AND ra.name = 'Australian Gran
+
+[136/210] qid=943 db=formula_1
+  ok latency=5.3s sql=SELECT 
+    COUNT(CASE WHEN time IS NOT NULL THEN raceId  ok latency=34.1s sql=
+
+[139/210] qid=970 db=formula_1
+  ok latency=17.3s sql=SELECT d.forename, d.surname, MIN(l.time) AS earliest_lap_time
+FROM drivers d
+JOIN lapTimes l ON d.driverId = l.driverId
+
+[140/210] qid=986 db=formula_1
+  ok latency=3.6s sql=SELECT r.name, lt.milliseconds
+FROM lapTimes lt
+JOIN races r ON lt.raceId   ok latency=17.3s sql=SELECT d.forename, d.surname, MIN(l.time) AS earliest_lap_time
+FROM drivers d
+JOIN lapTimes l ON d.driverId = l.driverId
+
+[140/210] qid=986 db=formula_1
+  ok latency=4.8s sql=SELECT r.name, lt.milliseconds
+FROM lapTimes lt
+JOIN races r ON lt.raceId = r.raceId
+WHERE lt.lap = 1
+ORDER BY lt.millis
+
+[141/210] qid=987 db=formula_1
+  ok latency=4.2s sql=SELECT AVG(fastestLapTime) FROM results WHERE raceId = (S  ok latency=18.3s sql=SELECT c.constructorRef, c.url
+FROM races r
+JOIN results res ON r.raceId   ok latency=15.6s sql=SELECT T1.forename, T1.surname, T3.time
+FROM drivers AS T  ok latency=1.9s sql=SELECT location, country, lat, lng FROM circuits WHERE name = 'Hungaroring  ok latency=8.1s sql=SELECT c.con  ok latency=28.1s sql=
+
+[146/210] qid=1000 db=formula_1
+  ok latency=10.0s sql=SELECT location || ', ' || country
+FROM circuits
+JOIN races ON circuits.circuitId = races.circuitId
+ORDER BY races.date 
+
+[147/210] qid=1004 db=formula_1
+  ok latency=23.2s sql=SELECT MAX(ds.wins) AS wins, d.forename, d.surname
+FROM drivers d
+JOIN driverStandings ds ON d.driverId = ds.driverId
+WH
+
+[148/210] qid=1006 db=formula_1
+  ok latency=2.6s sql=SELECT time FROM lapTimes ORDER BY milliseconds ASC LIMIT 1
+
+[149/210] qid=1009 db=formula_1
+  ok latency=3.9s sql=SELECT T3.forename, T3.surname, T1.duration
+FROM pitStops AS T1
+JOIN races AS T2 ON T1.raceId = T2.raceId
+JOIN drivers A
+
+[150/210]   ok latency=28.0s sql=
+
+[149/210] qid=1009 db=formula_1
+  ok latency=3.3s sql=SELECT 
+    d.forename,
+    d.surname,
+    p.duration
+FROM pitStops p
+JOIN races r ON p.raceId = r.raceId
+JOIN drivers   ok latency=11.3s sql=SELECT d.forename || ' ' || d.surname AS full_name
+FROM drivers d
+JOIN lapTimes l ON d.driverId = l.driverId
+ORDER BY l.
+
+[152/210] qid=1014 db=formula_1
+  ok latency=2.9s sql=SELECT c.nam  ok latency=17.4s sql=SELECT d.forename || ' ' || d.surname AS full_name
+FROM drivers d
+JOIN lapTimes lt ON d.driverId = lt.driverId
+WHERE lt.
+
+[152/210] qid=1014 db=formula_1
+  ok latency=2.8s sql=SELECT c.name AS circuit, MIN(lt.milliseconds) AS lap_record_milliseconds
+FROM circuits c
+JOIN races r ON r.circuitId = 
+
+[153/210] qid=1021 db=european_football_2
+  ok latency=7.5s sql=SELECT player_name, height FROM Player WHERE height = (SELECT MAX(height) FROM Player)
+
+[154/210] qid=1023 db=european_football_2
+  ok latency=2.6s sql=SELECT COUNT(DISTINCT player_api_id) FROM Player_Attributes WHERE overall_rating >= 60 AND overall_rating < 65 AND defen
+
+[155/210] qid=1027 db=european_football_2
+  ok latency=3.0s sql=SELECT T1.player_name
+FROM Player AS T1
+JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id
+GROUP BY T1.
+
+[156/210] qid=1028 db=european_football_2
+  ok latency=5.9s sql=SELECT T.team_long_name
+FROM Match M
+JOIN League L ON M.league_id = L.id
+JOIN Team T ON M.away_team_ap  ok latency=14.1s sql=SELECT T.team_long_name
+FROM Team_Attributes TA
+JOIN Team T ON TA.team_api_id = T.team_api_id
+WHERE TA.buildUpPlayDribbl
+
+[159/210] qid=1060 db=european_football_2
+  ok latency=18.5s sql=SELECT COUNT(*) FROM Player WHERE strftime('%Y', birthday) > '1990'
+
+[160/210] qid=1064 db=european_football_2
+  ok latency=2.5s sql=SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN   ok latency=21.0s sql=SELECT COUNT(*) FROM Player WHERE strftime('%Y', birthday) > '1990'
+
+[160/210] qid=1064 db=european_football_2
+  ok latency=2.5s sql=SELECT DISTINCT T1.player_name
+FROM Player AS T1
+JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id
+WHE
+
+[161/210] qid=1091 db=european_football_2
+  ok latency=8.3s sql=SELECT COUNT(*)
+FROM Match
+JOIN League ON Match.league_id = League.id
+WHERE League.name = 'Belgium Jupiler League'
+  AND
+
+[162/210] qid=1108 db=european_football_2
+  ok latency=2.8s sql=SELECT T.buildUpPlaySpeedClass
+FROM Team_Attributes T
+JOIN Team ON T.team_api_id = Team.team_api_id
+WHERE Team.team_long
+
+[163/210] qid=1113 db=european_football_2
+  ok latency=2.6s sql=SELECT T.defenceAggressionClass
+FROM Team_Attributes T
+JOIN Team ON T.team_api_id = Team.team_api_id
+WHERE Team.team_lon
+
+[164/210] qid=1144 d  ok latency=23.6s sql=
+
+[166/210] qid=1168 db=thrombosis_prediction
+  ok latency=26.0s sql=
+
+[167/210] qid=1172 db=thrombosis_prediction
+  ok latency=7.2s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M' AND T2.`T-BIL  ok latency=29.2s sql=
+
+[167/210] qid=1172 db=  ok latency=13.3s sql  ok latency=7.4s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M' AND T2.`T-BIL`
+
+[168/210] qid=117  ok latency=21.9s sql=
+
+[170/210] qid=1193 db=thrombosis_prediction
+  ok latency=33.6s sql=
+
+[171/210] qid=1197 db=thrombosis_prediction
+  ok latency=4.3s sql=SELECT Description, Diagnosis FROM Patient WHERE ID = 48473
+
+[172/210] qid=1199 db=thrombosis_prediction
+  ok latency=7.0s sql=SELECT COUNT(DISTINCT ID) FROM Laboratory WHERE strftime('%Y', Date) = '1997' AND (  ok latency=34.9s sql=
+
+[171/210] qid=1197 db=thrombosis_predictio  ok latency=10.7s sql=SELECT AVG(L.UA)
+FROM Laboratory L
+JOIN Patient P ON L.ID = P.ID
+WHERE (L.ID, L.Date) IN (
+    SELECT ID,   ok latency=27.4s sql=SELECT COUNT(DISTINCT ID) FROM Laboratory WHERE strftime('%Y', Date) = '1997' AND (TP <= 6 OR TP >= 8.5)
+
+[173/210] qid=1219 db=thrombosis_prediction
+  ok latency=26.1s sql=SELECT AVG(L.UA) AS avg_UA
+FROM Laboratory L
+JOIN Patient P ON L.ID = P.ID
+WHERE L.Date = (
+    SELECT MAX(L2.Date)
+    
+
+[174/210] qid=1229 db=thrombosis_prediction
+  ok latency=4.2s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T2.TG >= 200
+  AND CAST(str
+
+[175/210] qid=1233 db=thrombosis_prediction
+  ok latency=26.3s sql=
+
+[176/210] qid=1243 db=thrombosis_prediction
+  ok latency=8.3s sql=SELECT 
+    SUM(L.PT >= 14 AND P.SEX = 'F') * 1.0 / SUM(L.PT >= 14) AS percentage
+FROM Patient P
+JOIN Laboratory L ON P.
+
+[177/210] qid=1247 db=thrombosis_prediction
+  ok latency=7.3s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M'
+  AND T2.WBC B
+
+[178/210] qid=1248 db=thrombosis_prediction
+  ok latency=8.7s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.Birthday > '1980-01-01' 
+
+[179/210] qid=1252 db=thrombosis_prediction
+  ok latency=4.3s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Laboratory T1
+JOIN Examination T2 ON T1.ID = T2.ID
+WHERE T1.IGG BETWEEN 900 AND 2000 A
+
+[180/210] qid=1256 db=thrombosis_prediction
+  ok late  ok latency=25.3s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Laboratory AS T1
+JOIN Patient AS T2 ON T1.ID = T2.ID
+WHERE T1.CRP NOT IN ('+-', '-')
+ 
+
+[182/210] qid=1259 db=thrombosis_p  ok latency=32.0s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Laboratory AS T1
+JOIN Patient AS T2 ON T1.ID = T2.ID
+WHERE T1.CRP NOT IN ('+-', '-')
+ 
+
+[182/210] qid=1259 db=thrombosis_prediction
+  ok latency=12.2s sql=SELECT DISTINCT T1.Diagnosis FROM Patient AS T1 JOIN Laboratory AS T2 ON T1.ID = T2.ID WHERE CAST(strftime('%Y', T1.Birt
+
+[183/210] qid=1265 db=thrombosis_prediction
+  ok latency=3.6s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T2.RNP IN ('-', '+-') AND T
+
+[184/210] qid=1268 db=thrombosis_prediction
+  ok latency=5.4s sql=SELECT T1.ID
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T2.SM NOT IN ('-', '+-')
+GROUP BY T1.ID
+ORD
+
+[185/210] qid=1269 db=thrombosis_prediction
+  ok latency=6.8s sql=SELECT DISTINCT T1.ID
+FROM Examination T1
+JOIN Laboratory T2 ON T1.ID = T2.ID
+WHERE T1.`Examination Date` >= '1997-01-01
+
+[186/210] qid=1273 db=thrombosis_prediction
+  ok latency=6.1s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Laboratory AS T1
+JOIN Examination AS T2 ON T1.ID = T2.ID
+WHERE T1.SSB IN ('negative', 
+
+[187/210] qid=1275 db=thrombosis_prediction
+  ok latency=17.4s sql=SELECT COUNT(T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M' AND T2.CENTROMEA IN ('-
+
+[188/210] qid=1279 db=thrombosis_prediction
+  ok latency=26.9s sql=
+
+[189/210] qid=1280 db=thrombosis_prediction
+  ok latency=2.7s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M' AND T2.GOT < 6
+
+[190/210] qid=1290 db=thrombosis_prediction
+  ok latency=7.7s sql=SELECT Date FROM Laboratory WHERE ALB > 3.5 AND ALB < 5.5 ORDER BY ALB DESC LIMIT 1
+
+[191/210] qid=1291 db=thrombosis_prediction
+  ok latency=9.1s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.SEX = 'M' AND T2.ALB > 3
+
+[192/210] qid=1298 db=thrombosis_prediction
+  ok latency=5.1s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Laboratory AS T1
+JOIN Examination AS T2 ON T1.ID = T2.ID
+WHERE T1.`T-CHO` < 250
+  AND 
+
+[193/210] qid=1306 db=thrombosis_prediction
+  ok latency=14.9s sql=SELECT COUNT(DISTINCT T1.ID)
+FROM Patient AS T1
+JOIN Laboratory AS T2 ON T1.ID = T2.ID
+WHERE T1.Diagnosis = 'SLE' AND T2
+
+[194/210] qid=1314 db=student_club
+  ok latency=4.6s sql=SELECT first_name, last_name
+FROM member
+JOIN major ON member.link_to_major = major.major_id
+WHERE major.department = 'A
+
+[195/210] qid=1322 db=student_club
+  ok latency=7.0s sql=SELECT COUNT(*) FROM (
+  SELECT e.event_id
+  FROM event e
+  JOIN attendance a ON e.event_id = a.link_to_event
+  WHERE e.
+
+[196/210] qid=1352 db=student_club
+  ok latency=4.6s sql=SELECT COUNT(member.member_id)
+FROM member
+JOIN major ON member.link_to_major = major.major_id
+WHERE major.major_name = 
+
+[197/210] qid=1370 db=student_club
+  ok latency=8.0s sql=SELECT T1.expense_description FROM expense AS T1 JOIN member AS T2 ON T1.link_to_member = T2.member_id WHERE T2.position
+
+[198/210] qid=1391 db=student_club
+  ok latency=6.5s sql=SELECT CAST(SUM(major_name = 'Finance') AS REAL) / SUM(major_name = 'Physics')
+FROM member
+JOIN major ON member.link_to_
+
+[199/210] qid=1425 db=student_club
+  ok latency=4.8s sql=SELECT COUNT(*)
+FROM major
+WHERE college = 'College of Agriculture and Applied Sciences'
+  AND department = 'School of A
+
+[200/210] qid=1441 db=student_club
+  ok lat  ok latency=27.0s sql=
+
+[203/210] qid=1467 db=student_club
+  ok latency=5.4s sql=SELECT SUM(b.spent), e.event_name
+FROM budget b
+JOIN event e ON b.link_to_event = e.event_id
+WHERE b.category = 'Speaker
+
+[204/210] qid=1468 db=student_club
+  ok latency=3.4s sql=SELECT T2.city
+FROM member AS T1
+JOIN  ok latency=10.9s sql=SELECT e.event_name
+FROM event e
+JOIN budget b ON e.event_id = b.link_to_event
+JOIN expense ex ON ex.link_to  ok latency=36.0s sql=
+
+[206/210] qid=1491 db=debit_card_specializing
+  ok latency=3.6s sql=SELECT Country, COUNT(*) AS total_value_for_money_stations
+FROM gasstations
+WHERE Segment = 'Value for money'
+GROUP BY C
+
+[207/210] qid=1496 db=debit_card_specializing
+  ok latency=5.5s sql=SELECT T1.Segment
+FROM customers AS T1
+JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID
+WHERE T2.Date = '201309'
+GR
+
+[208/210] qid=1498 db=debit_card_specializing
+  ok latency=2.7s sql=SELECT MAX(Consu  ok latency=3.2s sql=SELECT Country, COUNT(*) AS total
+FROM gasstations
+WHERE Segment = 'Value for mone  ok latency=2.5s sql=SELECT DISTINCT p.Description
+FROM transactions_1k t
+JOIN custom  ok latency=5.1s sql=SELECT T1.Segment
+FROM customers AS T1
+JOIN yearmonth AS T2 ON T1.CustomerID = T2.  ok latency=18.2s sql=SELECT Date, Consumption
+FROM yearmonth
+WHERE CustomerID = (
+    SELECT CustomerID
+    FROM transactions_1k
+    WHERE Da
+
+Candidate generation complete. 210 candidates written to /home/dameng/project/nl2sql_harness_dev/predictions/e3_glm_candidates_for_retrieval_failures_20260725/predictions.jsonl
+Timeouts: 0, API errors: 0, duration: 2081.0s
+N 
+
+[210/210] qid=1520 db=debit_card_specializing
+  ok latency=19.1s sql=SELECT Date, Consumption
+FROM yearmonth
+WHERE CustomerID = (
+    SELECT CustomerID
+    FROM transactions_1k
+    WHERE Da
+
+Candidate generation complete. 210 candidates written to /home/dameng/project/nl2sql_harness_dev/predictions/e3_glm_candidates_for_retrieval_failures_20260725/predictions.jsonl
+Timeouts: 0, API errors: 1, duration: 2101.9s

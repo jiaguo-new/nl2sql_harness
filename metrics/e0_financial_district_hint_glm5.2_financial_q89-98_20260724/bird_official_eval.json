@@ -1,0 +1,104 @@
+{
+  "total": 10,
+  "em": 1,
+  "ex": 3,
+  "valid": 8,
+  "em_rate": 10.0,
+  "ex_rate": 30.0,
+  "valid_rate": 80.0,
+  "join_total": 9,
+  "join_ex": 2,
+  "join_ex_rate": 22.22222222222222,
+  "per_query": [
+    {
+      "idx": 0,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 1,
+      "ex": false,
+      "em": false,
+      "valid": false,
+      "gold_error": null,
+      "pred_error": "empty_sql",
+      "is_join": true
+    },
+    {
+      "idx": 2,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": false
+    },
+    {
+      "idx": 3,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 4,
+      "ex": false,
+      "em": true,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 5,
+      "ex": false,
+      "em": false,
+      "valid": false,
+      "gold_error": null,
+      "pred_error": "empty_sql",
+      "is_join": true
+    },
+    {
+      "idx": 6,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 7,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 8,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 9,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    }
+  ]
+}

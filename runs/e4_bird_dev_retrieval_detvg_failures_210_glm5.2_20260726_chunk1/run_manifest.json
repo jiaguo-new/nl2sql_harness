@@ -1,0 +1,643 @@
+{
+  "run_id": "e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726_chunk1",
+  "experiment": "E4",
+  "experiment_name": "Execution Repair Agent on retrieval+detVG failure examples",
+  "description": "Run the E4 execution-repair agent from scratch on the 210 examples where\nretrieval k5 v2 + deterministic value-grounding fails.  Output is intended as\nan additional candidate source for the full-dev selector.\n",
+  "started_at": "2026-07-25T18:08:28.299113+00:00",
+  "duration_seconds": 1156.56,
+  "config": {
+    "run_id": "e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726_chunk1",
+    "experiment": "E4",
+    "experiment_name": "Execution Repair Agent on retrieval+detVG failure examples",
+    "description": "Run the E4 execution-repair agent from scratch on the 210 examples where\nretrieval k5 v2 + deterministic value-grounding fails.  Output is intended as\nan additional candidate source for the full-dev selector.\n",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "datasets/dev/e4_failures_210_chunk1.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "data_manifest": "manifests/data_bird_dev.json"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "prompt": {
+      "generate": "prompts/e0_direct_sql_cot.md",
+      "repair": "prompts/e4_repair_sql.md"
+    },
+    "agent": {
+      "max_repairs": 2
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 53,
+    "em": 0,
+    "ex": 3,
+    "valid": 47,
+    "em_rate": 0.0,
+    "ex_rate": 5.660377358490566,
+    "valid_rate": 88.67924528301887,
+    "join_total": 38,
+    "join_ex": 3,
+    "join_ex_rate": 7.894736842105263,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "abraham lincoln high|abraham lincoln senior high|academies of education and empowerment at carson high|academy for academic excellence|academy of arts and sciences|academy of careers and exploration|academy of environmental & social policy (esp) at roosevelt high|academy of medical arts at carson high|academy of the redwoods|adelanto high|adolfo camarillo high|adrian wilcox high|alain leroy locke college prep academy|alexander hamilton senior high|alhambra high|alisal high|alliance cindy and bill simon technology academy high|alliance college-ready academy high 16|alliance collins family college-ready high|alliance dr. olga mohan high|alliance environmental science and technology high|alliance gertz-ressler richard merkin 6-12 complex|alliance health services academy high|alliance judy ivie burton technology academy high|alliance marc & eva stern math and science|alliance media arts and entertainment design high|alliance ouchi-o'donovan 6-12 complex|alliance patti and peter neuwirth leadership academy|alliance renee and meyer luskin academy high|alliance tennenbaum family technology high|alta loma high|alta vista alternative high|american canyon high|anaheim high|analy high|anderson high|anderson valley junior-senior high|anderson w. clark magnet high|andrew p. hill high|angelo rodriguez high|animo college preparatory academy|animo inglewood charter high|animo jackie robinson high|animo leadership high|animo pat brown|animo ralph bunche high|animo south los angeles charter|animo venice charter high|animo watts college preparatory academy|ann sobrato high|antelope high|antelope valley high|anzar high|apex academy|apple valley high|applied technology center|aptos high|aragon high|arcadia high|arcata high|arleta high|arlington high|armijo high|arnold o. beckman high|arroyo grande high|arroyo high|arroyo valley high|artesia high|arthur a. benjamin health professions high|arvin high|asawa (ruth) san francisco school of the arts, a public school.|aspire alexander twilight secondary academy|aspire benjamin holt college preparatory academy|aspire langston hughes academy|aspire pacific academy|atascadero high|atwater high|audeo charter|augustus f. hawkins high b community health advocates|augustus f. hawkins high c responsible indigenous social entrepreneurship|avalon k-12|avenal high|azusa high|bakersfield high|balboa high|baldwin park high|banning high|barstow high|bassett senior high|bear creek high|bear river high|beaumont senior high|bell gardens high|bell senior high|bella vista high|bellflower high|belmont senior high|belmont sh-la teacher preparatory academy|benicia high|benjamin franklin senior high|big bear high|birmingham community charter high|bishop union high|bitney college preparatory high|blair high|bloomington high|bolsa grande high|bonita high|bonita vista senior high|borrego springs high|branham high|brawley high|brea-olinda high|bright star secondary charter academy|buchanan high|buena high|buena park high|buhach colony high|bullard high|burbank high|burroughs high|burroughs high|burton (phillip and sala) academic high|c. k. mcclatchy high|cabrillo high|cabrillo high|cajon high|calexico high|california academy of mathematics and science|california city high|california connections academy @ ripon|california high|california military institute|california virtual academy @ los angeles|california virtual academy @ san diego|calipatria high|calistoga junior-senior high|camino nuevo charter high|canoga park senior high|canyon high|canyon springs high|capistrano connections academy|capistrano valley high|capuchino high|carlmont high|carlsbad high|carpinteria senior high|carson senior high|caruthers high|casa grande high|casa roble fundamental high|castle park senior high|cathedral city high|centennial high|centennial high|centennial high|center high|central city value|central high east campus|central union high|central valley high|central valley high|century high|ceres high|cerritos high|cesar chavez high|cesar e. chavez high|cesar e. chavez learning academies-academy of scientific exploration (ase)|cesar e. chavez learning academies-arts,theatre, entertainment (artes)|cesar e. chavez learning academies-social justice humanitas academy|cesar e. chavez learning academies-teacher preparation academy|chaffey high|champs - charter hs of arts-multimedia & performing|channel islands high|chaparral high|charter oak high|charter school of san diego|chatsworth charter high|chester junior/senior high|chino high|chino hills high|chowchilla union high|christopher high|chula vista senior high|citrus hill high|citrus valley high|city arts and tech high|city honors college preparatory academy|city of angels|clairemont high|claremont high|clear lake high|cloverdale high|clovis east high|clovis high|clovis north high|clovis west high|coachella valley high|coalinga high|coast union high|coleman tech charter high|colfax high|college prep high|colony high|colton high|communication and technology at diego rivera learning complex|compton high|connecting waters charter|contreras learning center-academic leadership community|contreras learning center-los angeles school of global studies|contreras learning center-school of social justice|corcoran high|cordova high|corning high|corona high|costa mesa high|cosumnes oaks high|covina high|crawford high|crenshaw arts-technology charter high|crenshaw science, technology, engineering, math and medicine magnet|crescenta valley high|culver city high|cypress high|da vinci design|da vinci science|dana hills high|daniel pearl journalism & communications magnet|david starr jordan senior high|davis senior high|dehesa charter|del campo high|del mar high|delano high|delhi high|delta charter|delta high|denair high|desert hot springs high|desert mirage high|design science early college high|diamond ranch high|dinuba high|discovery charter preparatory no. 2|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|dixon high|dominguez high|don antonio lugo high|dos palos high|dos pueblos senior high|downey high|downtown business high|dr. maya angelou community high|dr. t. j. owens gilroy early college academy|duarte high|eagle rock high|early college high|east bakersfield high|east los angeles performing arts academy at esteban e. torres high no. 1|east los angeles renaissance academy at esteban e. torres high no. 2|east nicolaus high|east palo alto academy|east union high|east valley senior high|eastlake high|eastside high|edgewood high|edison high|edison high|edward r. roybal learning center|eisenhower senior high|el cajon valley high|el camino fundamental high|el camino high|el camino high|el camino high|el camino real charter high|el capitan high|el diamante high|el dorado high|el modena high|el molino high|el monte high|el rancho high|el toro high|eleanor roosevelt high|elise p. buckingham charter magnet high|elizabeth learning center|elk grove high|elsie allen high|elsinore high|encina preparatory high|encore jr./sr. high school for the performing and visual arts|engineering and technology academy at esteban e. torres high no. 3|enterprise high|environmental charter high|erma duncan polytechnical high|ernest righetti high|escalon high|escondido charter high|escondido high|esparto high|esperanza high|estancia high|etiwanda high|etna union high|eureka senior high|everest public high|everett alvarez high|evergreen valley high|excelsior charter|exeter union high|fairfax senior high|fairfield high|fall river junior-senior high|fallbrook high|farmersville high|felicitas and gonzalo mendez high|ferndale high|fillmore senior high|firebaugh high|florin high|fontana a. b. miller high|fontana high|foothill high|foothill high|foothill high|foothill high|foothill technology high|forest charter|foresthill high|fort bragg high|fortuna union high|foshay learning center|fountain valley high|fowler high|francisco bravo medical magnet high|franklin high|franklin high|frazier mountain high|fred c. beyer high|frederick douglass academy high|fremont academy of engineering and design|fremont high|fresno high|frontier high|fullerton union high|futures high|gabrielino high|gahr (richard) high|galileo high|galt high|ganesha high|garden grove high|gardena senior high|garey high|gateway high|george washington carver school of arts and science|george washington preparatory high|gilroy high|gladstone high|glen a. wilson high|glendale high|glendora high|golden valley high|golden valley high|golden valley high|golden west high|gompers preparatory academy|gonzales high|gorman learning center|grace m. davis high|granada hills charter high|grand terrace high school at the ray abril jr. educational complex|granite hills high|granite hills high|granite hills high|grant union high|green design at diego rivera learning complex|greenfield high|grossmont high|grossmont middle college high|grove|grover cleveland charter high|guajome park academy charter|guidance charter|gunderson high|gustine high|half moon bay high|hallmark charter|hamilton high|hamilton high|hanford high|hanford west high|harbor high|harbor teacher preparation academy|harmony magnet academy|hawthorne high|hawthorne math and science academy|healdsburg high|health careers academy|health sciences high|hector g. godinez|helen bernstein high|helix high|hemet high|henry high|henry j. kaiser high|herbert hoover high|herbert hoover high|heritage high|heritage peak charter|hesperia high|high tech high|high tech high chula vista|high tech high international|high tech high media arts|high tech high north county|high tech la|highland high|highland high|highlands high|hillsdale high|hilltop senior high|hilmar high|hiram w. johnson high|hollywood senior high|holtville high|homestead high|hoopa valley high|hoover high|horizon charter|hueneme high|hughson high|humanitas academy of art and technology at esteban e. torres high no. 4|humanities and arts (harts) academy of los angeles|humphreys college academy of business, law and education|huntington beach high|huntington park senior high|imperial high|independence high|independence high|independence high|inderkum high|indian springs high|indio high|inglewood high|insight @ los angeles|international polytechnic high|international studies academy|international studies learning center at legacy high school complex|irvine high|ivy academia|james a. garfield senior high|james c. enochs high|james lick high|james monroe high|jefferson high|jesse m. bethel high|john a. rowland high|john c. fremont senior high|john c. kimball high|john f. kennedy high|john f. kennedy high|john f. kennedy high|john f. kennedy high|john h. francis polytechnic|john h. glenn high|john h. pitman high|john marshall senior high|john muir high|john w. north high|jordan high|joseph a. gregori high|julian charter|jurupa hills high|jurupa valley high|katella high|kearny digital media & design|kearny eng, innov & design|kearny international business|kearny sct|kelseyville high|kerman high|kern valley high|king city high|king-chavez community high|king/drew medical magnet high|kingsburg high|kipp san jose collegiate|la habra high|la jolla high|la mirada high|la puente high|la quinta high|la quinta high|la serna high|la sierra high|laguna creek high|laguna hills high|lakeside high|lakewood high|lancaster high|lassen high|lathrop high|lawndale high|le grand high|leadership high|leadership public schools - san jose|lemoore high|lemoore middle college high|lennox mathematics, science and technology academy|leuzinger high|liberty high|liberty high|liberty ranch high|lincoln (abraham) high|lincoln high|lincoln high|lincoln high|linda esperanza marquez high a huntington park institute of applied medicine|linda esperanza marquez high b libra academy|linda esperanza marquez high c school of social justice|linden high|lindhurst high|lindsay senior high|littlerock high|live oak high|live oak high|livingston high|loara high|lodi high|lompoc high|los altos high|los altos high|los amigos high|los angeles academy of arts & enterprise charter|los angeles center for enriched studies|los angeles international charter high|los angeles leadership academy|los angeles river at sonia sotomayor learning academies|los angeles senior high|los banos high|los molinos high|los osos high|lowell high|lower lake high|luther burbank high|lynwood high|madera high|madera south high|madison high|magnolia high|magnolia science academy|magnolia science academy 2|magnolia science academy 3|magnolia science academy 4|mammoth high|manteca high|manual arts senior high|mar vista senior high|marco antonio firebaugh high|maria carrillo high|marina high|marina high|mariposa county high|mark keppel high|marshall (thurgood) high|marshall fundamental|martin luther king jr. high|marysville charter academy for the arts|marysville high|math, science, & technology magnet academy at roosevelt high|mayfair high|maywood academy high|mcfarland high|mckinleyville high|mclane high|mendocino high|mendota high|menlo-atherton high|merced high|merrill f. west high|mesa verde high|middle college high|middle college high|middle college high|middle college high|middletown high|millennium charter|millikan high|mills high|milpitas high|minarets charter high|minarets high|mira loma high|mira mesa high|mira monte high|mission bay high|mission high|mission hills high|mission oak high|mission viejo high|mission vista high|modesto high|modoc high|monache high|monrovia high|montclair high|monte vista high|montebello high|monterey high|monterey trail high|montgomery high|montgomery senior high|moorpark high|moreno valley high|morningside high|morro bay high|morse high|mount miguel high|mount pleasant high|mountain empire high|mountain park|mountain view high|mountain view high|mt. carmel high|mt. everest academy|mt. shasta high|mt. whitney high|murrieta mesa high|murrieta valley high|napa high|nathaniel narbonne senior high|natomas charter|natomas high|natomas pacific pathways prep|needles high|nevada union high|new designs charter|new millennium secondary|new technology high|new technology high|newbury park high|newport harbor high|nipomo high|nogales high|norco high|nordhoff high|norte vista high|north high|north high|north hollywood senior high|north monterey county high|north salinas high|north tahoe high|northcoast preparatory and performing arts academy|northridge academy high|northview high|norwalk high|nova academy|nova academy - coachella|novato high|nuview bridge early college high|o'connell (john) high|oak grove high|oak hills high|oakdale high|oakmont high|occs:chep/pchs|ocean grove charter|ocean view high|oceana high|oceanside high|ocsa|olympian high|ontario high|opportunities for learning - baldwin park|opportunities for learning - baldwin park ii|opportunities for learning - santa clarita|options for youth san gabriel|options for youth-burbank charter|options for youth-san bernardino|options for youth-san juan|options for youth-victorville charter|orange cove high|orange glen high|orange high|orcutt academy charter|orestimba high|orland high|orosi high|orthopaedic hospital|oscar de la hoya animo charter high|otay ranch senior high|oxford academy|oxnard high|pacheco high|pacific grove high|pacific high|pacifica high|pacifica high|pajaro valley high|palisades charter high|palm desert high|palm springs high|palmdale high|palo verde high|paloma valley high|palomares academy of health science|panorama high|paramount academy|paramount high|parlier high|pasadena high|paso robles high|patriot high|patterson high|performing arts community at diego rivera learning complex|perris high|petaluma high|peter johansen high|phineas banning senior high|piedmont hills high|piner high|pioneer high|pioneer high|pioneer high|pioneer valley high|placer high|pleasant grove high|point arena high|point loma high|polytechnic high|polytechnic high|pomona high|port of los angeles high|porterville high|portola junior/senior high|potter valley high|poway high|preuss school ucsd|prospect high|public service community at diego rivera learning complex|puc ca academy for liberal studies early college high|puc early college academy for leaders and scholars (ecals)|puc lakeview charter high|quartz hill high|quincy junior/senior high|ramon c. cortines school of visual and performing arts|ramona high|ramona high|rancho alamitos high|rancho buena vista high|rancho cotate high|rancho cucamonga high|rancho dominguez preparatory|rancho verde high|red bluff high|redlands east valley high|redlands senior high|redondo union high|redwood academy of ukiah|redwood high|reedley high|renaissance arts academy|renaissance high school for the arts|reseda senior high|rfk community schools- for the visual arts and humanities|rfk community schools-ambassador-global leadership|rfk community schools-los angeles high school of the arts|rfk community schools-new open world academy k-12|rfk community schools-ucla community k-12|rialto high|ridgeview high|rim of the world senior high|rio americano high|rio linda high|rio mesa high|rio vista high|ripon high|river city high|river springs charter|river valley high|riverbank high|riverdale high|riverside preparatory|robert f. kennedy high|robert fulton college preparatory|ronald e. mcnair high|roosevelt high|rosamond high|roseland charter|rosemead high|rosemont high|roseville high|royal high|ruben s. ayala high|rubidoux high|s.f. international high|sacramento charter high|saddleback high|saint helena high|salinas high|san benito high|san bernardino high|san clemente high|san diego business/leadership|san diego early/middle college|san diego international studies|san diego metro career and tech|san diego mvp arts|san diego science and technology|san diego scpa|san dimas high|san fernando senior high|san francisco flex academy|san gabriel high|san gorgonio high|san jacinto high|san jacinto valley academy|san josé high|san juan high|san juan hills high|san lorenzo valley high|san luis obispo high|san marcos high|san marcos senior high|san marin high|san mateo high|san pasqual academy|san pasqual high|san pedro senior high|san rafael high|san ysidro high|sanger high|santa ana high|santa barbara senior high|santa clara high|santa clarita valley international|santa cruz high|santa fe high|santa maria high|santa monica high|santa paula high|santa rosa academy|santa rosa high|santa susana high|santa teresa high|santa ynez valley union high|santana high|santee education complex|santiago high|santiago high|savanna high|school of arts and enterprise|school of business and tourism at contreras learning complex|school of engineering & sciences|school of history and dramatic arts at sonia sotomayor learning academies|schurr high|science, technology, engineering, arts and mathematics at legacy high school complex|scripps ranch high|seaside high|segerstrom high|selma high|sequoia high|serra high|serrano high|shadow hills high|shafter high|shasta high|sheldon high|sherman oaks center for enriched studies|sierra high|sierra high|sierra pacific high|sierra vista high|silver creek high|silver valley high|silverado high|simi valley high|six rivers charter high|soar high (students on academic rise)|social justice leadership academy at esteban e. torres high no. 5|soledad high|sonoma valley high|sonora high|sonora high|soquel high|south east high|south el monte high|south fork junior - senior high|south gate senior high|south high|south high|south hills high|south pasadena senior high|south san francisco high|south sutter charter|southwest high|southwest senior high|stagg senior high|steele canyon high|stem academy at bernstein high|stockdale high|stockton collegiate international secondary|stockton unified early college academy|strathmore high|student empowerment academy|sultana high|summerville high|summit high|summit preparatory charter high|summit public school: rainier|summit public school: tahoma|sun valley high|sunny hills high|sunnyside high|susan miller dorsey senior high|sutter high|sweetwater high|sylmar senior high|synergy quantum academy|taft union high|tahoe truckee high|tahquitz high|tehachapi high|temecula valley high|temescal canyon high|temple city high|terra linda high|terra nova high|the high school at moorpark college|the met|theodore roosevelt senior high|thirty-second street usc performing arts|thomas downey high|thomas jefferson senior high|thousand oaks high|tokay high|tomales high|torrance high|tracy high|tranquillity high|trinity high|troy high|tulare union high|tulare western high|turlock high|tustin high|twentynine palms high|ukiah high|ulysses s. grant senior high|university city high|university high|university preparatory|university preparatory|university preparatory academy charter|university preparatory high|university senior high|upland high|vacaville high|valencia high|valhalla high|vallejo high|valley academy of arts and sciences|valley alternative magnet|valley center high|valley charter high|valley high|valley high|valley oaks charter|valley view high|van nuys senior high|vanden high|vasquez high|vaughn next century learning center|venice senior high|ventura high|venture academy|verdugo hills senior high|victor valley high|view park preparatory accelerated high|villa park high|village academy high school at indian hill|vintage high|visalia charter independent study|visions in education|vista del lago high|vista high|vista murrieta high|visual and performing arts at legacy high school complex|wallenberg (raoul) traditional high|wallis annenberg high|warren high|wasco high|washington (george) high|washington high|waterford high|watsonville high|weber institute|weed high|wesm health/sports medicine|west adams preparatory high|west campus|west covina high|west high|west high|west hills high|west shores high|west valley high|west valley high|western high|westlake high|westminster high|westmont high|westmoor high|weston ranch high|wheatland union high|whitmore charter high|whitney (gretchen) high|whitney high|whittier high|will c. wood high|william & marian ghidotti high|william c. overfelt high|william howard taft charter high|william j. (pete) knight high|william s. hart high|william workman high|willits high|willow glen high|willows high|wilmer amina carter high|wilson high|windsor high|winters high|woodbridge high|woodcreek high|woodlake high|woodland senior high|woodrow wilson senior high|woodside high|yerba buena high|yosemite high|yreka high|yuba city high|yucaipa high|yucca valley high",
+        "gold_hash": "abraham lincoln high|abraham lincoln senior high|academies of education and empowerment at carson high|academy for academic excellence|academy of arts and sciences|academy of careers and exploration|academy of environmental & social policy (esp) at roosevelt high|academy of medical arts at carson high|academy of the redwoods|adelanto high|adolfo camarillo high|adrian wilcox high|alain leroy locke college prep academy|alexander hamilton senior high|alhambra high|alisal high|alliance cindy and bill simon technology academy high|alliance college-ready academy high 16|alliance collins family college-ready high|alliance dr. olga mohan high|alliance environmental science and technology high|alliance gertz-ressler richard merkin 6-12 complex|alliance health services academy high|alliance judy ivie burton technology academy high|alliance marc & eva stern math and science|alliance media arts and entertainment design high|alliance ouchi-o'donovan 6-12 complex|alliance patti and peter neuwirth leadership academy|alliance renee and meyer luskin academy high|alliance tennenbaum family technology high|alta loma high|alta vista alternative high|american canyon high|anaheim high|analy high|anderson high|anderson valley junior-senior high|anderson w. clark magnet high|andrew p. hill high|angelo rodriguez high|animo college preparatory academy|animo inglewood charter high|animo jackie robinson high|animo leadership high|animo pat brown|animo ralph bunche high|animo south los angeles charter|animo venice charter high|animo watts college preparatory academy|ann sobrato high|antelope high|antelope valley high|anzar high|apex academy|apple valley high|applied technology center|aptos high|aragon high|arcadia high|arcata high|arleta high|arlington high|armijo high|arnold o. beckman high|arroyo grande high|arroyo high|arroyo valley high|artesia high|arthur a. benjamin health professions high|arvin high|asawa (ruth) san francisco school of the arts, a public school.|aspire alexander twilight secondary academy|aspire benjamin holt college preparatory academy|aspire langston hughes academy|aspire pacific academy|atascadero high|atwater high|audeo charter|augustus f. hawkins high b community health advocates|augustus f. hawkins high c responsible indigenous social entrepreneurship|avalon k-12|avenal high|azusa high|bakersfield high|balboa high|baldwin park high|banning high|barstow high|bassett senior high|bear creek high|bear river high|beaumont senior high|bell gardens high|bell senior high|bella vista high|bellflower high|belmont senior high|belmont sh-la teacher preparatory academy|benicia high|benjamin franklin senior high|big bear high|birmingham community charter high|bishop union high|bitney college preparatory high|blair high|bloomington high|bolsa grande high|bonita high|bonita vista senior high|borrego springs high|branham high|brawley high|brea-olinda high|bright star secondary charter academy|buchanan high|buena high|buena park high|buhach colony high|bullard high|burbank high|burroughs high|burroughs high|burton (phillip and sala) academic high|c. k. mcclatchy high|cabrillo high|cabrillo high|cajon high|calexico high|california academy of mathematics and science|california city high|california connections academy @ ripon|california high|california military institute|california virtual academy @ los angeles|california virtual academy @ san diego|calipatria high|calistoga junior-senior high|camino nuevo charter high|canoga park senior high|canyon high|canyon springs high|capistrano connections academy|capistrano valley high|capuchino high|carlmont high|carlsbad high|carpinteria senior high|carson senior high|caruthers high|casa grande high|casa roble fundamental high|castle park senior high|cathedral city high|centennial high|centennial high|centennial high|center high|central city value|central high east campus|central union high|central valley high|central valley high|century high|ceres high|cerritos high|cesar chavez high|cesar e. chavez high|cesar e. chavez learning academies-academy of scientific exploration (ase)|cesar e. chavez learning academies-arts,theatre, entertainment (artes)|cesar e. chavez learning academies-social justice humanitas academy|cesar e. chavez learning academies-teacher preparation academy|chaffey high|champs - charter hs of arts-multimedia & performing|channel islands high|chaparral high|charter oak high|charter school of san diego|chatsworth charter high|chester junior/senior high|chino high|chino hills high|chowchilla union high|christopher high|chula vista senior high|citrus hill high|citrus valley high|city arts and tech high|city honors college preparatory academy|city of angels|clairemont high|claremont high|clear lake high|cloverdale high|clovis east high|clovis high|clovis north high|clovis west high|coachella valley high|coalinga high|coast union high|coleman tech charter high|colfax high|college prep high|colony high|colton high|communication and technology at diego rivera learning complex|compton high|connecting waters charter|contreras learning center-academic leadership community|contreras learning center-los angeles school of global studies|contreras learning center-school of social justice|corcoran high|cordova high|corning high|corona high|costa mesa high|cosumnes oaks high|covina high|crawford high|crenshaw arts-technology charter high|crenshaw science, technology, engineering, math and medicine magnet|crescenta valley high|culver city high|cypress high|da vinci design|da vinci science|dana hills high|daniel pearl journalism & communications magnet|david starr jordan senior high|davis senior high|dehesa charter|del campo high|del mar high|delano high|delhi high|delta charter|delta high|denair high|desert hot springs high|desert mirage high|design science early college high|diamond ranch high|dinuba high|discovery charter preparatory no. 2|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|district office|dixon high|dominguez high|don antonio lugo high|dos palos high|dos pueblos senior high|downey high|downtown business high|dr. maya angelou community high|dr. t. j. owens gilroy early college academy|duarte high|eagle rock high|early college high|east bakersfield high|east los angeles performing arts academy at esteban e. torres high no. 1|east los angeles renaissance academy at esteban e. torres high no. 2|east nicolaus high|east palo alto academy|east union high|east valley senior high|eastlake high|eastside high|edgewood high|edison high|edison high|edward r. roybal learning center|eisenhower senior high|el cajon valley high|el camino fundamental high|el camino high|el camino high|el camino high|el camino real charter high|el capitan high|el diamante high|el dorado high|el modena high|el molino high|el monte high|el rancho high|el toro high|eleanor roosevelt high|elise p. buckingham charter magnet high|elizabeth learning center|elk grove high|elsie allen high|elsinore high|encina preparatory high|encore jr./sr. high school for the performing and visual arts|engineering and technology academy at esteban e. torres high no. 3|enterprise high|environmental charter high|erma duncan polytechnical high|ernest righetti high|escalon high|escondido charter high|escondido high|esparto high|esperanza high|estancia high|etiwanda high|etna union high|eureka senior high|everest public high|everett alvarez high|evergreen valley high|excelsior charter|exeter union high|fairfax senior high|fairfield high|fall river junior-senior high|fallbrook high|farmersville high|felicitas and gonzalo mendez high|ferndale high|fillmore senior high|firebaugh high|florin high|fontana a. b. miller high|fontana high|foothill high|foothill high|foothill high|foothill high|foothill technology high|forest charter|foresthill high|fort bragg high|fortuna union high|foshay learning center|fountain valley high|fowler high|francisco bravo medical magnet high|franklin high|franklin high|frazier mountain high|fred c. beyer high|frederick douglass academy high|fremont academy of engineering and design|fremont high|fresno high|frontier high|fullerton union high|futures high|gabrielino high|gahr (richard) high|galileo high|galt high|ganesha high|garden grove high|gardena senior high|garey high|gateway high|george washington carver school of arts and science|george washington preparatory high|gilroy high|gladstone high|glen a. wilson high|glendale high|glendora high|golden valley high|golden valley high|golden valley high|golden west high|gompers preparatory academy|gonzales high|gorman learning center|grace m. davis high|granada hills charter high|grand terrace high school at the ray abril jr. educational complex|granite hills high|granite hills high|granite hills high|grant union high|green design at diego rivera learning complex|greenfield high|grossmont high|grossmont middle college high|grove|grover cleveland charter high|guajome park academy charter|guidance charter|gunderson high|gustine high|half moon bay high|hallmark charter|hamilton high|hamilton high|hanford high|hanford west high|harbor high|harbor teacher preparation academy|harmony magnet academy|hawthorne high|hawthorne math and science academy|healdsburg high|health careers academy|health sciences high|hector g. godinez|helen bernstein high|helix high|hemet high|henry high|henry j. kaiser high|herbert hoover high|herbert hoover high|heritage high|heritage peak charter|hesperia high|high tech high|high tech high chula vista|high tech high international|high tech high media arts|high tech high north county|high tech la|highland high|highland high|highlands high|hillsdale high|hilltop senior high|hilmar high|hiram w. johnson high|hollywood senior high|holtville high|homestead high|hoopa valley high|hoover high|horizon charter|hueneme high|hughson high|humanitas academy of art and technology at esteban e. torres high no. 4|humanities and arts (harts) academy of los angeles|humphreys college academy of business, law and education|huntington beach high|huntington park senior high|imperial high|independence high|independence high|independence high|inderkum high|indian springs high|indio high|inglewood high|insight @ los angeles|international polytechnic high|international studies academy|international studies learning center at legacy high school complex|irvine high|ivy academia|james a. garfield senior high|james c. enochs high|james lick high|james monroe high|jefferson high|jesse m. bethel high|john a. rowland high|john c. fremont senior high|john c. kimball high|john f. kennedy high|john f. kennedy high|john f. kennedy high|john f. kennedy high|john h. francis polytechnic|john h. glenn high|john h. pitman high|john marshall senior high|john muir high|john w. north high|jordan high|joseph a. gregori high|julian charter|jurupa hills high|jurupa valley high|katella high|kearny digital media & design|kearny eng, innov & design|kearny international business|kearny sct|kelseyville high|kerman high|kern valley high|king city high|king-chavez community high|king/drew medical magnet high|kingsburg high|kipp san jose collegiate|la habra high|la jolla high|la mirada high|la puente high|la quinta high|la quinta high|la serna high|la sierra high|laguna creek high|laguna hills high|lakeside high|lakewood high|lancaster high|lassen high|lathrop high|lawndale high|le grand high|leadership high|leadership public schools - san jose|lemoore high|lemoore middle college high|lennox mathematics, science and technology academy|leuzinger high|liberty high|liberty high|liberty ranch high|lincoln (abraham) high|lincoln high|lincoln high|lincoln high|linda esperanza marquez high a huntington park institute of applied medicine|linda esperanza marquez high b libra academy|linda esperanza marquez high c school of social justice|linden high|lindhurst high|lindsay senior high|littlerock high|live oak high|live oak high|livingston high|loara high|lodi high|lompoc high|los altos high|los altos high|los amigos high|los angeles academy of arts & enterprise charter|los angeles center for enriched studies|los angeles international charter high|los angeles leadership academy|los angeles river at sonia sotomayor learning academies|los angeles senior high|los banos high|los molinos high|los osos high|lowell high|lower lake high|luther burbank high|lynwood high|madera high|madera south high|madison high|magnolia high|magnolia science academy|magnolia science academy 2|magnolia science academy 3|magnolia science academy 4|mammoth high|manteca high|manual arts senior high|mar vista senior high|marco antonio firebaugh high|maria carrillo high|marina high|marina high|mariposa county high|mark keppel high|marshall (thurgood) high|marshall fundamental|martin luther king jr. high|marysville charter academy for the arts|marysville high|math, science, & technology magnet academy at roosevelt high|mayfair high|maywood academy high|mcfarland high|mckinleyville high|mclane high|mendocino high|mendota high|menlo-atherton high|merced high|merrill f. west high|mesa verde high|middle college high|middle college high|middle college high|middle college high|middletown high|millennium charter|millikan high|mills high|milpitas high|minarets charter high|minarets high|mira loma high|mira mesa high|mira monte high|mission bay high|mission high|mission hills high|mission oak high|mission viejo high|mission vista high|modesto high|modoc high|monache high|monrovia high|montclair high|monte vista high|montebello high|monterey high|monterey trail high|montgomery high|montgomery senior high|moorpark high|moreno valley high|morningside high|morro bay high|morse high|mount miguel high|mount pleasant high|mountain empire high|mountain park|mountain view high|mountain view high|mt. carmel high|mt. everest academy|mt. shasta high|mt. whitney high|murrieta mesa high|murrieta valley high|napa high|nathaniel narbonne senior high|natomas charter|natomas high|natomas pacific pathways prep|needles high|nevada union high|new designs charter|new millennium secondary|new technology high|new technology high|newbury park high|newport harbor high|nipomo high|nogales high|norco high|nordhoff high|norte vista high|north high|north high|north hollywood senior high|north monterey county high|north salinas high|north tahoe high|northcoast preparatory and performing arts academy|northridge academy high|northview high|norwalk high|nova academy|nova academy - coachella|novato high|nuview bridge early college high|o'connell (john) high|oak grove high|oak hills high|oakdale high|oakmont high|occs:chep/pchs|ocean grove charter|ocean view high|oceana high|oceanside high|ocsa|olympian high|ontario high|opportunities for learning - baldwin park|opportunities for learning - baldwin park ii|opportunities for learning - santa clarita|options for youth san gabriel|options for youth-burbank charter|options for youth-san bernardino|options for youth-san juan|options for youth-victorville charter|orange cove high|orange glen high|orange high|orcutt academy charter|orestimba high|orland high|orosi high|orthopaedic hospital|oscar de la hoya animo charter high|otay ranch senior high|oxford academy|oxnard high|pacheco high|pacific grove high|pacific high|pacifica high|pacifica high|pajaro valley high|palisades charter high|palm desert high|palm springs high|palmdale high|palo verde high|paloma valley high|palomares academy of health science|panorama high|paramount academy|paramount high|parlier high|pasadena high|paso robles high|patriot high|patterson high|performing arts community at diego rivera learning complex|perris high|petaluma high|peter johansen high|phineas banning senior high|piedmont hills high|piner high|pioneer high|pioneer high|pioneer high|pioneer valley high|placer high|pleasant grove high|point arena high|point loma high|polytechnic high|polytechnic high|pomona high|port of los angeles high|porterville high|portola junior/senior high|potter valley high|poway high|preuss school ucsd|prospect high|public service community at diego rivera learning complex|puc ca academy for liberal studies early college high|puc early college academy for leaders and scholars (ecals)|puc lakeview charter high|quartz hill high|quincy junior/senior high|ramon c. cortines school of visual and performing arts|ramona high|ramona high|rancho alamitos high|rancho buena vista high|rancho cotate high|rancho cucamonga high|rancho dominguez preparatory|rancho verde high|red bluff high|redlands east valley high|redlands senior high|redondo union high|redwood academy of ukiah|redwood high|reedley high|renaissance arts academy|renaissance high school for the arts|reseda senior high|rfk community schools- for the visual arts and humanities|rfk community schools-ambassador-global leadership|rfk community schools-los angeles high school of the arts|rfk community schools-new open world academy k-12|rfk community schools-ucla community k-12|rialto high|ridgeview high|rim of the world senior high|rio americano high|rio linda high|rio mesa high|rio vista high|ripon high|river city high|river springs charter|river valley high|riverbank high|riverdale high|riverside preparatory|robert f. kennedy high|robert fulton college preparatory|ronald e. mcnair high|roosevelt high|rosamond high|roseland charter|rosemead high|rosemont high|roseville high|royal high|ruben s. ayala high|rubidoux high|s.f. international high|sacramento charter high|saddleback high|saint helena high|salinas high|san benito high|san bernardino high|san clemente high|san diego business/leadership|san diego early/middle college|san diego international studies|san diego metro career and tech|san diego mvp arts|san diego science and technology|san diego scpa|san dimas high|san fernando senior high|san francisco flex academy|san gabriel high|san gorgonio high|san jacinto high|san jacinto valley academy|san josé high|san juan high|san juan hills high|san lorenzo valley high|san luis obispo high|san marcos high|san marcos senior high|san marin high|san mateo high|san pasqual academy|san pasqual high|san pedro senior high|san rafael high|san ysidro high|sanger high|santa ana high|santa barbara senior high|santa clara high|santa clarita valley international|santa cruz high|santa fe high|santa maria high|santa monica high|santa paula high|santa rosa academy|santa rosa high|santa susana high|santa teresa high|santa ynez valley union high|santana high|santee education complex|santiago high|santiago high|savanna high|school of arts and enterprise|school of business and tourism at contreras learning complex|school of engineering & sciences|school of history and dramatic arts at sonia sotomayor learning academies|schurr high|science, technology, engineering, arts and mathematics at legacy high school complex|scripps ranch high|seaside high|segerstrom high|selma high|sequoia high|serra high|serrano high|shadow hills high|shafter high|shasta high|sheldon high|sherman oaks center for enriched studies|sierra high|sierra high|sierra pacific high|sierra vista high|silver creek high|silver valley high|silverado high|simi valley high|six rivers charter high|soar high (students on academic rise)|social justice leadership academy at esteban e. torres high no. 5|soledad high|sonoma valley high|sonora high|sonora high|soquel high|south east high|south el monte high|south fork junior - senior high|south gate senior high|south high|south high|south hills high|south pasadena senior high|south san francisco high|south sutter charter|southwest high|southwest senior high|stagg senior high|steele canyon high|stem academy at bernstein high|stockdale high|stockton collegiate international secondary|stockton unified early college academy|strathmore high|student empowerment academy|sultana high|summerville high|summit high|summit preparatory charter high|summit public school: rainier|summit public school: tahoma|sun valley high|sunny hills high|sunnyside high|susan miller dorsey senior high|sutter high|sweetwater high|sylmar senior high|synergy quantum academy|taft union high|tahoe truckee high|tahquitz high|tehachapi high|temecula valley high|temescal canyon high|temple city high|terra linda high|terra nova high|the high school at moorpark college|the met|theodore roosevelt senior high|thirty-second street usc performing arts|thomas downey high|thomas jefferson senior high|thousand oaks high|tokay high|tomales high|torrance high|tracy high|tranquillity high|trinity high|troy high|tulare union high|tulare western high|turlock high|tustin high|twentynine palms high|ukiah high|ulysses s. grant senior high|university city high|university high|university preparatory|university preparatory|university preparatory academy charter|university preparatory high|university senior high|upland high|vacaville high|valencia high|valhalla high|vallejo high|valley academy of arts and sciences|valley alternative magnet|valley center high|valley charter high|valley high|valley high|valley oaks charter|valley view high|van nuys senior high|vanden high|vasquez high|vaughn next century learning center|venice senior high|ventura high|venture academy|verdugo hills senior high|victor valley high|view park preparatory accelerated high|villa park high|village academy high school at indian hill|vintage high|visalia charter independent study|visions in education|vista del lago high|vista high|vista murrieta high|visual and performing arts at legacy high school complex|wallenberg (raoul) traditional high|wallis annenberg high|warren high|wasco high|washington (george) high|washington high|waterford high|watsonville high|weber institute|weed high|wesm health/sports medicine|west adams preparatory high|west campus|west covina high|west high|west high|west hills high|west shores high|west valley high|west valley high|western high|westlake high|westminster high|westmont high|westmoor high|weston ranch high|wheatland union high|whitmore charter high|whitney (gretchen) high|whitney high|whittier high|will c. wood high|william & marian ghidotti high|william c. overfelt high|william howard taft charter high|william j. (pete) knight high|william s. hart high|william workman high|willits high|willow glen high|willows high|wilmer amina carter high|wilson high|windsor high|winters high|woodbridge high|woodcreek high|woodlake high|woodland senior high|woodrow wilson senior high|woodside high|yerba buena high|yosemite high|yreka high|yuba city high|yucaipa high|yucca valley high"
+      },
+      {
+        "idx": 1,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "0.0",
+        "gold_hash": "14.0"
+      },
+      {
+        "idx": 2,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "",
+        "gold_hash": "aguilar,san francisco unified,san francisco,creative arts charter"
+      },
+      {
+        "idx": 3,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "87400.0",
+        "gold_hash": "59200.0"
+      },
+      {
+        "idx": 4,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "149609.18",
+        "gold_hash": "153372.275"
+      },
+      {
+        "idx": 5,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "east bohemia",
+        "gold_hash": "51.0,east bohemia"
+      },
+      {
+        "idx": 6,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "45.0",
+        "gold_hash": "210993.0"
+      },
+      {
+        "idx": 7,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "br|c|ca|cl|cu|f|h|n|o|p|pb|s|sn|te"
+      },
+      {
+        "idx": 8,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 9,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "6.0",
+        "gold_hash": "12.0"
+      },
+      {
+        "idx": 10,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "",
+        "gold_hash": "c|h|n|pb|s"
+      },
+      {
+        "idx": 11,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "acidic slime|ajani, mentor of heroes|anguished unmaking|assassin's trophy|barkchannel pathway // tidechannel pathway|barkchannel pathway // tidechannel pathway|barkchannel pathway // tidechannel pathway|blightstep pathway // searstep pathway|blightstep pathway // searstep pathway|blightstep pathway // searstep pathway|branchloft pathway // boulderloft pathway|branchloft pathway // boulderloft pathway|branchloft pathway // boulderloft pathway|brightclimb pathway // grimclimb pathway|brightclimb pathway // grimclimb pathway|brightclimb pathway // grimclimb pathway|captain sisay|clearwater pathway // murkwater pathway|clearwater pathway // murkwater pathway|clearwater pathway // murkwater pathway|cragcrown pathway // timbercrown pathway|cragcrown pathway // timbercrown pathway|cragcrown pathway // timbercrown pathway|dack fayden|daretti, ingenious iconoclast|darkbore pathway // slitherbore pathway|darkbore pathway // slitherbore pathway|darkbore pathway // slitherbore pathway|decimate|domri, chaos bringer|dreadbore|elspeth, knight-errant|garruk, apex predator|gideon blackblade|hangarback walker|hengegate pathway // mistgate pathway|hengegate pathway // mistgate pathway|hengegate pathway // mistgate pathway|jace, the mind sculptor|jaya ballard|karn, scion of urza|kaya, orzhov usurper|liliana, the last hope|meren of clan nel toth|nahiri, the harbinger|narset, enlightened master|necrotic ooze|needleverge pathway // pillarverge pathway|needleverge pathway // pillarverge pathway|needleverge pathway // pillarverge pathway|nicol bolas, dragon-god|nicol bolas, planeswalker|oona, queen of the fae|ral, izzet viceroy|riverglide pathway // lavaglide pathway|riverglide pathway // lavaglide pathway|riverglide pathway // lavaglide pathway|sarkhan unbroken|saskia the unyielding|scavenging ooze|sorin markov|tamiyo, the moon sage|teferi, hero of dominaria|tezzeret the seeker|tezzeret, agent of bolas|the mimeoplasm|thraximundar|ugin, the spirit dragon|valki, god of lies // tibalt, cosmic impostor|void beckoner|voidslime|vraska, golgari queen",
+        "gold_hash": "23004.0|25350.0|25355.0|25357.0|25359.0|25361.0|33094.0|33095.0|33096.0|33097.0|33098.0|33099.0|33100.0|33101.0|33102.0|33103.0|33104.0|33105.0|33106.0|33107.0|33108.0|33109.0|33110.0|33111.0|33112.0|33113.0|33114.0|33115.0|33116.0|33117.0|39967.0|48262.0|48263.0|48264.0|48265.0|48266.0|48338.0|48339.0|48340.0|48341.0|48342.0|48432.0|48433.0|48434.0|48435.0|48436.0|48437.0|48438.0|48439.0|48440.0|48441.0|48442.0|48443.0|48444.0|48445.0|48446.0|48447.0|48448.0|48449.0|48450.0|48451.0|56708.0|56710.0|56712.0|56714.0|56716.0|56720.0"
+      },
+      {
+        "idx": 12,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "None|creature - cleric|creature - human cleric|creature — human cleric",
+        "gold_hash": "creature - cleric|creature - human cleric|creature — human cleric"
+      },
+      {
+        "idx": 13,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "abstruse interference,None|affa protector,w|akoum flameseeker,r|allied reinforcements,w|ancient crab,u|ayli, eternal pilgrim,b,w|baloth null,b,g|baloth pup,g|bearer of silence,None|birthing hulk,None|blinding drone,None|bonds of mortality,g|bone saw,None|boulder salvo,r|brute strength,r|call the gatewatch,w|canopy gorger,g|captain's claws,None|captain's claws,None|chandra, flamecaller,r|chitinous cloak,None|cinder barrens,None|cinder hellion,r|cliffhaven vampire,b,w|comparative analysis,u|consuming sinkhole,None|containment membrane,u|corpse churn,b|corrupted crossroads,None|crumbling vestige,None|crush of tentacles,u|cultivator drone,None|cyclone sire,u|dazzling reflection,w|deceiver of form,None|deepfathom skulker,None|devour in flames,r|dimensional infiltrator,None|drana's chosen,b|dread defiler,None|eldrazi aggressor,None|eldrazi displacer,None|eldrazi mimic,None|eldrazi obligator,None|elemental uprising,g|embodiment of fury,r|embodiment of insight,g|endbringer,None|essence depleter,None|expedite,r|expedition raptor,w|fall of the titans,r|flayer drone,None|flaying tendrils,None|general tazri,w|gift of tusks,u|gladehart cavalry,g|goblin dark-dwellers,r|goblin freerunner,r|grasp of darkness,b|gravity negator,None|grip of the roil,u|harvester troll,g|havoc sower,None|hedron alignment,u|hedron crawler,None|hissing quagmire,None|holdout settlement,None|immobilizer eldrazi,None|immolating glare,w|inverter of truth,None|iona's blessing,w|isolation zone,w|joraga auxiliary,g,w|jori en, ruin diver,r,u|jwar isle avenger,u|kalitas, traitor of ghet,b|kazuul's toll collector,r|kor scythemaster,w|kor sky climber,w|kozilek's pathfinder,None|kozilek's return,None|kozilek's shrieker,None|kozilek's translator,None|kozilek, the great distortion,None|lead by example,g|linvala, the preserver,w|loam larva,g|make a stand,w|makindi aeronaut,w|malakir soothsayer,b|matter reshaper,None|maw of kozilek,None|meandering river,None|mighty leap,w|mina and denn, wildborn,g,r|mindmelter,None|mirrorpool,None|munda's vanguard,w|natural state,g|needle spires,None|negate,u|netcaster spider,g|nissa's judgment,g|nissa, voice of zendikar,g|null caller,b|oath of chandra,r|oath of gideon,w|oath of jace,u|oath of nissa,g|oblivion strike,None|ondu war cleric,w|overwhelming denial,u|press into service,r|prophet of distortion,None|pulse of murasa,g|pyromancer's assault,r|reality hemorrhage,None|reality smasher,None|reaver drone,None|reckless bushwhacker,r|reflector mage,u,w|relentless hunter,g,r|relief captain,w|remorseless punishment,b|roiling waters,u|ruin in their wake,None|ruins of oran-rief,None|saddleback lagac,g|scion summoner,None|sea gate wreckage,None|searing light,w|seed guardian,g|seer's lantern,None|shoulder to shoulder,w|sifter of skulls,None|sky scourer,None|slaughter drone,None|slip through space,None|sparkmage's gambit,r|spatial contortion,None|spawnbinder mage,w|sphinx of the final word,u|stalking drone,None|steppe glider,w|stone haven outfitter,w|stoneforge acolyte,w|stoneforge masterwork,None|stormchaser mage,r,u|strider harness,None|submerged boneyard,None|sweep away,u|sylvan advocate,g|tajuru pathwarden,g|tar snare,b|tears of valakut,r|thought harvester,None|thought-knot seer,None|timber gorge,None|tranquil expanse,None|tyrant of valakut,r|umara entangler,u|unity of purpose,u|unknown shores,None|unnatural endurance,None|untamed hunger,b|vampire envoy,b|vile redeemer,None|vines of the recluse,g|visions of brutality,None|void grafter,None|void shatter,None|walker of the wastes,None|wall of resurgence,w|wandering fumarole,None|warden of geometries,None|warping wail,None|wastes,None|wastes,None|wastes,None|wastes,None|weapons trainer,r,w|witness the end,None|world breaker,None|zada's commando,r|zendikar resurgent,g|zulaport chainmage,b",
+        "gold_hash": "851.0,u|852.0,u|853.0,u|854.0,u|855.0,u|856.0,u|857.0,u|858.0,u|859.0,u|860.0,u"
+      },
+      {
+        "idx": 14,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "10e|4bb|4ed|5dn|5ed|6ed|7ed|8ed|9ed|aer|akh|ala|all|apc|arb|avr|bfz|bng|bok|c13|c14|c15|c16|c17|c18|c19|c20|chk|cmd|cmr|con|csp|cst|ddf|ddg|ddh|dgm|dis|dka|dom|dst|dtk|eld|emn|eve|exo|frf|fut|gk1|gk2|gpt|grn|gtc|hml|hou|ice|iko|inv|isd|itp|jou|jud|kld|ktk|lgn|lrw|m10|m11|m12|m13|m14|m15|m19|m20|m21|mbs|mh1|mir|mmq|mor|mrd|nem|nph|ody|ogw|ohop|ons|opc2|ori|p02|pc2|pcy|phop|plc|pls|por|ps11|psal|rav|rix|rna|roe|rtr|s00|scg|shm|soi|sok|som|sth|thb|ths|tmp|tor|tsb|tsp|uds|ugin|ulg|usg|vis|w16|w17|war|wth|wwk|xln|zen|znc|zne|znr",
+        "gold_hash": "10e|4ed|5dn|5ed|6ed|7ed|8ed|9ed|aer|akh|ala|apc|arb|arc|bfz|bng|bok|brb|btd|c13|c14|c15|c16|c17|chk|chr|cm1|cmd|cn2|cns|con|csp|dd1|dd2|ddc|ddd|dde|ddf|ddg|ddh|ddi|ddj|ddk|ddl|ddm|ddn|ddo|ddp|ddq|ddr|dis|dkm|dom|dst|dtk|eld|ema|emn|eve|exo|frf|fut|gpt|gtc|hml|ice|iko|jou|jud|kld|ktk|lgn|lrw|m10|m14|m15|m20|m21|mbs|mm2|mma|mmq|mor|mrd|ody|ogw|ons|ori|pc2|pca|pcy|pd2|plc|rav|rix|rna|rtr|scg|shm|soi|sok|sth|thb|ths|tmp|tor|tpr|tsp|uds|ulg|usg|v09|v10|v11|v12|v13|v14|v15|v16|war|wth"
+      },
+      {
+        "idx": 15,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "tenth edition,set base decima edizione"
+      },
+      {
+        "idx": 16,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "japanese,,land|japanese,ゼンディカーでは、今日の草原は明日の密林であり、狩場も天気と同じぐらいにすぐ変わってしまう。,creature — cat",
+        "gold_hash": "japanese,|japanese,ゼンディカーでは、今日の草原は明日の密林であり、狩場も天気と同じぐらいにすぐ変わってしまう。"
+      },
+      {
+        "idx": 17,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "kreatur — kleriker|kreatur — mensch, kleriker",
+        "gold_hash": "creature — human cleric"
+      },
+      {
+        "idx": 18,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "None|commander (2015 edition)|commander (2016 edition)|commander (2017 edition)|magic: the gathering commander|第９版 基本セット",
+        "gold_hash": "commander (2015 edition)|commander (2016 edition)|commander (2017 edition)|magic: the gathering commander|第９版 基本セット"
+      },
+      {
+        "idx": 19,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "",
+        "gold_hash": "chinese simplified"
+      },
+      {
+        "idx": 20,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "how does gentle boosting differ from adaboost?|what is the right name for the variant of the kolmogorov-smirnov statistic that retains the sign of the difference?",
+        "gold_hash": "estimating beta-binomial distribution|how does gentle boosting differ from adaboost?|should an svm grid search show a high-accuracy region with low accuracies around?|what is the right name for the variant of the kolmogorov-smirnov statistic that retains the sign of the difference?"
+      },
+      {
+        "idx": 21,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "0.0",
+        "gold_hash": "9.0"
+      },
+      {
+        "idx": 22,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "",
+        "gold_hash": "editor|editor|organizer|organizer|organizer|student|student|student|student|student|student|student|student"
+      },
+      {
+        "idx": 23,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "1.0",
+        "gold_hash": "4.0"
+      },
+      {
+        "idx": 24,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "28970.0",
+        "gold_hash": "209.0"
+      },
+      {
+        "idx": 25,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "1595.0,fabian fagerholm",
+        "gold_hash": "890.0,fabian fagerholm"
+      },
+      {
+        "idx": 26,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "eval_timeout",
+        "is_join": true
+      },
+      {
+        "idx": 27,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "eval_timeout",
+        "is_join": true
+      },
+      {
+        "idx": 28,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "good,intelligence",
+        "gold_hash": "intelligence"
+      },
+      {
+        "idx": 29,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "räikkönen",
+        "gold_hash": "räikkönen"
+      },
+      {
+        "idx": 30,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603|24.467,54.603",
+        "gold_hash": "24.467,54.603,abu dhabi"
+      },
+      {
+        "idx": 31,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "adrian sutil|bruno senna|christian klien|felipe massa|fernando alonso|heikki kovalainen|jaime alguersuari|jarno trulli|jenson button|kamui kobayashi|lewis hamilton|lucas di grassi|mark webber|michael schumacher|nick heidfeld|nico hülkenberg|nico rosberg|robert kubica|rubens barrichello|sebastian vettel|sébastien buemi|timo glock|vitaly petrov|vitantonio liuzzi",
+        "gold_hash": "adrian,sutil|bruno,senna|christian,klien|felipe,massa|fernando,alonso|heikki,kovalainen|jaime,alguersuari|jarno,trulli|jenson,button|kamui,kobayashi|karun,chandhok|lewis,hamilton|lucas,di grassi|mark,webber|michael,schumacher|nick,heidfeld|nico,hülkenberg|nico,rosberg|pedro,de la rosa|robert,kubica|rubens,barrichello|sakon,yamamoto|sebastian,vettel|sébastien,buemi|timo,glock|vitaly,petrov|vitantonio,liuzzi"
+      },
+      {
+        "idx": 32,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "37.0,kamui kobayashi",
+        "gold_hash": "40.0,kamui,kobayashi"
+      },
+      {
+        "idx": 33,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "hamilton",
+        "gold_hash": "heikki,kovalainen,kovalainen"
+      },
+      {
+        "idx": 34,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 35,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "robert,kubica,1:36:24.227",
+        "gold_hash": "1:36:24.227"
+      },
+      {
+        "idx": 36,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "abu dhabi, uae",
+        "gold_hash": "abu dhabi"
+      },
+      {
+        "idx": 37,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "1:07.411",
+        "gold_hash": "1:12.506|1:13.029|1:13.046|1:13.090|1:13.160|1:13.162|1:13.179|1:13.222|1:13.223|1:13.227|1:13.238|1:13.242|1:13.282|1:13.295|1:13.324|1:13.355|1:13.371|1:13.385|1:13.420|1:13.429|1:13.443|1:13.446|1:13.482|1:13.499|1:13.499|1:13.517|1:13.559|1:13.579|1:13.589|1:13.589|1:13.621|1:13.666|1:13.677|1:13.681|1:13.693|1:13.721|1:13.749|1:13.756|1:13.764|1:13.823|1:13.831|1:13.851|1:13.873|1:13.875|1:13.879|1:13.923|1:13.956|1:13.958|1:13.964|1:13.972|1:13.991|1:13.991|1:13.994|1:14.015|1:14.048|1:14.066|1:14.072|1:14.077|1:14.079|1:14.082|1:14.084|1:14.102|1:14.104|1:14.106|1:14.110|1:14.114|1:14.120|1:14.142|1:14.148|1:14.154|1:14.156|1:14.159|1:14.161|1:14.177|1:14.188|1:14.196|1:14.197|1:14.200|1:14.201|1:14.204|1:14.214|1:14.226|1:14.226|1:14.239|1:14.253|1:14.258|1:14.261|1:14.262|1:14.265|1:14.273|1:14.277|1:14.280|1:14.287|1:14.315|1:14.317|1:14.323|1:14.329|1:14.331|1:14.332|1:14.334|1:14.337|1:14.344|1:14.345|1:14.362|1:14.370|1:14.379|1:14.380|1:14.381|1:14.397|1:14.398|1:14.398|1:14.409|1:14.420|1:14.433|1:14.437|1:14.440|1:14.444|1:14.456|1:14.458|1:14.498|1:14.502|1:14.504|1:14.516|1:14.543|1:14.547|1:14.551|1:14.570|1:14.579|1:14.580|1:14.582|1:14.584|1:14.590|1:14.606|1:14.607|1:14.612|1:14.614|1:14.614|1:14.614|1:14.643|1:14.645|1:14.646|1:14.653|1:14.653|1:14.682|1:14.684|1:14.688|1:14.690|1:14.692|1:14.700|1:14.718|1:14.737|1:14.746|1:14.755|1:14.764|1:14.781|1:14.805|1:14.808|1:14.819|1:14.831|1:14.850|1:14.880|1:14.886|1:14.924|1:14.926|1:14.931|1:14.938|1:14.943|1:14.945|1:14.965|1:14.977|1:14.980|1:14.985|1:14.990|1:14.997|1:15.000|1:15.018|1:15.018|1:15.025|1:15.041|1:15.045|1:15.049|1:15.053|1:15.058|1:15.063|1:15.080|1:15.083|1:15.089|1:15.111|1:15.112|1:15.112|1:15.117|1:15.120|1:15.121|1:15.133|1:15.155|1:15.157|1:15.163|1:15.170|1:15.176|1:15.181|1:15.192|1:15.197|1:15.198|1:15.204|1:15.218|1:15.218|1:15.232|1:15.236|1:15.238|1:15.252|1:15.273|1:15.284|1:15.287|1:15.289|1:15.297|1:15.333|1:15.341|1:15.349|1:15.358|1:15.361|1:15.362|1:15.370|1:15.372|1:15.377|1:15.390|1:15.390|1:15.446|1:15.452|1:15.454|1:15.473|1:15.528|1:15.536|1:15.543|1:15.570|1:15.578|1:15.580|1:15.583|1:15.596|1:15.623|1:15.645|1:15.645|1:15.658|1:15.705|1:15.706|1:15.710|1:15.729|1:15.751|1:15.752|1:15.758|1:15.768|1:15.776|1:15.833|1:15.838|1:15.839|1:15.858|1:15.883|1:15.885|1:15.892|1:15.904|1:15.914|1:15.917|1:15.927|1:15.957|1:15.958|1:15.962|1:15.970|1:15.980|1:15.989|1:16.029|1:16.033|1:16.039|1:16.058|1:16.060|1:16.078|1:16.080|1:16.085|1:16.094|1:16.100|1:16.117|1:16.136|1:16.141|1:16.152|1:16.158|1:16.164|1:16.168|1:16.169|1:16.169|1:16.172|1:16.199|1:16.203|1:16.206|1:16.219|1:16.238|1:16.242|1:16.250|1:16.263|1:16.269|1:16.270|1:16.273|1:16.274|1:16.274|1:16.274|1:16.289|1:16.292|1:16.296|1:16.300|1:16.301|1:16.302|1:16.303|1:16.316|1:16.320|1:16.326|1:16.335|1:16.341|1:16.342|1:16.342|1:16.343|1:16.348|1:16.350|1:16.360|1:16.373|1:16.374|1:16.378|1:16.383|1:16.404|1:16.407|1:16.414|1:16.419|1:16.420|1:16.445|1:16.446|1:16.455|1:16.463|1:16.465|1:16.465|1:16.472|1:16.473|1:16.494|1:16.499|1:16.503|1:16.505|1:16.515|1:16.516|1:16.522|1:16.536|1:16.543|1:16.543|1:16.546|1:16.547|1:16.548|1:16.563|1:16.564|1:16.565|1:16.566|1:16.567|1:16.571|1:16.574|1:16.575|1:16.580|1:16.584|1:16.587|1:16.591|1:16.592|1:16.594|1:16.594|1:16.595|1:16.600|1:16.607|1:16.609|1:16.610|1:16.618|1:16.627|1:16.628|1:16.629|1:16.631|1:16.634|1:16.646|1:16.652|1:16.658|1:16.660|1:16.664|1:16.675|1:16.678|1:16.679|1:16.686|1:16.695|1:16.704|1:16.710|1:16.711|1:16.715|1:16.730|1:16.739|1:16.744|1:16.744|1:16.748|1:16.751|1:16.754|1:16.756|1:16.756|1:16.765|1:16.766|1:16.767|1:16.768|1:16.785|1:16.786|1:16.789|1:16.791|1:16.795|1:16.796|1:16.797|1:16.797|1:16.803|1:16.805|1:16.807|1:16.812|1:16.833|1:16.835|1:16.840|1:16.841|1:16.844|1:16.847|1:16.848|1:16.848|1:16.850|1:16.866|1:16.868|1:16.875|1:16.879|1:16.883|1:16.883|1:16.883|1:16.895|1:16.898|1:16.899|1:16.900|1:16.902|1:16.907|1:16.908|1:16.909|1:16.913|1:16.918|1:16.922|1:16.926|1:16.931|1:16.939|1:16.940|1:16.941|1:16.949|1:16.950|1:16.952|1:16.954|1:16.958|1:16.966|1:16.969|1:16.972|1:16.986|1:16.994|1:17.015|1:17.019|1:17.022|1:17.023|1:17.026|1:17.028|1:17.028|1:17.029|1:17.033|1:17.033|1:17.037|1:17.045|1:17.047|1:17.048|1:17.055|1:17.062|1:17.065|1:17.075|1:17.083|1:17.083|1:17.085|1:17.086|1:17.089|1:17.096|1:17.098|1:17.099|1:17.110|1:17.122|1:17.123|1:17.126|1:17.127|1:17.127|1:17.128|1:17.136|1:17.146|1:17.150|1:17.151|1:17.156|1:17.161|1:17.166|1:17.167|1:17.175|1:17.177|1:17.194|1:17.196|1:17.203|1:17.205|1:17.205|1:17.208|1:17.208|1:17.212|1:17.213|1:17.221|1:17.223|1:17.230|1:17.233|1:17.234|1:17.236|1:17.236|1:17.240|1:17.242|1:17.247|1:17.248|1:17.254|1:17.257|1:17.258|1:17.260|1:17.271|1:17.277|1:17.286|1:17.287|1:17.292|1:17.293|1:17.295|1:17.297|1:17.302|1:17.303|1:17.321|1:17.322|1:17.324|1:17.325|1:17.347|1:17.353|1:17.363|1:17.381|1:17.382|1:17.388|1:17.396|1:17.402|1:17.410|1:17.422|1:17.431|1:17.432|1:17.432|1:17.434|1:17.452|1:17.453|1:17.455|1:17.461|1:17.462|1:17.468|1:17.478|1:17.480|1:17.483|1:17.488|1:17.494|1:17.494|1:17.500|1:17.506|1:17.506|1:17.508|1:17.511|1:17.523|1:17.523|1:17.528|1:17.539|1:17.542|1:17.557|1:17.565|1:17.566|1:17.568|1:17.577|1:17.583|1:17.584|1:17.585|1:17.593|1:17.593|1:17.602|1:17.602|1:17.603|1:17.607|1:17.622|1:17.625|1:17.626|1:17.629|1:17.634|1:17.635|1:17.636|1:17.642|1:17.647|1:17.652|1:17.654|1:17.657|1:17.659|1:17.669|1:17.675|1:17.679|1:17.681|1:17.688|1:17.692|1:17.697|1:17.700|1:17.706|1:17.717|1:17.732|1:17.744|1:17.750|1:17.757|1:17.761|1:17.761|1:17.762|1:17.763|1:17.764|1:17.774|1:17.782|1:17.790|1:17.794|1:17.800|1:17.806|1:17.812|1:17.820|1:17.827|1:17.828|1:17.830|1:17.835|1:17.842|1:17.847|1:17.857|1:17.864|1:17.869|1:17.870|1:17.883|1:17.886|1:17.891|1:17.904|1:17.904|1:17.906|1:17.906|1:17.929|1:17.935|1:17.937|1:17.937|1:17.952|1:17.955|1:17.958|1:17.964|1:17.965|1:17.965|1:17.969|1:17.982|1:17.989|1:17.995|1:17.998|1:18.003|1:18.005|1:18.012|1:18.018|1:18.025|1:18.052|1:18.065|1:18.068|1:18.080|1:18.092|1:18.094|1:18.106|1:18.111|1:18.119|1:18.130|1:18.134|1:18.148|1:18.150|1:18.152|1:18.168|1:18.172|1:18.174|1:18.182|1:18.187|1:18.189|1:18.194|1:18.200|1:18.204|1:18.205|1:18.211|1:18.223|1:18.227|1:18.242|1:18.248|1:18.249|1:18.252|1:18.295|1:18.302|1:18.313|1:18.322|1:18.354|1:18.370|1:18.380|1:18.386|1:18.395|1:18.403|1:18.403|1:18.407|1:18.412|1:18.413|1:18.420|1:18.422|1:18.426|1:18.428|1:18.432|1:18.438|1:18.439|1:18.440|1:18.441|1:18.447|1:18.451|1:18.456|1:18.458|1:18.467|1:18.470|1:18.482|1:18.490|1:18.492|1:18.492|1:18.498|1:18.507|1:18.510|1:18.513|1:18.515|1:18.541|1:18.554|1:18.557|1:18.562|1:18.563|1:18.565|1:18.573|1:18.591|1:18.594|1:18.595|1:18.599|1:18.616|1:18.632|1:18.647|1:18.647|1:18.660|1:18.670|1:18.671|1:18.677|1:18.689|1:18.692|1:18.699|1:18.704|1:18.730|1:18.734|1:18.740|1:18.741|1:18.748|1:18.760|1:18.764|1:18.789|1:18.798|1:18.809|1:18.810|1:18.810|1:18.828|1:18.836|1:18.843|1:18.843|1:18.851|1:18.852|1:18.858|1:18.861|1:18.868|1:18.875|1:18.878|1:18.879|1:18.885|1:18.896|1:18.902|1:18.903|1:18.903|1:18.909|1:18.909|1:18.922|1:18.923|1:18.933|1:18.940|1:18.958|1:18.964|1:18.965|1:18.978|1:18.996|1:19.006|1:19.010|1:19.012|1:19.017|1:19.026|1:19.030|1:19.071|1:19.095|1:19.099|1:19.103|1:19.106|1:19.108|1:19.114|1:19.117|1:19.119|1:19.121|1:19.124|1:19.132|1:19.144|1:19.150|1:19.154|1:19.157|1:19.161|1:19.165|1:19.172|1:19.176|1:19.190|1:19.195|1:19.200|1:19.208|1:19.219|1:19.229|1:19.233|1:19.236|1:19.250|1:19.264|1:19.271|1:19.281|1:19.297|1:19.304|1:19.306|1:19.307|1:19.309|1:19.311|1:19.319|1:19.327|1:19.344|1:19.350|1:19.356|1:19.361|1:19.361|1:19.365|1:19.369|1:19.375|1:19.382|1:19.390|1:19.394|1:19.403|1:19.407|1:19.413|1:19.420|1:19.420|1:19.422|1:19.433|1:19.436|1:19.445|1:19.451|1:19.458|1:19.458|1:19.466|1:19.468|1:19.474|1:19.479|1:19.483|1:19.495|1:19.503|1:19.506|1:19.512|1:19.514|1:19.522|1:19.532|1:19.532|1:19.560|1:19.572|1:19.577|1:19.583|1:19.586|1:19.595|1:19.596|1:19.600|1:19.621|1:19.633|1:19.636|1:19.659|1:19.670|1:19.679|1:19.684|1:19.726|1:19.729|1:19.731|1:19.733|1:19.747|1:19.757|1:19.768|1:19.787|1:19.792|1:19.798|1:19.821|1:19.831|1:19.833|1:19.842|1:19.847|1:19.888|1:19.907|1:19.911|1:19.916|1:19.925|1:19.966|1:19.973|1:19.992|1:19.998|1:20.014|1:20.022|1:20.029|1:20.047|1:20.054|1:20.056|1:20.065|1:20.067|1:20.068|1:20.075|1:20.077|1:20.086|1:20.104|1:20.114|1:20.117|1:20.128|1:20.128|1:20.128|1:20.136|1:20.140|1:20.158|1:20.161|1:20.169|1:20.171|1:20.175|1:20.194|1:20.198|1:20.202|1:20.213|1:20.213|1:20.219|1:20.234|1:20.237|1:20.240|1:20.241|1:20.266|1:20.273|1:20.279|1:20.320|1:20.321|1:20.329|1:20.341|1:20.344|1:20.369|1:20.374|1:20.378|1:20.393|1:20.401|1:20.409|1:20.413|1:20.437|1:20.439|1:20.449|1:20.452|1:20.455|1:20.461|1:20.492|1:20.501|1:20.513|1:20.519|1:20.526|1:20.528|1:20.532|1:20.533|1:20.537|1:20.559|1:20.559|1:20.564|1:20.566|1:20.574|1:20.577|1:20.578|1:20.581|1:20.583|1:20.583|1:20.607|1:20.609|1:20.620|1:20.626|1:20.627|1:20.631|1:20.639|1:20.640|1:20.648|1:20.650|1:20.656|1:20.665|1:20.667|1:20.669|1:20.683|1:20.686|1:20.687|1:20.705|1:20.713|1:20.713|1:20.717|1:20.723|1:20.723|1:20.727|1:20.734|1:20.751|1:20.765|1:20.775|1:20.776|1:20.800|1:20.805|1:20.826|1:20.840|1:20.843|1:20.850|1:20.850|1:20.857|1:20.859|1:20.869|1:20.915|1:20.930|1:20.935|1:20.937|1:20.951|1:20.957|1:20.965|1:20.970|1:20.980|1:21.032|1:21.051|1:21.071|1:21.074|1:21.085|1:21.099|1:21.117|1:21.130|1:21.139|1:21.147|1:21.164|1:21.194|1:21.196|1:21.207|1:21.238|1:21.256|1:21.265|1:21.275|1:21.302|1:21.304|1:21.349|1:21.357|1:21.370|1:21.376|1:21.378|1:21.444|1:21.452|1:21.468|1:21.477|1:21.484|1:21.493|1:21.512|1:21.529|1:21.546|1:21.563|1:21.571|1:21.592|1:21.606|1:21.606|1:21.616|1:21.630|1:21.643|1:21.649|1:21.658|1:21.675|1:21.680|1:21.683|1:21.692|1:21.692|1:21.708|1:21.730|1:21.753|1:21.765|1:21.772|1:21.777|1:21.783|1:21.783|1:21.787|1:21.794|1:21.802|1:21.818|1:21.847|1:21.854|1:21.861|1:21.872|1:21.898|1:21.918|1:21.924|1:21.926|1:21.951|1:21.955|1:21.961|1:21.966|1:21.974|1:21.977|1:21.979|1:21.984|1:21.989|1:21.991|1:21.995|1:21.998|1:21.999|1:22.003|1:22.009|1:22.017|1:22.032|1:22.035|1:22.043|1:22.045|1:22.050|1:22.061|1:22.067|1:22.074|1:22.087|1:22.105|1:22.109|1:22.126|1:22.127|1:22.132|1:22.139|1:22.171|1:22.171|1:22.185|1:22.187|1:22.189|1:22.191|1:22.194|1:22.195|1:22.197|1:22.199|1:22.210|1:22.220|1:22.251|1:22.276|1:22.302|1:22.308|1:22.312|1:22.313|1:22.323|1:22.336|1:22.345|1:22.351|1:22.355|1:22.365|1:22.378|1:22.389|1:22.398|1:22.399|1:22.411|1:22.415|1:22.422|1:22.428|1:22.433|1:22.435|1:22.436|1:22.454|1:22.460|1:22.467|1:22.473|1:22.475|1:22.479|1:22.483|1:22.485|1:22.487|1:22.498|1:22.543|1:22.547|1:22.547|1:22.552|1:22.566|1:22.570|1:22.576|1:22.580|1:22.581|1:22.581|1:22.593|1:22.609|1:22.617|1:22.628|1:22.636|1:22.642|1:22.646|1:22.646|1:22.649|1:22.654|1:22.655|1:22.659|1:22.667|1:22.673|1:22.680|1:22.688|1:22.690|1:22.690|1:22.699|1:22.701|1:22.701|1:22.702|1:22.706|1:22.709|1:22.710|1:22.712|1:22.717|1:22.719|1:22.733|1:22.736|1:22.758|1:22.761|1:22.764|1:22.771|1:22.776|1:22.788|1:22.789|1:22.790|1:22.795|1:22.795|1:22.801|1:22.814|1:22.821|1:22.831|1:22.845|1:22.846|1:22.849|1:22.856|1:22.857|1:22.868|1:22.876|1:22.880|1:22.882|1:22.898|1:22.905|1:22.905|1:22.907|1:22.916|1:22.917|1:22.918|1:22.919|1:22.926|1:22.927|1:22.929|1:22.930|1:22.931|1:22.936|1:22.942|1:22.943|1:22.943|1:22.947|1:22.951|1:22.951|1:22.956|1:22.965|1:22.966|1:22.968|1:22.977|1:22.984|1:22.986|1:22.987|1:23.004|1:23.008|1:23.013|1:23.019|1:23.025|1:23.027|1:23.029|1:23.029|1:23.038|1:23.044|1:23.051|1:23.051|1:23.068|1:23.068|1:23.072|1:23.082|1:23.088|1:23.088|1:23.090|1:23.093|1:23.094|1:23.099|1:23.116|1:23.129|1:23.132|1:23.134|1:23.135|1:23.141|1:23.148|1:23.151|1:23.151|1:23.155|1:23.169|1:23.171|1:23.173|1:23.177|1:23.179|1:23.180|1:23.182|1:23.190|1:23.199|1:23.207|1:23.208|1:23.215|1:23.218|1:23.229|1:23.230|1:23.234|1:23.243|1:23.249|1:23.260|1:23.261|1:23.262|1:23.263|1:23.275|1:23.278|1:23.280|1:23.280|1:23.300|1:23.307|1:23.311|1:23.323|1:23.335|1:23.348|1:23.352|1:23.353|1:23.356|1:23.363|1:23.364|1:23.367|1:23.375|1:23.384|1:23.397|1:23.398|1:23.400|1:23.407|1:23.408|1:23.417|1:23.423|1:23.423|1:23.428|1:23.428|1:23.429|1:23.432|1:23.432|1:23.434|1:23.435|1:23.437|1:23.437|1:23.452|1:23.455|1:23.456|1:23.456|1:23.463|1:23.464|1:23.470|1:23.475|1:23.475|1:23.489|1:23.490|1:23.494|1:23.498|1:23.501|1:23.501|1:23.503|1:23.503|1:23.504|1:23.510|1:23.511|1:23.522|1:23.522|1:23.524|1:23.527|1:23.527|1:23.532|1:23.534|1:23.540|1:23.540|1:23.541|1:23.542|1:23.544|1:23.549|1:23.554|1:23.554|1:23.556|1:23.566|1:23.568|1:23.578|1:23.580|1:23.581|1:23.587|1:23.599|1:23.599|1:23.605|1:23.607|1:23.608|1:23.612|1:23.618|1:23.620|1:23.625|1:23.627|1:23.639|1:23.661|1:23.661|1:23.663|1:23.663|1:23.667|1:23.673|1:23.678|1:23.681|1:23.685|1:23.689|1:23.694|1:23.695|1:23.696|1:23.704|1:23.706|1:23.732|1:23.733|1:23.733|1:23.741|1:23.745|1:23.748|1:23.750|1:23.751|1:23.751|1:23.752|1:23.755|1:23.761|1:23.765|1:23.780|1:23.786|1:23.788|1:23.791|1:23.796|1:23.803|1:23.804|1:23.807|1:23.809|1:23.814|1:23.817|1:23.831|1:23.832|1:23.835|1:23.838|1:23.839|1:23.840|1:23.847|1:23.859|1:23.868|1:23.876|1:23.881|1:23.893|1:23.894|1:23.905|1:23.913|1:23.924|1:23.924|1:23.941|1:23.956|1:23.962|1:23.965|1:23.965|1:23.972|1:23.973|1:23.977|1:23.990|1:24.000|1:24.000|1:24.007|1:24.009|1:24.012|1:24.012|1:24.020|1:24.024|1:24.032|1:24.037|1:24.075|1:24.075|1:24.076|1:24.084|1:24.087|1:24.094|1:24.108|1:24.115|1:24.128|1:24.130|1:24.131|1:24.137|1:24.155|1:24.159|1:24.164|1:24.187|1:24.201|1:24.212|1:24.216|1:24.234|1:24.240|1:24.249|1:24.260|1:24.278|1:24.288|1:24.298|1:24.300|1:24.302|1:24.324|1:24.329|1:24.336|1:24.339|1:24.351|1:24.352|1:24.357|1:24.369|1:24.373|1:24.382|1:24.400|1:24.400|1:24.401|1:24.402|1:24.449|1:24.498|1:24.512|1:24.515|1:24.524|1:24.536|1:24.555|1:24.557|1:24.590|1:24.612|1:24.617|1:24.629|1:24.637|1:24.638|1:24.655|1:24.662|1:24.670|1:24.685|1:24.688|1:24.705|1:24.740|1:24.757|1:24.764|1:24.769|1:24.775|1:24.777|1:24.785|1:24.801|1:24.802|1:24.839|1:24.854|1:24.854|1:24.857|1:24.857|1:24.865|1:24.869|1:24.874|1:24.879|1:24.886|1:24.894|1:24.907|1:24.909|1:24.958|1:24.964|1:24.968|1:24.976|1:24.987|1:24.987|1:24.999|1:25.004|1:25.009|1:25.017|1:25.026|1:25.032|1:25.042|1:25.043|1:25.051|1:25.062|1:25.071|1:25.073|1:25.076|1:25.100|1:25.108|1:25.114|1:25.115|1:25.124|1:25.129|1:25.131|1:25.139|1:25.143|1:25.156|1:25.163|1:25.172|1:25.188|1:25.189|1:25.197|1:25.199|1:25.199|1:25.219|1:25.228|1:25.251|1:25.271|1:25.275|1:25.277|1:25.287|1:25.288|1:25.304|1:25.304|1:25.307|1:25.308|1:25.317|1:25.337|1:25.354|1:25.360|1:25.365|1:25.404|1:25.405|1:25.410|1:25.413|1:25.442|1:25.444|1:25.447|1:25.448|1:25.454|1:25.456|1:25.463|1:25.463|1:25.489|1:25.525|1:25.538|1:25.565|1:25.567|1:25.570|1:25.579|1:25.602|1:25.603|1:25.613|1:25.613|1:25.626|1:25.628|1:25.630|1:25.639|1:25.664|1:25.665|1:25.676|1:25.714|1:25.736|1:25.780|1:25.813|1:25.814|1:25.815|1:25.827|1:25.862|1:25.876|1:25.877|1:25.897|1:25.938|1:25.979|1:26.016|1:26.019|1:26.025|1:26.034|1:26.055|1:26.055|1:26.056|1:26.060|1:26.062|1:26.066|1:26.104|1:26.109|1:26.116|1:26.121|1:26.126|1:26.132|1:26.176|1:26.187|1:26.188|1:26.194|1:26.212|1:26.216|1:26.258|1:26.276|1:26.282|1:26.298|1:26.351|1:26.358|1:26.377|1:26.383|1:26.415|1:26.416|1:26.434|1:26.440|1:26.451|1:26.460|1:26.462|1:26.470|1:26.485|1:26.485|1:26.497|1:26.500|1:26.502|1:26.507|1:26.517|1:26.528|1:26.529|1:26.546|1:26.547|1:26.555|1:26.592|1:26.602|1:26.612|1:26.615|1:26.615|1:26.622|1:26.623|1:26.628|1:26.630|1:26.641|1:26.646|1:26.653|1:26.654|1:26.655|1:26.679|1:26.681|1:26.682|1:26.687|1:26.718|1:26.727|1:26.729|1:26.742|1:26.743|1:26.756|1:26.758|1:26.779|1:26.791|1:26.797|1:26.799|1:26.812|1:26.822|1:26.823|1:26.825|1:26.826|1:26.844|1:26.845|1:26.845|1:26.851|1:26.853|1:26.854|1:26.867|1:26.869|1:26.891|1:26.897|1:26.901|1:26.902|1:26.903|1:26.903|1:26.905|1:26.911|1:26.937|1:26.941|1:26.951|1:26.952|1:26.956|1:26.966|1:26.969|1:26.972|1:26.977|1:26.985|1:27.000|1:27.001|1:27.020|1:27.021|1:27.024|1:27.026|1:27.046|1:27.049|1:27.070|1:27.088|1:27.092|1:27.093|1:27.096|1:27.106|1:27.111|1:27.116|1:27.137|1:27.139|1:27.142|1:27.144|1:27.157|1:27.162|1:27.163|1:27.167|1:27.168|1:27.183|1:27.185|1:27.185|1:27.187|1:27.188|1:27.209|1:27.222|1:27.232|1:27.233|1:27.238|1:27.242|1:27.247|1:27.247|1:27.258|1:27.269|1:27.282|1:27.290|1:27.294|1:27.295|1:27.305|1:27.307|1:27.312|1:27.330|1:27.330|1:27.332|1:27.334|1:27.348|1:27.354|1:27.385|1:27.386|1:27.388|1:27.389|1:27.392|1:27.396|1:27.402|1:27.416|1:27.422|1:27.427|1:27.450|1:27.452|1:27.457|1:27.475|1:27.484|1:27.494|1:27.496|1:27.497|1:27.505|1:27.507|1:27.516|1:27.521|1:27.523|1:27.534|1:27.536|1:27.538|1:27.544|1:27.548|1:27.563|1:27.566|1:27.574|1:27.587|1:27.590|1:27.593|1:27.608|1:27.616|1:27.624|1:27.630|1:27.634|1:27.634|1:27.638|1:27.641|1:27.646|1:27.651|1:27.651|1:27.655|1:27.662|1:27.677|1:27.695|1:27.706|1:27.708|1:27.709|1:27.711|1:27.722|1:27.738|1:27.741|1:27.742|1:27.746|1:27.750|1:27.761|1:27.767|1:27.778|1:27.783|1:27.784|1:27.785|1:27.790|1:27.797|1:27.804|1:27.810|1:27.827|1:27.830|1:27.830|1:27.841|1:27.851|1:27.858|1:27.859|1:27.879|1:27.881|1:27.884|1:27.897|1:27.900|1:27.906|1:27.914|1:27.932|1:27.937|1:27.938|1:27.952|1:27.953|1:27.955|1:27.957|1:27.963|1:27.968|1:27.979|1:27.986|1:27.988|1:27.989|1:27.993|1:27.996|1:28.002|1:28.007|1:28.011|1:28.013|1:28.021|1:28.024|1:28.025|1:28.032|1:28.047|1:28.058|1:28.064|1:28.065|1:28.065|1:28.067|1:28.072|1:28.076|1:28.076|1:28.090|1:28.092|1:28.092|1:28.111|1:28.111|1:28.123|1:28.150|1:28.164|1:28.170|1:28.193|1:28.202|1:28.207|1:28.210|1:28.214|1:28.215|1:28.236|1:28.242|1:28.250|1:28.250|1:28.253|1:28.264|1:28.268|1:28.291|1:28.291|1:28.291|1:28.299|1:28.299|1:28.327|1:28.328|1:28.343|1:28.349|1:28.353|1:28.362|1:28.363|1:28.367|1:28.371|1:28.379|1:28.394|1:28.409|1:28.413|1:28.429|1:28.442|1:28.446|1:28.456|1:28.457|1:28.458|1:28.459|1:28.462|1:28.464|1:28.469|1:28.472|1:28.475|1:28.476|1:28.506|1:28.510|1:28.511|1:28.513|1:28.516|1:28.556|1:28.562|1:28.566|1:28.590|1:28.591|1:28.595|1:28.604|1:28.614|1:28.627|1:28.632|1:28.638|1:28.649|1:28.651|1:28.655|1:28.666|1:28.676|1:28.678|1:28.679|1:28.680|1:28.682|1:28.682|1:28.682|1:28.686|1:28.691|1:28.693|1:28.705|1:28.705|1:28.718|1:28.720|1:28.721|1:28.724|1:28.754|1:28.762|1:28.762|1:28.766|1:28.766|1:28.771|1:28.776|1:28.802|1:28.805|1:28.806|1:28.806|1:28.806|1:28.811|1:28.836|1:28.836|1:28.849|1:28.857|1:28.863|1:28.880|1:28.885|1:28.893|1:28.912|1:28.917|1:28.918|1:28.928|1:28.941|1:28.944|1:28.950|1:28.952|1:28.959|1:28.966|1:28.977|1:28.998|1:29.000|1:29.002|1:29.004|1:29.005|1:29.017|1:29.018|1:29.020|1:29.022|1:29.023|1:29.023|1:29.032|1:29.032|1:29.035|1:29.036|1:29.054|1:29.060|1:29.076|1:29.081|1:29.085|1:29.086|1:29.100|1:29.103|1:29.104|1:29.104|1:29.113|1:29.118|1:29.126|1:29.138|1:29.161|1:29.170|1:29.173|1:29.180|1:29.207|1:29.217|1:29.219|1:29.220|1:29.223|1:29.231|1:29.235|1:29.247|1:29.256|1:29.257|1:29.260|1:29.261|1:29.262|1:29.287|1:29.301|1:29.302|1:29.303|1:29.306|1:29.313|1:29.317|1:29.317|1:29.318|1:29.318|1:29.321|1:29.323|1:29.327|1:29.333|1:29.335|1:29.337|1:29.338|1:29.359|1:29.365|1:29.366|1:29.391|1:29.405|1:29.417|1:29.420|1:29.422|1:29.422|1:29.426|1:29.428|1:29.434|1:29.440|1:29.443|1:29.444|1:29.458|1:29.461|1:29.465|1:29.474|1:29.474|1:29.474|1:29.474|1:29.476|1:29.484|1:29.488|1:29.507|1:29.530|1:29.535|1:29.535|1:29.546|1:29.560|1:29.561|1:29.574|1:29.576|1:29.579|1:29.581|1:29.595|1:29.599|1:29.603|1:29.610|1:29.610|1:29.611|1:29.625|1:29.639|1:29.639|1:29.640|1:29.652|1:29.671|1:29.691|1:29.701|1:29.712|1:29.713|1:29.721|1:29.722|1:29.723|1:29.733|1:29.735|1:29.740|1:29.741|1:29.743|1:29.749|1:29.750|1:29.757|1:29.763|1:29.764|1:29.764|1:29.775|1:29.799|1:29.800|1:29.808|1:29.824|1:29.834|1:29.835|1:29.840|1:29.844|1:29.846|1:29.867|1:29.875|1:29.879|1:29.894|1:29.899|1:29.910|1:29.912|1:29.926|1:29.933|1:29.976|1:30.001|1:30.011|1:30.022|1:30.024|1:30.025|1:30.027|1:30.031|1:30.037|1:30.043|1:30.045|1:30.052|1:30.054|1:30.075|1:30.077|1:30.081|1:30.082|1:30.083|1:30.097|1:30.098|1:30.100|1:30.108|1:30.110|1:30.116|1:30.117|1:30.122|1:30.127|1:30.129|1:30.139|1:30.147|1:30.149|1:30.156|1:30.183|1:30.192|1:30.194|1:30.222|1:30.224|1:30.239|1:30.239|1:30.243|1:30.256|1:30.261|1:30.276|1:30.287|1:30.302|1:30.314|1:30.323|1:30.329|1:30.338|1:30.357|1:30.359|1:30.370|1:30.375|1:30.377|1:30.411|1:30.411|1:30.417|1:30.420|1:30.421|1:30.425|1:30.438|1:30.449|1:30.454|1:30.464|1:30.469|1:30.471|1:30.480|1:30.482|1:30.501|1:30.508|1:30.512|1:30.514|1:30.517|1:30.520|1:30.522|1:30.524|1:30.526|1:30.528|1:30.548|1:30.553|1:30.575|1:30.576|1:30.586|1:30.590|1:30.594|1:30.633|1:30.634|1:30.637|1:30.639|1:30.640|1:30.658|1:30.664|1:30.667|1:30.668|1:30.669|1:30.671|1:30.673|1:30.679|1:30.687|1:30.693|1:30.721|1:30.740|1:30.742|1:30.751|1:30.753|1:30.757|1:30.759|1:30.771|1:30.776|1:30.777|1:30.781|1:30.783|1:30.785|1:30.786|1:30.820|1:30.838|1:30.850|1:30.860|1:30.865|1:30.889|1:30.900|1:30.906|1:30.910|1:30.921|1:30.930|1:30.948|1:30.958|1:30.963|1:30.969|1:30.984|1:31.001|1:31.010|1:31.013|1:31.053|1:31.061|1:31.064|1:31.066|1:31.066|1:31.067|1:31.071|1:31.077|1:31.079|1:31.084|1:31.085|1:31.092|1:31.099|1:31.108|1:31.108|1:31.116|1:31.125|1:31.129|1:31.129|1:31.139|1:31.140|1:31.149|1:31.175|1:31.175|1:31.183|1:31.185|1:31.189|1:31.194|1:31.200|1:31.203|1:31.206|1:31.212|1:31.213|1:31.229|1:31.231|1:31.233|1:31.240|1:31.241|1:31.252|1:31.261|1:31.279|1:31.291|1:31.292|1:31.312|1:31.319|1:31.335|1:31.342|1:31.347|1:31.347|1:31.376|1:31.380|1:31.387|1:31.400|1:31.404|1:31.408|1:31.414|1:31.419|1:31.428|1:31.440|1:31.453|1:31.459|1:31.470|1:31.493|1:31.497|1:31.510|1:31.524|1:31.534|1:31.541|1:31.548|1:31.558|1:31.564|1:31.586|1:31.591|1:31.600|1:31.605|1:31.629|1:31.629|1:31.634|1:31.679|1:31.712|1:31.719|1:31.720|1:31.722|1:31.728|1:31.739|1:31.746|1:31.749|1:31.764|1:31.766|1:31.768|1:31.787|1:31.789|1:31.791|1:31.813|1:31.823|1:31.825|1:31.826|1:31.830|1:31.847|1:31.849|1:31.850|1:31.858|1:31.871|1:31.876|1:31.880|1:31.885|1:31.886|1:31.902|1:31.958|1:31.959|1:31.971|1:31.993|1:32.008|1:32.016|1:32.050|1:32.065|1:32.075|1:32.090|1:32.119|1:32.129|1:32.132|1:32.133|1:32.157|1:32.184|1:32.198|1:32.208|1:32.219|1:32.222|1:32.228|1:32.232|1:32.254|1:32.264|1:32.267|1:32.279|1:32.287|1:32.310|1:32.310|1:32.345|1:32.372|1:32.408|1:32.411|1:32.418|1:32.422|1:32.427|1:32.434|1:32.442|1:32.447|1:32.471|1:32.475|1:32.478|1:32.496|1:32.506|1:32.510|1:32.521|1:32.526|1:32.572|1:32.582|1:32.612|1:32.615|1:32.639|1:32.640|1:32.657|1:32.664|1:32.671|1:32.709|1:32.737|1:32.746|1:32.747|1:32.758|1:32.762|1:32.793|1:32.795|1:32.817|1:32.823|1:32.829|1:32.847|1:32.848|1:32.869|1:32.869|1:32.882|1:32.897|1:32.900|1:32.902|1:32.927|1:32.931|1:32.980|1:32.984|1:33.031|1:33.036|1:33.039|1:33.051|1:33.096|1:33.099|1:33.104|1:33.110|1:33.114|1:33.114|1:33.117|1:33.121|1:33.123|1:33.150|1:33.154|1:33.158|1:33.186|1:33.204|1:33.208|1:33.216|1:33.231|1:33.232|1:33.234|1:33.245|1:33.248|1:33.259|1:33.268|1:33.274|1:33.294|1:33.307|1:33.307|1:33.315|1:33.347|1:33.363|1:33.389|1:33.401|1:33.405|1:33.411|1:33.452|1:33.454|1:33.455|1:33.493|1:33.508|1:33.519|1:33.549|1:33.549|1:33.551|1:33.555|1:33.567|1:33.576|1:33.581|1:33.592|1:33.596|1:33.604|1:33.606|1:33.607|1:33.629|1:33.643|1:33.649|1:33.651|1:33.654|1:33.663|1:33.665|1:33.666|1:33.689|1:33.701|1:33.702|1:33.715|1:33.721|1:33.731|1:33.737|1:33.740|1:33.741|1:33.744|1:33.744|1:33.747|1:33.747|1:33.765|1:33.774|1:33.781|1:33.788|1:33.822|1:33.832|1:33.842|1:33.846|1:33.850|1:33.862|1:33.869|1:33.879|1:33.884|1:33.888|1:33.895|1:33.897|1:33.900|1:33.917|1:33.925|1:33.927|1:33.931|1:33.931|1:33.933|1:33.940|1:33.942|1:33.944|1:33.962|1:33.964|1:34.007|1:34.017|1:34.018|1:34.020|1:34.025|1:34.073|1:34.073|1:34.078|1:34.078|1:34.083|1:34.086|1:34.095|1:34.107|1:34.108|1:34.113|1:34.114|1:34.125|1:34.151|1:34.169|1:34.172|1:34.176|1:34.186|1:34.216|1:34.230|1:34.235|1:34.258|1:34.258|1:34.270|1:34.293|1:34.299|1:34.302|1:34.314|1:34.324|1:34.328|1:34.336|1:34.348|1:34.354|1:34.356|1:34.359|1:34.384|1:34.385|1:34.386|1:34.389|1:34.413|1:34.422|1:34.445|1:34.459|1:34.467|1:34.468|1:34.490|1:34.493|1:34.495|1:34.496|1:34.501|1:34.508|1:34.517|1:34.547|1:34.550|1:34.554|1:34.576|1:34.578|1:34.589|1:34.591|1:34.600|1:34.606|1:34.607|1:34.615|1:34.620|1:34.630|1:34.631|1:34.638|1:34.651|1:34.655|1:34.682|1:34.694|1:34.698|1:34.721|1:34.733|1:34.733|1:34.766|1:34.770|1:34.778|1:34.785|1:34.785|1:34.787|1:34.803|1:34.804|1:34.809|1:34.821|1:34.836|1:34.858|1:34.865|1:34.872|1:34.884|1:34.898|1:34.907|1:34.915|1:34.921|1:34.929|1:34.946|1:34.952|1:34.966|1:34.972|1:34.984|1:34.987|1:35.003|1:35.005|1:35.026|1:35.029|1:35.036|1:35.040|1:35.044|1:35.044|1:35.047|1:35.063|1:35.065|1:35.072|1:35.083|1:35.083|1:35.096|1:35.117|1:35.117|1:35.118|1:35.122|1:35.129|1:35.135|1:35.137|1:35.146|1:35.175|1:35.182|1:35.182|1:35.184|1:35.184|1:35.196|1:35.201|1:35.207|1:35.213|1:35.219|1:35.224|1:35.243|1:35.263|1:35.281|1:35.281|1:35.287|1:35.289|1:35.291|1:35.292|1:35.301|1:35.320|1:35.330|1:35.341|1:35.364|1:35.366|1:35.367|1:35.397|1:35.398|1:35.402|1:35.409|1:35.411|1:35.412|1:35.415|1:35.418|1:35.427|1:35.438|1:35.439|1:35.440|1:35.451|1:35.452|1:35.460|1:35.462|1:35.463|1:35.466|1:35.466|1:35.466|1:35.473|1:35.477|1:35.478|1:35.483|1:35.486|1:35.492|1:35.501|1:35.506|1:35.510|1:35.514|1:35.520|1:35.524|1:35.532|1:35.537|1:35.542|1:35.551|1:35.556|1:35.559|1:35.560|1:35.560|1:35.563|1:35.568|1:35.570|1:35.577|1:35.580|1:35.584|1:35.585|1:35.587|1:35.593|1:35.598|1:35.604|1:35.604|1:35.611|1:35.612|1:35.615|1:35.619|1:35.627|1:35.633|1:35.635|1:35.637|1:35.643|1:35.646|1:35.653|1:35.666|1:35.667|1:35.675|1:35.678|1:35.714|1:35.714|1:35.720|1:35.720|1:35.724|1:35.727|1:35.741|1:35.754|1:35.755|1:35.772|1:35.773|1:35.774|1:35.774|1:35.782|1:35.787|1:35.787|1:35.803|1:35.808|1:35.819|1:35.830|1:35.835|1:35.845|1:35.864|1:35.871|1:35.879|1:35.881|1:35.904|1:35.911|1:35.922|1:35.923|1:35.930|1:35.942|1:35.958|1:35.962|1:35.972|1:35.972|1:35.973|1:35.973|1:35.979|1:35.984|1:35.988|1:35.989|1:36.006|1:36.013|1:36.018|1:36.018|1:36.022|1:36.023|1:36.028|1:36.043|1:36.043|1:36.045|1:36.047|1:36.057|1:36.060|1:36.066|1:36.066|1:36.074|1:36.074|1:36.077|1:36.077|1:36.080|1:36.084|1:36.090|1:36.099|1:36.100|1:36.101|1:36.107|1:36.108|1:36.116|1:36.118|1:36.120|1:36.121|1:36.125|1:36.135|1:36.151|1:36.151|1:36.160|1:36.161|1:36.164|1:36.165|1:36.170|1:36.171|1:36.173|1:36.180|1:36.184|1:36.184|1:36.198|1:36.201|1:36.204|1:36.204|1:36.235|1:36.237|1:36.245|1:36.250|1:36.250|1:36.256|1:36.260|1:36.262|1:36.264|1:36.284|1:36.286|1:36.306|1:36.307|1:36.321|1:36.324|1:36.325|1:36.326|1:36.336|1:36.341|1:36.341|1:36.343|1:36.346|1:36.351|1:36.366|1:36.375|1:36.380|1:36.384|1:36.385|1:36.396|1:36.399|1:36.408|1:36.416|1:36.420|1:36.426|1:36.437|1:36.453|1:36.467|1:36.479|1:36.481|1:36.493|1:36.503|1:36.504|1:36.508|1:36.511|1:36.513|1:36.518|1:36.522|1:36.526|1:36.547|1:36.575|1:36.583|1:36.583|1:36.587|1:36.598|1:36.599|1:36.601|1:36.601|1:36.605|1:36.612|1:36.612|1:36.614|1:36.615|1:36.620|1:36.623|1:36.628|1:36.634|1:36.651|1:36.652|1:36.652|1:36.652|1:36.661|1:36.662|1:36.665|1:36.670|1:36.671|1:36.683|1:36.686|1:36.689|1:36.701|1:36.703|1:36.707|1:36.716|1:36.718|1:36.722|1:36.725|1:36.749|1:36.761|1:36.776|1:36.780|1:36.782|1:36.782|1:36.792|1:36.794|1:36.801|1:36.801|1:36.807|1:36.828|1:36.838|1:36.846|1:36.858|1:36.863|1:36.865|1:36.866|1:36.869|1:36.871|1:36.876|1:36.878|1:36.886|1:36.891|1:36.904|1:36.906|1:36.907|1:36.920|1:36.923|1:36.929|1:36.931|1:36.933|1:36.940|1:36.942|1:36.947|1:36.958|1:36.961|1:36.961|1:36.961|1:36.970|1:36.978|1:36.986|1:36.989|1:36.991|1:37.004|1:37.005|1:37.007|1:37.012|1:37.024|1:37.029|1:37.042|1:37.048|1:37.053|1:37.081|1:37.103|1:37.108|1:37.114|1:37.117|1:37.133|1:37.148|1:37.152|1:37.158|1:37.176|1:37.184|1:37.186|1:37.191|1:37.195|1:37.210|1:37.215|1:37.219|1:37.227|1:37.238|1:37.249|1:37.252|1:37.257|1:37.265|1:37.269|1:37.279|1:37.300|1:37.301|1:37.302|1:37.307|1:37.309|1:37.309|1:37.317|1:37.318|1:37.318|1:37.321|1:37.325|1:37.325|1:37.332|1:37.346|1:37.347|1:37.359|1:37.367|1:37.369|1:37.381|1:37.386|1:37.393|1:37.400|1:37.404|1:37.412|1:37.414|1:37.424|1:37.427|1:37.429|1:37.431|1:37.434|1:37.440|1:37.444|1:37.453|1:37.453|1:37.457|1:37.460|1:37.462|1:37.473|1:37.483|1:37.486|1:37.501|1:37.507|1:37.515|1:37.534|1:37.534|1:37.544|1:37.553|1:37.560|1:37.565|1:37.571|1:37.579|1:37.579|1:37.587|1:37.596|1:37.608|1:37.613|1:37.614|1:37.618|1:37.622|1:37.625|1:37.630|1:37.639|1:37.645|1:37.651|1:37.656|1:37.663|1:37.669|1:37.673|1:37.676|1:37.684|1:37.700|1:37.703|1:37.712|1:37.714|1:37.716|1:37.720|1:37.726|1:37.731|1:37.737|1:37.737|1:37.740|1:37.745|1:37.745|1:37.747|1:37.753|1:37.755|1:37.758|1:37.761|1:37.770|1:37.781|1:37.787|1:37.802|1:37.809|1:37.814|1:37.815|1:37.816|1:37.822|1:37.825|1:37.838|1:37.843|1:37.848|1:37.853|1:37.858|1:37.860|1:37.861|1:37.865|1:37.865|1:37.865|1:37.868|1:37.878|1:37.892|1:37.902|1:37.907|1:37.907|1:37.940|1:37.951|1:37.953|1:37.962|1:37.963|1:37.981|1:37.991|1:37.991|1:38.006|1:38.016|1:38.022|1:38.028|1:38.029|1:38.029|1:38.029|1:38.030|1:38.034|1:38.036|1:38.043|1:38.043|1:38.071|1:38.093|1:38.101|1:38.106|1:38.118|1:38.119|1:38.123|1:38.136|1:38.139|1:38.149|1:38.156|1:38.159|1:38.167|1:38.170|1:38.173|1:38.180|1:38.193|1:38.194|1:38.198|1:38.199|1:38.204|1:38.207|1:38.210|1:38.218|1:38.228|1:38.247|1:38.248|1:38.254|1:38.255|1:38.276|1:38.278|1:38.287|1:38.297|1:38.315|1:38.321|1:38.326|1:38.334|1:38.340|1:38.345|1:38.364|1:38.379|1:38.380|1:38.384|1:38.393|1:38.393|1:38.396|1:38.426|1:38.435|1:38.445|1:38.456|1:38.457|1:38.476|1:38.482|1:38.494|1:38.506|1:38.511|1:38.511|1:38.517|1:38.522|1:38.527|1:38.528|1:38.532|1:38.540|1:38.554|1:38.557|1:38.562|1:38.565|1:38.569|1:38.579|1:38.580|1:38.590|1:38.594|1:38.605|1:38.627|1:38.637|1:38.641|1:38.647|1:38.649|1:38.670|1:38.680|1:38.683|1:38.688|1:38.709|1:38.720|1:38.744|1:38.748|1:38.756|1:38.759|1:38.774|1:38.775|1:38.805|1:38.823|1:38.833|1:38.833|1:38.841|1:38.842|1:38.852|1:38.854|1:38.858|1:38.860|1:38.868|1:38.876|1:38.884|1:38.889|1:38.923|1:38.949|1:38.961|1:38.978|1:38.990|1:39.005|1:39.010|1:39.014|1:39.018|1:39.019|1:39.025|1:39.056|1:39.079|1:39.091|1:39.096|1:39.106|1:39.112|1:39.117|1:39.134|1:39.135|1:39.137|1:39.140|1:39.141|1:39.150|1:39.151|1:39.156|1:39.170|1:39.177|1:39.187|1:39.202|1:39.210|1:39.222|1:39.227|1:39.232|1:39.234|1:39.241|1:39.244|1:39.249|1:39.273|1:39.279|1:39.285|1:39.289|1:39.289|1:39.304|1:39.305|1:39.306|1:39.312|1:39.326|1:39.334|1:39.335|1:39.339|1:39.346|1:39.364|1:39.365|1:39.381|1:39.386|1:39.394|1:39.394|1:39.397|1:39.418|1:39.425|1:39.446|1:39.449|1:39.450|1:39.454|1:39.455|1:39.455|1:39.460|1:39.466|1:39.487|1:39.487|1:39.490|1:39.497|1:39.497|1:39.501|1:39.523|1:39.535|1:39.548|1:39.556|1:39.566|1:39.566|1:39.575|1:39.580|1:39.584|1:39.590|1:39.594|1:39.611|1:39.627|1:39.629|1:39.637|1:39.667|1:39.680|1:39.685|1:39.694|1:39.695|1:39.697|1:39.701|1:39.706|1:39.722|1:39.729|1:39.729|1:39.743|1:39.746|1:39.746|1:39.754|1:39.766|1:39.772|1:39.774|1:39.776|1:39.780|1:39.783|1:39.791|1:39.792|1:39.796|1:39.797|1:39.805|1:39.808|1:39.810|1:39.820|1:39.827|1:39.833|1:39.840|1:39.846|1:39.850|1:39.852|1:39.864|1:39.864|1:39.868|1:39.877|1:39.878|1:39.886|1:39.901|1:39.903|1:39.910|1:39.912|1:39.917|1:39.919|1:39.920|1:39.932|1:39.949|1:39.964|1:39.980|1:39.984|1:39.992|1:39.995|1:40.006|1:40.006|1:40.006|1:40.011|1:40.016|1:40.043|1:40.043|1:40.049|1:40.057|1:40.064|1:40.086|1:40.090|1:40.096|1:40.100|1:40.107|1:40.118|1:40.131|1:40.135|1:40.137|1:40.137|1:40.137|1:40.139|1:40.142|1:40.147|1:40.152|1:40.158|1:40.162|1:40.174|1:40.175|1:40.176|1:40.180|1:40.182|1:40.182|1:40.182|1:40.192|1:40.195|1:40.197|1:40.220|1:40.241|1:40.257|1:40.258|1:40.270|1:40.281|1:40.286|1:40.289|1:40.293|1:40.325|1:40.328|1:40.334|1:40.335|1:40.357|1:40.364|1:40.367|1:40.369|1:40.373|1:40.401|1:40.415|1:40.416|1:40.422|1:40.427|1:40.441|1:40.444|1:40.448|1:40.451|1:40.452|1:40.459|1:40.464|1:40.488|1:40.503|1:40.504|1:40.509|1:40.511|1:40.513|1:40.531|1:40.545|1:40.552|1:40.554|1:40.558|1:40.558|1:40.572|1:40.573|1:40.574|1:40.580|1:40.599|1:40.605|1:40.617|1:40.622|1:40.628|1:40.655|1:40.660|1:40.668|1:40.670|1:40.684|1:40.686|1:40.687|1:40.693|1:40.695|1:40.704|1:40.711|1:40.715|1:40.732|1:40.736|1:40.742|1:40.762|1:40.769|1:40.812|1:40.813|1:40.814|1:40.820|1:40.832|1:40.849|1:40.869|1:40.869|1:40.877|1:40.895|1:40.899|1:40.899|1:40.899|1:40.923|1:40.932|1:40.939|1:40.949|1:40.957|1:40.971|1:40.973|1:40.973|1:40.974|1:40.996|1:41.000|1:41.020|1:41.034|1:41.034|1:41.055|1:41.079|1:41.122|1:41.126|1:41.129|1:41.146|1:41.146|1:41.148|1:41.179|1:41.187|1:41.192|1:41.197|1:41.205|1:41.213|1:41.241|1:41.244|1:41.244|1:41.250|1:41.252|1:41.256|1:41.257|1:41.259|1:41.274|1:41.276|1:41.277|1:41.287|1:41.296|1:41.301|1:41.312|1:41.317|1:41.325|1:41.328|1:41.333|1:41.338|1:41.347|1:41.350|1:41.357|1:41.359|1:41.377|1:41.425|1:41.427|1:41.441|1:41.447|1:41.449|1:41.469|1:41.488|1:41.500|1:41.501|1:41.512|1:41.549|1:41.592|1:41.597|1:41.601|1:41.620|1:41.621|1:41.626|1:41.626|1:41.627|1:41.643|1:41.668|1:41.684|1:41.694|1:41.722|1:41.776|1:41.778|1:41.804|1:41.807|1:41.810|1:41.828|1:41.846|1:41.850|1:41.851|1:41.865|1:41.884|1:41.888|1:41.892|1:41.912|1:41.924|1:41.924|1:41.943|1:41.952|1:41.955|1:41.989|1:42.006|1:42.027|1:42.030|1:42.050|1:42.061|1:42.066|1:42.132|1:42.136|1:42.175|1:42.214|1:42.218|1:42.258|1:42.267|1:42.268|1:42.278|1:42.289|1:42.293|1:42.321|1:42.333|1:42.349|1:42.358|1:42.360|1:42.367|1:42.457|1:42.465|1:42.484|1:42.511|1:42.525|1:42.530|1:42.530|1:42.577|1:42.579|1:42.582|1:42.617|1:42.645|1:42.657|1:42.688|1:42.695|1:42.713|1:42.715|1:42.731|1:42.732|1:42.733|1:42.766|1:42.769|1:42.782|1:42.799|1:42.801|1:42.823|1:42.830|1:42.840|1:42.844|1:42.845|1:42.859|1:42.867|1:42.873|1:42.874|1:42.881|1:42.896|1:42.896|1:42.896|1:42.908|1:42.919|1:42.928|1:42.930|1:42.936|1:42.937|1:42.947|1:42.959|1:42.966|1:42.985|1:42.987|1:42.993|1:43.009|1:43.019|1:43.035|1:43.039|1:43.062|1:43.069|1:43.077|1:43.090|1:43.101|1:43.108|1:43.110|1:43.111|1:43.119|1:43.131|1:43.142|1:43.144|1:43.144|1:43.153|1:43.156|1:43.157|1:43.159|1:43.164|1:43.174|1:43.183|1:43.192|1:43.237|1:43.254|1:43.276|1:43.276|1:43.299|1:43.304|1:43.305|1:43.305|1:43.317|1:43.322|1:43.373|1:43.373|1:43.388|1:43.414|1:43.416|1:43.421|1:43.429|1:43.434|1:43.461|1:43.462|1:43.467|1:43.509|1:43.512|1:43.515|1:43.527|1:43.536|1:43.556|1:43.587|1:43.591|1:43.610|1:43.614|1:43.617|1:43.625|1:43.632|1:43.637|1:43.643|1:43.656|1:43.668|1:43.681|1:43.685|1:43.717|1:43.717|1:43.720|1:43.725|1:43.727|1:43.736|1:43.749|1:43.762|1:43.770|1:43.781|1:43.788|1:43.794|1:43.801|1:43.807|1:43.831|1:43.835|1:43.841|1:43.855|1:43.860|1:43.861|1:43.890|1:43.909|1:43.925|1:43.926|1:43.928|1:43.933|1:43.938|1:43.939|1:43.982|1:44.017|1:44.019|1:44.021|1:44.022|1:44.023|1:44.023|1:44.023|1:44.025|1:44.029|1:44.057|1:44.067|1:44.067|1:44.079|1:44.102|1:44.114|1:44.126|1:44.141|1:44.155|1:44.168|1:44.176|1:44.226|1:44.235|1:44.248|1:44.276|1:44.279|1:44.283|1:44.287|1:44.298|1:44.307|1:44.337|1:44.349|1:44.356|1:44.357|1:44.362|1:44.363|1:44.401|1:44.423|1:44.451|1:44.469|1:44.470|1:44.493|1:44.511|1:44.515|1:44.543|1:44.590|1:44.590|1:44.592|1:44.616|1:44.628|1:44.630|1:44.641|1:44.652|1:44.663|1:44.665|1:44.672|1:44.685|1:44.688|1:44.689|1:44.721|1:44.723|1:44.759|1:44.762|1:44.767|1:44.783|1:44.784|1:44.800|1:44.807|1:44.809|1:44.812|1:44.816|1:44.857|1:44.858|1:44.874|1:44.879|1:44.921|1:44.923|1:44.927|1:44.952|1:44.953|1:44.954|1:44.960|1:44.965|1:44.996|1:44.997|1:45.010|1:45.013|1:45.019|1:45.020|1:45.029|1:45.047|1:45.063|1:45.063|1:45.074|1:45.095|1:45.128|1:45.138|1:45.161|1:45.166|1:45.168|1:45.183|1:45.200|1:45.209|1:45.218|1:45.220|1:45.225|1:45.234|1:45.235|1:45.248|1:45.260|1:45.276|1:45.287|1:45.296|1:45.301|1:45.310|1:45.311|1:45.316|1:45.319|1:45.332|1:45.362|1:45.372|1:45.378|1:45.417|1:45.445|1:45.445|1:45.460|1:45.508|1:45.518|1:45.524|1:45.528|1:45.532|1:45.533|1:45.541|1:45.545|1:45.552|1:45.562|1:45.573|1:45.573|1:45.606|1:45.618|1:45.629|1:45.636|1:45.639|1:45.655|1:45.658|1:45.662|1:45.676|1:45.677|1:45.686|1:45.696|1:45.697|1:45.701|1:45.746|1:45.765|1:45.767|1:45.781|1:45.800|1:45.820|1:45.880|1:45.891|1:45.900|1:45.903|1:45.914|1:45.935|1:45.936|1:45.989|1:46.007|1:46.017|1:46.041|1:46.049|1:46.051|1:46.072|1:46.075|1:46.078|1:46.098|1:46.126|1:46.138|1:46.147|1:46.162|1:46.166|1:46.181|1:46.192|1:46.202|1:46.236|1:46.236|1:46.242|1:46.276|1:46.304|1:46.321|1:46.329|1:46.338|1:46.354|1:46.372|1:46.381|1:46.399|1:46.413|1:46.431|1:46.453|1:46.464|1:46.473|1:46.511|1:46.512|1:46.516|1:46.526|1:46.549|1:46.580|1:46.591|1:46.595|1:46.618|1:46.633|1:46.640|1:46.666|1:46.703|1:46.719|1:46.753|1:46.757|1:46.837|1:46.843|1:46.844|1:46.850|1:46.922|1:46.927|1:46.931|1:46.940|1:46.964|1:46.989|1:46.990|1:47.004|1:47.032|1:47.049|1:47.088|1:47.090|1:47.109|1:47.134|1:47.161|1:47.175|1:47.269|1:47.286|1:47.331|1:47.370|1:47.373|1:47.405|1:47.494|1:47.499|1:47.502|1:47.545|1:47.572|1:47.598|1:47.656|1:47.670|1:47.673|1:47.680|1:47.685|1:47.695|1:47.726|1:47.735|1:47.750|1:47.762|1:47.788|1:47.807|1:47.808|1:47.826|1:47.827|1:47.829|1:47.854|1:47.878|1:47.901|1:47.964|1:47.968|1:47.981|1:48.011|1:48.014|1:48.040|1:48.058|1:48.071|1:48.080|1:48.088|1:48.132|1:48.135|1:48.136|1:48.144|1:48.150|1:48.151|1:48.191|1:48.204|1:48.215|1:48.270|1:48.291|1:48.305|1:48.312|1:48.315|1:48.340|1:48.341|1:48.345|1:48.345|1:48.363|1:48.397|1:48.397|1:48.415|1:48.423|1:48.433|1:48.448|1:48.449|1:48.471|1:48.474|1:48.512|1:48.521|1:48.538|1:48.543|1:48.574|1:48.599|1:48.607|1:48.609|1:48.619|1:48.624|1:48.629|1:48.638|1:48.647|1:48.700|1:48.709|1:48.730|1:48.731|1:48.731|1:48.738|1:48.750|1:48.767|1:48.771|1:48.773|1:48.779|1:48.786|1:48.806|1:48.812|1:48.821|1:48.843|1:48.851|1:48.853|1:48.874|1:48.892|1:48.908|1:48.915|1:48.915|1:48.918|1:48.919|1:48.919|1:48.936|1:48.957|1:48.959|1:48.990|1:48.994|1:49.017|1:49.020|1:49.033|1:49.037|1:49.039|1:49.059|1:49.059|1:49.069|1:49.088|1:49.107|1:49.109|1:49.118|1:49.140|1:49.144|1:49.158|1:49.170|1:49.172|1:49.178|1:49.183|1:49.194|1:49.195|1:49.201|1:49.218|1:49.220|1:49.221|1:49.223|1:49.233|1:49.255|1:49.261|1:49.275|1:49.295|1:49.314|1:49.316|1:49.318|1:49.323|1:49.335|1:49.342|1:49.348|1:49.353|1:49.355|1:49.364|1:49.364|1:49.367|1:49.376|1:49.395|1:49.413|1:49.422|1:49.422|1:49.424|1:49.435|1:49.438|1:49.439|1:49.454|1:49.469|1:49.483|1:49.500|1:49.538|1:49.538|1:49.557|1:49.568|1:49.572|1:49.580|1:49.591|1:49.609|1:49.610|1:49.631|1:49.644|1:49.649|1:49.653|1:49.659|1:49.660|1:49.674|1:49.680|1:49.691|1:49.714|1:49.806|1:49.834|1:49.845|1:49.850|1:49.851|1:49.883|1:49.895|1:49.896|1:49.913|1:49.919|1:49.922|1:49.933|1:49.938|1:49.945|1:49.949|1:49.973|1:49.989|1:50.008|1:50.032|1:50.035|1:50.040|1:50.048|1:50.078|1:50.092|1:50.147|1:50.150|1:50.187|1:50.228|1:50.245|1:50.247|1:50.310|1:50.337|1:50.362|1:50.364|1:50.380|1:50.430|1:50.459|1:50.490|1:50.548|1:50.578|1:50.621|1:50.629|1:50.672|1:50.675|1:50.682|1:50.710|1:50.750|1:50.774|1:50.780|1:50.791|1:50.832|1:50.853|1:50.864|1:50.886|1:50.925|1:50.935|1:50.976|1:50.984|1:51.046|1:51.057|1:51.058|1:51.096|1:51.104|1:51.125|1:51.129|1:51.199|1:51.199|1:51.202|1:51.243|1:51.275|1:51.287|1:51.300|1:51.317|1:51.331|1:51.387|1:51.404|1:51.437|1:51.461|1:51.488|1:51.591|1:51.623|1:51.629|1:51.633|1:51.641|1:51.661|1:51.680|1:51.690|1:51.702|1:51.722|1:51.779|1:51.789|1:51.810|1:51.815|1:51.864|1:51.882|1:51.903|1:51.939|1:52.005|1:52.039|1:52.046|1:52.046|1:52.054|1:52.055|1:52.066|1:52.177|1:52.246|1:52.257|1:52.262|1:52.273|1:52.279|1:52.282|1:52.282|1:52.323|1:52.331|1:52.382|1:52.411|1:52.456|1:52.507|1:52.606|1:52.610|1:52.636|1:52.660|1:52.666|1:52.757|1:52.765|1:52.774|1:52.778|1:52.781|1:52.795|1:52.805|1:52.815|1:52.824|1:52.837|1:52.860|1:52.869|1:52.878|1:52.897|1:52.920|1:52.950|1:52.965|1:53.007|1:53.008|1:53.016|1:53.024|1:53.032|1:53.054|1:53.065|1:53.072|1:53.085|1:53.102|1:53.111|1:53.138|1:53.138|1:53.164|1:53.177|1:53.189|1:53.216|1:53.238|1:53.298|1:53.301|1:53.325|1:53.326|1:53.347|1:53.368|1:53.382|1:53.503|1:53.520|1:53.537|1:53.567|1:53.585|1:53.585|1:53.596|1:53.716|1:53.723|1:53.744|1:53.751|1:53.781|1:53.802|1:53.816|1:53.819|1:53.820|1:53.867|1:53.878|1:53.914|1:53.916|1:53.958|1:54.050|1:54.055|1:54.063|1:54.096|1:54.135|1:54.197|1:54.219|1:54.254|1:54.291|1:54.321|1:54.328|1:54.349|1:54.358|1:54.378|1:54.416|1:54.442|1:54.525|1:54.538|1:54.575|1:54.646|1:54.651|1:54.651|1:54.663|1:54.665|1:54.751|1:54.786|1:54.891|1:54.905|1:54.909|1:54.928|1:54.936|1:54.940|1:54.972|1:54.993|1:54.994|1:54.996|1:55.041|1:55.152|1:55.153|1:55.201|1:55.242|1:55.253|1:55.268|1:55.284|1:55.316|1:55.322|1:55.342|1:55.345|1:55.347|1:55.381|1:55.442|1:55.446|1:55.461|1:55.484|1:55.534|1:55.549|1:55.554|1:55.565|1:55.629|1:55.647|1:55.660|1:55.667|1:55.669|1:55.676|1:55.677|1:55.745|1:55.778|1:55.912|1:55.931|1:55.936|1:55.992|1:56.073|1:56.090|1:56.099|1:56.161|1:56.214|1:56.244|1:56.353|1:56.402|1:56.433|1:56.442|1:56.450|1:56.511|1:56.555|1:56.596|1:56.637|1:56.644|1:56.646|1:56.700|1:56.797|1:56.856|1:56.885|1:56.899|1:56.905|1:56.933|1:56.997|1:57.092|1:57.133|1:57.146|1:57.261|1:57.408|1:57.420|1:57.426|1:57.428|1:57.434|1:57.438|1:57.442|1:57.452|1:57.621|1:57.625|1:57.724|1:57.741|1:57.759|1:57.795|1:57.796|1:57.809|1:57.960|1:58.153|1:58.215|1:58.270|1:58.296|1:58.326|1:58.403|1:58.445|1:58.449|1:58.536|1:58.625|1:58.635|1:58.665|1:58.688|1:58.763|1:58.823|1:58.834|1:58.843|1:58.872|1:58.884|1:58.886|1:58.915|1:58.941|1:59.061|1:59.069|1:59.109|1:59.116|1:59.199|1:59.225|1:59.234|1:59.261|1:59.272|1:59.291|1:59.350|1:59.406|1:59.481|1:59.523|1:59.540|1:59.547|1:59.560|1:59.565|1:59.590|1:59.706|1:59.731|1:59.794|1:59.904|1:59.979|21:36.058|24:13.884|2:00.009|2:00.036|2:00.062|2:00.073|2:00.150|2:00.194|2:00.323|2:00.325|2:00.355|2:00.361|2:00.367|2:00.368|2:00.377|2:00.445|2:00.447|2:00.456|2:00.472|2:00.512|2:00.534|2:00.544|2:00.565|2:00.584|2:00.642|2:00.670|2:00.690|2:00.696|2:00.715|2:00.721|2:00.748|2:00.785|2:00.788|2:00.789|2:00.803|2:00.825|2:00.842|2:00.859|2:00.876|2:00.896|2:00.933|2:00.940|2:01.036|2:01.166|2:01.211|2:01.264|2:01.270|2:01.278|2:01.318|2:01.345|2:01.410|2:01.435|2:01.456|2:01.465|2:01.466|2:01.478|2:01.590|2:01.755|2:01.770|2:01.838|2:01.895|2:01.922|2:01.980|2:02.074|2:02.131|2:02.141|2:02.238|2:02.304|2:02.337|2:02.357|2:02.375|2:02.526|2:02.530|2:02.593|2:02.828|2:03.071|2:03.161|2:03.192|2:03.212|2:03.217|2:03.270|2:03.283|2:03.283|2:03.338|2:03.474|2:03.554|2:03.558|2:03.578|2:03.581|2:03.662|2:03.722|2:03.784|2:03.786|2:03.838|2:03.859|2:03.889|2:03.899|2:03.912|2:03.921|2:03.927|2:03.938|2:04.252|2:04.259|2:04.332|2:04.556|2:04.636|2:04.756|2:04.782|2:04.784|2:04.824|2:04.841|2:04.945|2:05.003|2:05.340|2:05.624|2:05.744|2:05.779|2:05.882|2:06.045|2:06.059|2:06.157|2:06.291|2:06.544|2:06.961|2:06.971|2:07.002|2:07.017|2:07.058|2:07.120|2:07.189|2:07.429|2:07.863|2:07.894|2:08.029|2:08.243|2:08.407|2:08.474|2:08.558|2:09.117|2:09.216|2:09.579|2:09.586|2:09.650|2:09.676|2:09.710|2:09.775|2:09.861|2:09.995|2:10.196|2:10.200|2:10.219|2:10.336|2:10.682|2:10.708|2:10.823|2:10.934|2:10.953|2:10.988|2:11.205|2:11.232|2:11.298|2:11.342|2:11.558|2:11.678|2:11.898|2:12.076|2:12.257|2:12.321|2:12.382|2:12.389|2:12.573|2:12.724|2:12.745|2:12.854|2:12.860|2:13.140|2:13.203|2:13.246|2:13.256|2:13.334|2:13.440|2:13.485|2:13.622|2:13.822|2:13.919|2:14.026|2:14.228|2:14.323|2:14.363|2:14.442|2:14.459|2:14.609|2:14.848|2:14.999|2:15.006|2:15.166|2:15.309|2:15.356|2:15.491|2:15.562|2:15.680|2:15.827|2:15.927|2:15.955|2:16.155|2:16.183|2:16.355|2:16.656|2:16.818|2:16.935|2:17.043|2:17.500|2:17.969|2:18.057|2:18.118|2:18.206|2:18.521|2:18.709|2:19.139|2:19.272|2:19.334|2:19.428|2:19.432|2:20.323|2:20.482|2:20.765|2:21.071|2:21.215|2:21.709|2:21.986|2:22.279|2:22.443|2:22.459|2:22.512|2:22.645|2:22.884|2:23.322|2:23.950|2:24.014|2:24.326|2:24.328|2:24.953|2:24.990|2:25.242|2:25.330|2:25.337|2:25.583|2:25.658|2:25.866|2:26.116|2:26.749|2:26.915|2:27.045|2:27.290|2:27.484|2:28.752|2:28.946|2:29.164|2:29.373|2:30.834|2:30.859|2:30.895|2:31.408|2:31.533|2:32.229|2:32.352|2:32.471|2:33.030|2:33.309|2:34.529|2:34.580|2:34.842|2:35.292|2:36.638|2:37.404|2:37.668|2:37.678|2:37.952|2:38.615|2:38.707|2:38.740|2:38.861|2:39.101|2:39.114|2:39.354|2:39.664|2:39.798|2:39.927|2:40.106|2:40.163|2:40.249|2:40.339|2:40.412|2:40.437|2:40.437|2:40.554|2:40.912|2:40.952|2:41.011|2:41.407|2:41.417|2:41.427|2:41.715|2:42.121|2:42.862|2:43.027|2:43.384|2:43.425|2:43.737|2:43.886|2:43.903|2:44.110|2:44.152|2:44.318|2:44.420|2:45.354|2:45.619|2:46.417|2:46.432|2:47.090|2:47.353|2:47.431|2:47.473|2:49.083|2:49.724|2:52.443|2:53.455|2:53.529|2:53.974|2:57.228|3:00.400|3:00.702|3:01.187|3:05.200|3:05.275|3:06.013|3:09.012|3:09.725|3:13.630|3:15.953|49:01.051|5:31.478"
+      },
+      {
+        "idx": 38,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "619.0",
+        "gold_hash": "3594.0"
+      },
+      {
+        "idx": 39,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 40,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "fast"
+      },
+      {
+        "idx": 41,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "1981-07-31,69.0"
+      },
+      {
+        "idx": 42,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "4.0",
+        "gold_hash": "3.0"
+      },
+      {
+        "idx": 43,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "106.0",
+        "gold_hash": "106.0"
+      },
+      {
+        "idx": 44,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "3.0",
+        "gold_hash": "75.0"
+      },
+      {
+        "idx": 45,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "no such function: YEAR",
+        "is_join": true
+      },
+      {
+        "idx": 46,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "0.0",
+        "gold_hash": "29.0"
+      },
+      {
+        "idx": 47,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "1981-06-01",
+        "gold_hash": "1982-04-12"
+      },
+      {
+        "idx": 48,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "amy,firth"
+      },
+      {
+        "idx": 49,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "None",
+        "gold_hash": "1.0"
+      },
+      {
+        "idx": 50,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "november speaker|october speaker|september speaker"
+      },
+      {
+        "idx": 51,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false,
+        "pred_hash": "cze,214.0|svk,27.0",
+        "gold_hash": "cze,597.0"
+      },
+      {
+        "idx": 52,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true,
+        "pred_hash": "",
+        "gold_hash": "40333.0,201201,4084.9|7630.0,201201,24953.81"
+      }
+    ],
+    "repair_stats": {
+      "attempted": 23,
+      "success": 1,
+      "damage": 2
+    }
+  }
+}

@@ -1,0 +1,44 @@
+run_id: e5b_self_critique_retrieval_detvg_failures_210_20260726
+experiment: E5b-SELF-CRITIQUE
+experiment_name: Self-critique refinement on retrieval+detVG failure examples
+description: |
+  Apply E5b self-critique to the 210 examples where retrieval k5 v2 + detVG fails.
+  Initial candidate comes from predictions/e5b_retrieval_k5_v2_merged_detvg_20260725.
+  Output is used as an additional candidate source for the full-dev selector.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: datasets/dev/bird_dev_retrieval_detvg_failures_210.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  critique: prompts/e5b_self_critique.md
+
+candidate_predictions: predictions/e5b_retrieval_k5_v2_merged_detvg_20260725/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

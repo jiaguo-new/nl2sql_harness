@@ -1,0 +1,1 @@
+{"question_id": 90, "db_id": "financial", "tools": [{"tool": "execute_sql", "input": "", "output": {"ok": false, "error": "empty prediction"}}]}

@@ -1,0 +1,1 @@
+{"question_id": 91, "db_id": "financial", "tools": [{"tool": "execute_sql", "input": "SELECT CASE WHEN AVG(A12) > AVG(A13) THEN '1995' ELSE '1996' END FROM district", "output": {"sql": "SELECT CASE WHEN AVG(A12) > AVG(A13) THEN '1995' ELSE '1996' END FROM district", "ok": true, "rows": [["1996"]], "error": null, "truncated": false}}]}

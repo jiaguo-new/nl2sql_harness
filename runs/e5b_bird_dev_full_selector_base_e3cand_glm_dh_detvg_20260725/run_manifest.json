@@ -1,0 +1,36 @@
+{
+  "run_id": "e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725",
+  "experiment": "E3-VALUE-GROUNDING-DETERMINISTIC",
+  "experiment_name": "e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725",
+  "description": "Deterministic value-grounding repair: fix string literal case mismatches using column samples.",
+  "started_at": "2026-07-25T13:39:30.785224+00:00",
+  "duration_seconds": 154.4310929775238,
+  "base_predictions": "predictions/e5b_bird_dev_full_selector_base_e3cand_glm_dh_20260725/predictions.jsonl",
+  "repair_stats": {
+    "attempted": 874,
+    "repaired": 10
+  },
+  "metrics": {
+    "total": 1534,
+    "em": 81,
+    "ex": 960,
+    "valid": 1520,
+    "em_rate": 5.280312907431552,
+    "ex_rate": 62.58148631029987,
+    "valid_rate": 99.08735332464146,
+    "join_total": 1140,
+    "join_ex": 698,
+    "join_ex_rate": 61.228070175438596
+  },
+  "audit": {
+    "finalized_at": "2026-07-25T13:50:35.156766+00:00",
+    "predictions_file": "predictions/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/predictions.jsonl",
+    "predictions_sha256": "48282bb5d41a12d6b77e53da0feade6a5b2ac475dc28ad037b5e9a3bc220914c",
+    "data_manifest": "/home/dameng/project/nl2sql_harness_dev/runs/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/data_manifest.json",
+    "code_commit_file": "/home/dameng/project/nl2sql_harness_dev/runs/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/code_commit.txt",
+    "code_commit": "9e0c7fc69366671f1bad219bfeec8902f8f50221",
+    "code_dirty": true,
+    "code_snapshot_patch": "/home/dameng/project/nl2sql_harness_dev/runs/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/code_snapshot.patch",
+    "environment_file": "/home/dameng/project/nl2sql_harness_dev/runs/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/environment.txt"
+  }
+}

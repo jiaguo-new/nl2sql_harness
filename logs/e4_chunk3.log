@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/dameng/project/nl2sql_harness_dev/agents/e4_execution_repair_agent.py", line 291, in <module>
+    run_e4(config_path)
+    ~~~~~~^^^^^^^^^^^^^
+  File "/home/dameng/project/nl2sql_harness_dev/agents/e4_execution_repair_agent.py", line 102, in run_e4
+    with open(cfg["dataset"]["source"], "r", encoding="utf-8") as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/dev/datasets/dev/e4_failures_210_chunk3.json'
+  [5/52] qid=142 valid=True repairs=0
+  [10/52] qid=286 valid=True repairs=0
+  [15/52] qid=406 valid=True repairs=2
+  [20/52] qid=556 valid=True repairs=0
+  [25/52] qid=649 valid=True repairs=0
+  [30/52] qid=851 valid=True repairs=1
+  [35/52] qid=986 valid=True repairs=0
+  [40/52] qid=1064 valid=True repairs=0
+  [45/52] qid=1256 valid=True repairs=0
+  [50/52] qid=1441 valid=True repairs=0
+  [52/52] qid=1498 valid=True repairs=0
+Evaluating 52 BIRD queries with subprocess timeout=12s ...
+  [50/52] EX=6/50 (12.0%), Valid=49/50 (98.0%)
+  [52/52] EX=6/52 (11.5%), Valid=51/52 (98.1%)
+
+========== BIRD Official-style Evaluation ==========
+Total queries: 52
+Exact Match (EM): 1 / 52 = 1.92%
+Execution Match (EX): 6 / 52 = 11.54%
+Valid SQL Rate: 51 / 52 = 98.08%
+JOIN EX: 5 / 39 = 12.82%
+====================================================
+Results written to metrics/e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726_chunk3/bird_official_eval.json
+Run e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726_chunk3 complete.
+Metrics: EX=11.54%, Valid=98.08%
+Repair stats: {'attempted': 9, 'success': 2, 'damage': 0}

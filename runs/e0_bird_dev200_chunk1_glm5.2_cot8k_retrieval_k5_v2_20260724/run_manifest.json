@@ -1,0 +1,63 @@
+{
+  "run_id": "e0_bird_dev200_chunk1_glm5.2_cot8k_retrieval_k5_v2_20260724",
+  "experiment": "E0-COT-8K-RETRIEVAL-K5-V2-CHUNK1",
+  "experiment_name": "k5 keyword retrieval + self-correction checklist chunk 1 on dev200",
+  "description": "Chunk 1 (indices 50-100) of k=5 keyword retrieval + self-correction checklist on BIRD dev 200.",
+  "started_at": "2026-07-24T13:01:35.475137+00:00",
+  "duration_seconds": 271.78,
+  "config": {
+    "run_id": "e0_bird_dev200_chunk1_glm5.2_cot8k_retrieval_k5_v2_20260724",
+    "experiment": "E0-COT-8K-RETRIEVAL-K5-V2-CHUNK1",
+    "experiment_name": "k5 keyword retrieval + self-correction checklist chunk 1 on dev200",
+    "description": "Chunk 1 (indices 50-100) of k=5 keyword retrieval + self-correction checklist on BIRD dev 200.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/home/dameng/bird_dev/dev_200_chunk1.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "train_source": "/home/dameng/bird_dev/dev_train1234.json",
+      "data_manifest": "manifests/data_bird_dev_200.json"
+    },
+    "few_shot": {
+      "k": 5,
+      "method": "keyword"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 8192
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_cot_retrieval_v2.md"
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 50,
+    "ex": 0.82,
+    "em": 0.72,
+    "valid_rate": 1.0,
+    "join_errors": 0,
+    "empty_results": 0,
+    "error_types": {}
+  }
+}

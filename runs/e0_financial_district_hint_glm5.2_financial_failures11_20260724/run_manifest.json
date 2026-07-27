@@ -1,0 +1,162 @@
+{
+  "run_id": "e0_financial_district_hint_glm5.2_financial_failures11_20260724",
+  "experiment": "E0-FINANCIAL-HINT",
+  "experiment_name": "Direct SQL with financial district_id join hint (11 known financial failures)",
+  "description": "Run GLM 5.2 on the 11 financial examples that the current best dev200 run fails, using the district_id join hint prompt.",
+  "started_at": "2026-07-25T05:10:15.598888+00:00",
+  "duration_seconds": 226.27,
+  "config": {
+    "run_id": "e0_financial_district_hint_glm5.2_financial_failures11_20260724",
+    "experiment": "E0-FINANCIAL-HINT",
+    "experiment_name": "Direct SQL with financial district_id join hint (11 known financial failures)",
+    "description": "Run GLM 5.2 on the 11 financial examples that the current best dev200 run fails, using the district_id join hint prompt.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/tmp/bird_dev_financial_failures_11.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "data_manifest": "manifests/data_bird_dev_200.json"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_financial_district_hint.md"
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 11,
+    "em": 2,
+    "ex": 4,
+    "valid": 11,
+    "em_rate": 18.181818181818183,
+    "ex_rate": 36.36363636363637,
+    "valid_rate": 100.0,
+    "join_total": 9,
+    "join_ex": 4,
+    "join_ex_rate": 44.44444444444444,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 1,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 2,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 3,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 4,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 5,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 6,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 7,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 8,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 9,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 10,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      }
+    ]
+  }
+}

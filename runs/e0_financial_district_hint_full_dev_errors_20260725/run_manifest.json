@@ -1,0 +1,588 @@
+{
+  "run_id": "e0_financial_district_hint_full_dev_errors_20260725",
+  "experiment": "E0-FINANCIAL-DH-FULL-DEV",
+  "experiment_name": "Financial district-hint prompt on full dev financial errors",
+  "description": "Generate district-hint candidates for financial DB examples that E0 base got wrong on full BIRD dev.",
+  "started_at": "2026-07-25T12:46:44.622936+00:00",
+  "duration_seconds": 1241.83,
+  "config": {
+    "run_id": "e0_financial_district_hint_full_dev_errors_20260725",
+    "experiment": "E0-FINANCIAL-DH-FULL-DEV",
+    "experiment_name": "Financial district-hint prompt on full dev financial errors",
+    "description": "Generate district-hint candidates for financial DB examples that E0 base got wrong on full BIRD dev.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/tmp/bird_dev_financial_errors_full_20260725.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "data_manifest": "manifests/data_bird_dev_200.json"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_financial_district_hint.md"
+    },
+    "agent": {
+      "per_example_timeout_seconds": 120
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 58,
+    "em": 6,
+    "ex": 13,
+    "valid": 42,
+    "em_rate": 10.344827586206897,
+    "ex_rate": 22.413793103448278,
+    "valid_rate": 72.41379310344827,
+    "join_total": 53,
+    "join_ex": 13,
+    "join_ex_rate": 24.528301886792452,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 1,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 2,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 3,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 4,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 5,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 6,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 7,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 8,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 9,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 10,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 11,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 12,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 13,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 14,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 15,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 16,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 17,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 18,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 19,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 20,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 21,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 22,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 23,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 24,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 25,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 26,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 27,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 28,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 29,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "near \"order\": syntax error",
+        "is_join": true
+      },
+      {
+        "idx": 30,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 31,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 32,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 33,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 34,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 35,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 36,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 37,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 38,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 39,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 40,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "near \"order\": syntax error",
+        "is_join": true
+      },
+      {
+        "idx": 41,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 42,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 43,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 44,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 45,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 46,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 47,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 48,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 49,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 50,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 51,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "near \"order\": syntax error",
+        "is_join": true
+      },
+      {
+        "idx": 52,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 53,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 54,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 55,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 56,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 57,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      }
+    ]
+  }
+}

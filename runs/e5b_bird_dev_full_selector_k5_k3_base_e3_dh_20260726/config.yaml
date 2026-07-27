@@ -1,0 +1,58 @@
+run_id: e5b_bird_dev_full_selector_k5_k3_base_e3_dh_20260726
+experiment: E5b-SELECTOR-REPAIR
+experiment_name: E5b selector on full BIRD dev (k5 + k3 + base + E3 + DH)
+description: |
+  E5b selector with deterministic repairs on full BIRD dev.
+  Candidate pool:
+    - E0 retrieval few-shot k=5 v2
+    - E0 retrieval few-shot k=3 v2
+    - E0 GLM base predictions (cot8k)
+    - E3 GLM schema/value-grounding candidates
+    - financial district-hint candidates
+
+source_names:
+  - retrieval_k5_v2
+  - retrieval_k3_v2
+  - base
+  - e3cand
+  - glm_dh
+
+source_priority:
+  - retrieval_k5_v2
+  - retrieval_k3_v2
+  - base
+  - e3cand
+  - glm_dh
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev.json
+
+candidate_sources:
+  - predictions/e0_bird_dev_full_glm5.2_cot8k_retrieval_k5_v2_merged_20260725/predictions.jsonl
+  - predictions/e0_bird_dev_full_glm5.2_cot8k_retrieval_k3_v2_merged_20260726/predictions.jsonl
+  - predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions.jsonl
+  - predictions/e3_glm_candidates_full_dev_merged_20260725/predictions.jsonl
+  - predictions/e0_financial_district_hint_full_dev_errors_20260725/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+selector:
+  use_priority_first: true
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

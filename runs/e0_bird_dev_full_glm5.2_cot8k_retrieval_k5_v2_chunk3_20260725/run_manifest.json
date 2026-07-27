@@ -1,0 +1,3509 @@
+{
+  "run_id": "e0_bird_dev_full_glm5.2_cot8k_retrieval_k5_v2_chunk3_20260725",
+  "experiment": "E0-COT-8K-RETRIEVAL-K5-V2-FULL-CHUNK3",
+  "experiment_name": "k5 keyword retrieval + self-correction checklist on full BIRD dev chunk 3",
+  "description": "k=5 keyword retrieval from BIRD train split + CoT/Rules prompt with self-correction checklist on BIRD dev chunk 3 using GLM 5.2. Resumable, per-example timeout.",
+  "started_at": "2026-07-25T14:38:48.648257+00:00",
+  "duration_seconds": 1946.57,
+  "config": {
+    "run_id": "e0_bird_dev_full_glm5.2_cot8k_retrieval_k5_v2_chunk3_20260725",
+    "experiment": "E0-COT-8K-RETRIEVAL-K5-V2-FULL-CHUNK3",
+    "experiment_name": "k5 keyword retrieval + self-correction checklist on full BIRD dev chunk 3",
+    "description": "k=5 keyword retrieval from BIRD train split + CoT/Rules prompt with self-correction checklist on BIRD dev chunk 3 using GLM 5.2. Resumable, per-example timeout.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/home/dameng/bird_dev/chunks/dev_chunk3.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "train_source": "/home/dameng/bird_dev/dev_train1234.json",
+      "data_manifest": "manifests/data_bird_dev.json"
+    },
+    "few_shot": {
+      "k": 5,
+      "method": "keyword"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 8192
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_cot_retrieval_v2.md"
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "agent": {
+      "per_example_timeout_seconds": 150
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 382,
+    "em": 270,
+    "ex": 336,
+    "valid": 382,
+    "em_rate": 70.68062827225131,
+    "ex_rate": 87.95811518324608,
+    "valid_rate": 100.0,
+    "join_total": 309,
+    "join_ex": 274,
+    "join_ex_rate": 88.67313915857605,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 1,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 2,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 3,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 4,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 5,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 6,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 7,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 8,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 9,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 10,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 11,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 12,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 13,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 14,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 15,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 16,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 17,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 18,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 19,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 20,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 21,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 22,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 23,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 24,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 25,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 26,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 27,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 28,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 29,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 30,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 31,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 32,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 33,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 34,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 35,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 36,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 37,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 38,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 39,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 40,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 41,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 42,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 43,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 44,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 45,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 46,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 47,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 48,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 49,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 50,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 51,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 52,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 53,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 54,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 55,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 56,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 57,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 58,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 59,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 60,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 61,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 62,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 63,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 64,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 65,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 66,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 67,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 68,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 69,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 70,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 71,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 72,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 73,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 74,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 75,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 76,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 77,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 78,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 79,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 80,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 81,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 82,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 83,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 84,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 85,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 86,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 87,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 88,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 89,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 90,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 91,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 92,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 93,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 94,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 95,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 96,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 97,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 98,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 99,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 100,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 101,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 102,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 103,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 104,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 105,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 106,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 107,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 108,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 109,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 110,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 111,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 112,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 113,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 114,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 115,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 116,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 117,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 118,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 119,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 120,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 121,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 122,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 123,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 124,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 125,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 126,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 127,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 128,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 129,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 130,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 131,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 132,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 133,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 134,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 135,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 136,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 137,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 138,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 139,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 140,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 141,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 142,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 143,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 144,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 145,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 146,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 147,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 148,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 149,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 150,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 151,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 152,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 153,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 154,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 155,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 156,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 157,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 158,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 159,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 160,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 161,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 162,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 163,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 164,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 165,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 166,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 167,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 168,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 169,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 170,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 171,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 172,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 173,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 174,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 175,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 176,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 177,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 178,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 179,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 180,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 181,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 182,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 183,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 184,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 185,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 186,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 187,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 188,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 189,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 190,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 191,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 192,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 193,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 194,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 195,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 196,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 197,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 198,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 199,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 200,
+        "ex": false,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 201,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 202,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 203,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 204,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 205,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 206,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 207,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 208,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 209,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 210,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 211,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 212,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 213,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 214,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 215,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 216,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 217,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 218,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 219,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 220,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 221,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 222,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 223,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 224,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 225,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 226,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 227,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 228,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 229,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 230,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 231,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 232,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 233,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 234,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 235,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 236,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 237,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 238,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 239,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 240,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 241,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 242,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 243,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 244,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 245,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 246,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 247,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 248,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 249,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 250,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 251,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 252,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 253,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 254,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 255,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 256,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 257,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 258,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 259,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 260,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 261,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 262,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 263,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 264,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 265,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 266,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 267,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 268,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 269,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 270,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 271,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 272,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 273,
+        "ex": false,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 274,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 275,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 276,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 277,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 278,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 279,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 280,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 281,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 282,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 283,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 284,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 285,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 286,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 287,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 288,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 289,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 290,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 291,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 292,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 293,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 294,
+        "ex": false,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 295,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 296,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 297,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 298,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 299,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 300,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 301,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 302,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 303,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 304,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 305,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 306,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 307,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 308,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 309,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 310,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 311,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 312,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 313,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 314,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 315,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 316,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 317,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 318,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 319,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 320,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 321,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 322,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 323,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 324,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 325,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 326,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 327,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 328,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 329,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 330,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 331,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 332,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 333,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 334,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 335,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 336,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 337,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 338,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 339,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 340,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 341,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 342,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 343,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 344,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 345,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 346,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 347,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 348,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 349,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 350,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 351,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 352,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 353,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 354,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 355,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 356,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 357,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 358,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 359,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 360,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 361,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 362,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 363,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 364,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 365,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 366,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 367,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 368,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 369,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 370,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 371,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 372,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 373,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 374,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 375,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 376,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      },
+      {
+        "idx": 377,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 378,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 379,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 380,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 381,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      }
+    ]
+  }
+}

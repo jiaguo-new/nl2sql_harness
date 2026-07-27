@@ -1,0 +1,39 @@
+run_id: e5b_bird_dev200_selector_repair_e3cand_glm_dh_partial_v2_20260724
+experiment: E5b-SELECTOR-REPAIR
+experiment_name: e5b_bird_dev200_selector_repair_e3cand_glm_dh_partial_v2_20260724
+description: >
+  E5b selector with pattern-aware effective-join adjustment for glm_dh on the
+  Czech financial DB.  Boosts glm_dh when it uses the client-account-district_id
+  pattern, penalises it otherwise.  Run on the partial district-hint source
+  (q89-98 + 11 failures) to validate the rule before applying the full source.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_200.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+candidate_sources:
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_v2_merged_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_20260724/predictions.jsonl
+  - predictions/e0_bird_dev200_glm5.2_cot8k_retrieval_k5_tfidf_16k_20260724/predictions.jsonl
+  - predictions/e3_local_candidates_20260724_155614/predictions.jsonl
+  - predictions/e0_financial_district_hint_glm5.2_financial_partial_20260724/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

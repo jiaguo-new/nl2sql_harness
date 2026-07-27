@@ -1,0 +1,47 @@
+run_id: e0_bird_dev_full_glm5.2_cot8k_retrieval_k3_v2_chunk3_20260726
+experiment: E0-COT-8K-RETRIEVAL-K3-V2-FULL-CHUNK3
+experiment_name: k3 keyword retrieval + self-correction checklist on full BIRD dev chunk 3
+description: k=3 keyword retrieval from BIRD train split + CoT/Rules prompt with self-correction checklist on BIRD dev chunk 3 using GLM 5.2. Resumable, per-example timeout.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/chunks/dev_chunk3.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  train_source: /home/dameng/bird_dev/dev_train1234.json
+  data_manifest: manifests/data_bird_dev.json
+
+few_shot:
+  k: 3
+  method: keyword
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+
+prompt:
+  template: prompts/e0_direct_sql_cot_retrieval_v2.md
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+agent:
+  per_example_timeout_seconds: 150
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

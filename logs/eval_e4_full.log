@@ -1,0 +1,15 @@
+Evaluating 210 BIRD queries with subprocess timeout=12s ...
+  [50/210] EX=1/50 (2.0%), Valid=10/50 (20.0%)
+  [100/210] EX=1/100 (1.0%), Valid=10/100 (10.0%)
+  [150/210] EX=1/150 (0.7%), Valid=10/150 (6.7%)
+  [200/210] EX=1/200 (0.5%), Valid=10/200 (5.0%)
+  [210/210] EX=1/210 (0.5%), Valid=10/210 (4.8%)
+
+========== BIRD Official-style Evaluation ==========
+Total queries: 210
+Exact Match (EM): 0 / 210 = 0.00%
+Execution Match (EX): 1 / 210 = 0.48%
+Valid SQL Rate: 10 / 210 = 4.76%
+JOIN EX: 1 / 167 = 0.60%
+====================================================
+Results written to metrics/e4_bird_dev_retrieval_detvg_failures_210_glm5.2_20260726/bird_official_eval.json

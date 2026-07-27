@@ -1,0 +1,17 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "datasets/dev/bird_dev_retrieval_detvg_failures_5.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": [
+    "evaluation",
+    "error_analysis"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "retrieval_corpus"
+  ],
+  "loaded_at": "2026-07-25T16:52:12.701479+00:00"
+}
