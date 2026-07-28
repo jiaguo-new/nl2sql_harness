@@ -1,0 +1,55 @@
+run_id: e0_bird_dev_full_glm5.2_cot8k_retrieval_k5_clean_samedb_20260728
+experiment: E0-COT-8K-RETRIEVAL-K5-CLEAN-SAMEDB
+experiment_name: k5 keyword retrieval from CLEAN BIRD train split (same-db) on full BIRD dev
+description: |
+  Compliance fix for the retrieval self-leak (see reports/workflow_and_ablation_20260728.md).
+  Retrieval corpus is the REAL BIRD train split (NL2SQL360 train.json, 9428 examples,
+  0 question/SQL overlap with dev, SHA256 abf17d3d...).  Self-exclusion is enforced in
+  _retrieve_examples.  NOTE: BIRD train and dev have DISJOINT db_ids (train=69 dbs,
+  dev=11 dbs, 0 shared), so same-db retrieval returns NO examples for any dev question.
+  This run therefore measures retrieval's contribution with the leak removed; it should
+  collapse to ~base (no few-shot).
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  train_source: /home/dameng/project/text2sql_agent/NL2SQL360/data/bird/train/train.json
+  data_manifest: manifests/data_bird_dev.json
+
+few_shot:
+  k: 5
+  method: keyword
+  cross_db: false
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+
+prompt:
+  template: prompts/e0_direct_sql_cot_retrieval_v2.md
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+agent:
+  per_example_timeout_seconds: 150
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true
