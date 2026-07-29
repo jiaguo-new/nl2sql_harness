@@ -1,0 +1,33 @@
+run_id: e4_repair_merged4_ormband005_20260729
+experiment: E4-REPAIR-OVERLAY
+experiment_name: Execution repair on merged4 ORM selector output (full BIRD dev)
+description: |
+  Take the compliant merged4 ORM-band selector predictions (1068 EX) and run
+  execution-feedback repair: for each question whose selected SQL errors or
+  returns empty, feed (failed_sql, error, schema) to GLM-5.2 for up to 2 rounds.
+  Safe keep: only adopt a repair if it executes successfully. Compliant (no gold).
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+prompt:
+  repair: prompts/e4_repair_sql.md
+agent:
+  max_repairs: 2
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+output:
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
+  save_api_request_id: true

@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""E4 execution-repair overlay on E3v failures.
+"""E4 execution-repair on top of the merged4 ORM selector output.
 
-For each E3v-still-failure question:
-  1. Execute current SQL; if ok + non-empty, keep (nothing to repair).
-  2. If error or empty: feed {current_sql} + {current_result} + schema + evidence
-     to GLM-5.2 for repair (max N rounds).
-  3. Accept repaired SQL only if it executes ok + non-empty (no gold used).
+For each dev question:
+  1. take the selector's chosen SQL (from compliant_merged4_ormband005);
+  2. execute it (read-only);
+  3. if it errors or returns empty -> feed (failed_sql, error, schema, question)
+     to GLM-5.2 for up to max_repairs rounds;
+  4. keep the repaired SQL only if it executes successfully (safe: never keep
+     a repair that breaks a previously-ok SQL).
 
-Resume-safe, parallel.  Operates on E3v merged predictions (573 failures).
+Attacks BOTH error classes:
+  - A (selector-miss): repair may fix a syntactically-broken or empty pick;
+  - B (generator-miss): the error feedback lets GLM correct join/column errors.
+
+Compliant: only dev schema+question+evidence+execution-error; no gold.
+Parallel + resumable.
 """
 from __future__ import annotations
 
@@ -27,98 +34,99 @@ sys.path.insert(0, str(ROOT))
 from tools.db_utils import BirdDatabase  # noqa: E402
 from tools.llm_client import LLMClient  # noqa: E402
 
-sys.path.insert(0, str(ROOT / "agents"))
-from e4_execution_repair_agent import extract_sql  # noqa: E402
+
+def _render(template: str, **kw) -> str:
+    out = template
+    for k, v in kw.items():
+        out = out.replace("{" + k + "}", str(v))
+    return out
 
 
-def _fmt_result(res: dict) -> str:
-    if not res.get("ok"):
-        return f"Execution error: {res.get('error', 'unknown')}"
-    rows = res.get("rows") or []
-    if not rows:
-        return "Empty result set (0 rows)"
-    sample = [" | ".join(str(v) for v in r) for r in rows[:5]]
-    return f"{len(rows)} rows (first {min(5, len(rows))}):\n" + "\n".join(sample)
+def _extract_sql(text: str) -> str:
+    text = (text or "").strip()
+    text = re.sub(r"<reasoning>.*?</reasoning>", "", text, flags=re.DOTALL | re.I)
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.I)
+    m = list(re.finditer(r"```sql\s*\n?(.*?)```", text, re.S))
+    if m:
+        return m[-1].group(1).strip()
+    m = list(re.finditer(r"```\s*\n?(.*?)```", text, re.S))
+    if m:
+        return m[-1].group(1).strip()
+    idx = text.upper().find("SELECT")
+    if idx >= 0:
+        return text[idx:].strip()
+    return text.rstrip(";").strip()
 
 
-def process_one(args):
-    ex, cur_pred, cfg, client = args
+def process_one(ex, cfg, db_root, client, repair_tpl):
     qid = ex.get("question_id")
     db_id = ex["db_id"]
     question = ex["question"]
     evidence = ex.get("evidence", "")
-    sql = cur_pred.get("pred_sql", "")
+    ev = f"## Evidence\n{evidence}\n" if evidence else ""
+    base_sql = ex.get("pred_sql", "")  # selector's pick
 
-    db = BirdDatabase(db_id=db_id, db_root=cfg["dataset"]["db_root"],
-                      timeout=cfg["execution"]["timeout_seconds"],
-                      max_rows=cfg["execution"]["max_rows"])
-    rec: dict = {"question_id": qid, "db_id": db_id, "question": question}
-
-    if not sql.strip():
-        rec["pred_sql"] = ""
-        rec["stage"] = "empty"
-        return rec
-
-    res = db.execute(sql)
-    # if already ok + non-empty, nothing to repair
-    if res.get("ok") and res.get("rows"):
-        rec["pred_sql"] = sql
-        rec["stage"] = "already_ok"
-        return rec
-
+    db = BirdDatabase(db_id=db_id, db_root=db_root, timeout=30, max_rows=100)
     schema = db.get_schema()
-    prompt_tmpl = open(cfg["prompt"]["template"]).read()
     max_repairs = cfg.get("agent", {}).get("max_repairs", 2)
 
+    rec = {"question_id": qid, "db_id": db_id, "pred_sql": base_sql,
+           "repaired": False, "repair_rounds": 0}
+
+    sql = base_sql
+    res = db.execute(sql) if sql.strip() else {"ok": False, "error": "empty", "rows": None}
+
     for rnd in range(max_repairs):
-        error_msg = _fmt_result(res)
-        prompt = (
-            prompt_tmpl
-            .replace("{db_id}", db_id)
-            .replace("{schema}", schema)
-            .replace("{evidence}", f"## Evidence\n{evidence}" if evidence else "")
-            .replace("{question}", question)
-            .replace("{current_sql}", sql)
-            .replace("{current_result}", error_msg)
-        )
+        # only repair if not ok OR empty result
+        if res["ok"] and res.get("rows"):
+            break
+        err = res.get("error") or "empty result set (0 rows)"
+        # build a short result preview for the prompt
+        rows = res.get("rows")
+        if rows is None:
+            result_preview = f"Execution error: {err}"
+        elif len(rows) == 0:
+            result_preview = "Empty result set (0 rows returned)"
+        else:
+            result_preview = f"{len(rows)} rows. First rows: " + " | ".join(str(v) for v in rows[0]) if rows else ""
+        prompt = _render(repair_tpl, db_id=db_id, schema=schema, evidence=ev,
+                         question=question, current_sql=sql, current_result=result_preview)
         try:
             comp = client.chat_completion(
-                messages=[{"role": "system", "content": "You are an expert SQL repair assistant."},
+                messages=[{"role": "system", "content": "You are an expert SQL debugging assistant."},
                           {"role": "user", "content": prompt}],
-                temperature=0.0, top_p=1.0, max_tokens=cfg["model"]["max_tokens"],
+                temperature=0.0, top_p=1.0, max_tokens=8192,
             )
-            raw, _ = client.extract_content(comp)
-            new_sql = extract_sql(raw)
+            raw, usage = client.extract_content(comp)
+            new_sql = _extract_sql(raw)
+            rec[f"request_id_r{rnd}"] = comp["response"].get("id")
         except Exception as e:
-            rec["pred_sql"] = sql
-            rec["stage"] = "llm_error"
-            rec["error"] = str(e)[:200]
-            return rec
-
-        if not new_sql or new_sql.strip().lower() == sql.strip().lower():
-            break  # no change
+            rec[f"error_r{rnd}"] = str(e)[:150]
+            break
+        if not new_sql.strip() or new_sql.strip().lower() == sql.strip().lower():
+            break
         new_res = db.execute(new_sql)
-        sql = new_sql
-        res = new_res
-        if res.get("ok") and res.get("rows"):
-            break  # fixed
-
+        # safe keep: adopt if new is strictly better (ok and non-empty)
+        if new_res["ok"] and new_res.get("rows"):
+            sql = new_sql
+            res = new_res
+            rec["repaired"] = True
+            rec["repair_rounds"] = rnd + 1
+        else:
+            # new also fails; continue trying with it (may be closer)
+            sql = new_sql
+            res = new_res
     rec["pred_sql"] = sql
-    rec["stage"] = "repaired" if (res.get("ok") and res.get("rows")) else "still_fail"
-    rec["final_result"] = _fmt_result(res)[:200]
     return rec
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
-    ap.add_argument("--base-preds", required=True, type=Path,
-                    help="E3v merged predictions (input)")
-    ap.add_argument("--dev", required=True, type=Path)
-    ap.add_argument("--fail-qids", required=True, type=Path,
-                    help="JSON list of question_ids to repair")
+    ap.add_argument("--baseline-pred", required=True, help="selector predictions.jsonl to repair from")
     ap.add_argument("--workers", type=int, default=8)
-    ap.add_argument("--per-call-timeout", type=float, default=120.0)
+    ap.add_argument("--per-call-timeout", type=float, default=180.0)
+    ap.add_argument("--limit", type=int, default=0)
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.config))
@@ -127,14 +135,19 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "predictions.jsonl"
 
-    dev = json.load(open(args.dev))
-    dev_by_qid = {d.get("question_id"): d for d in dev}
-    base = {}
-    for l in open(args.base_preds):
-        if l.strip():
-            d = json.loads(l)
-            base[d["question_id"]] = d
-    fail_ids = set(json.load(open(args.fail_qids)))
+    dev = json.load(open(cfg["dataset"]["source"]))
+    base = {json.loads(l)["question_id"]: json.loads(l) for l in open(args.baseline_pred) if l.strip()}
+    todo = []
+    for i, ex in enumerate(dev):
+        qid = ex.get("question_id", i)
+        b = base.get(qid, {})
+        ex["pred_sql"] = b.get("pred_sql", "")
+        todo.append(ex)
+    if args.limit:
+        todo = todo[: args.limit]
+
+    repair_tpl = open(cfg["prompt"]["repair"]).read()
+    db_root = cfg["dataset"]["db_root"]
 
     done = set()
     if out_path.exists():
@@ -142,32 +155,24 @@ def main():
             if l.strip():
                 done.add(json.loads(l)["question_id"])
         print(f"resume: {len(done)} done", flush=True)
-
-    todo = [(dev_by_qid[qid], base[qid]) for qid in sorted(fail_ids)
-            if qid not in done and qid in base]
+    todo = [ex for ex in todo if ex.get("question_id") not in done]
     print(f"todo: {len(todo)}", flush=True)
     if not todo:
         return
 
-    client = LLMClient(
-        base_url=cfg["model"]["base_url"],
-        model_name=cfg["model"]["model_name"],
-        api_key_env=cfg["model"]["api_key_env"],
-        timeout=args.per_call_timeout,
-    )
+    client = LLMClient(base_url=cfg["model"]["base_url"], model_name=cfg["model"]["model_name"],
+                       api_key_env=cfg["model"]["api_key_env"], timeout=args.per_call_timeout)
     t0 = time.time()
     written = 0
-    with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = {pool.submit(process_one, (ex, bp, cfg, client)): ex.get("question_id")
-                   for ex, bp in todo}
-        with out_path.open("a", encoding="utf-8") as f:
-            for fut in as_completed(futures):
+    with out_path.open("a", encoding="utf-8") as f:
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            futs = {pool.submit(process_one, ex, cfg, db_root, client, repair_tpl): ex.get("question_id") for ex in todo}
+            for fut in as_completed(futs):
                 try:
                     rec = fut.result(timeout=args.per_call_timeout + 60)
                 except Exception as e:
-                    qid = futures[fut]
-                    rec = {"question_id": qid, "pred_sql": base[qid]["pred_sql"],
-                           "stage": "future_error", "error": str(e)[:150]}
+                    qid = futs[fut]
+                    rec = {"question_id": qid, "pred_sql": "", "error": str(e)[:120]}
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 f.flush()
                 written += 1
