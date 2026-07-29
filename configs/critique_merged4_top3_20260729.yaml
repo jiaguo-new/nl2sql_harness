@@ -1,0 +1,21 @@
+run_id: critique_merged4_top3_20260729
+experiment: CRITIQUE-SELECTOR
+experiment_name: GLM execution-result critique over merged4 top-3 candidates
+description: |
+  For each dev question, take top-3 merged4 candidates by ORM score, present
+  their execution results to GLM-5.2, let it pick the best. Attacks A-class
+  (selector-miss) errors. Compliant: only results shown, no gold.
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+output:
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
