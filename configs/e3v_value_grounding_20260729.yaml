@@ -1,0 +1,47 @@
+run_id: e3v_value_grounding_20260729
+experiment: E3v
+experiment_name: Active-Probe Value Grounding Agent on base failures
+description: |
+  For each GLM-5.2 base-failure question, deterministically probe the DB for
+  actual WHERE-clause cell values (case-insensitive + fuzzy match), then feed
+  the probe info to GLM-5.2 for a structural correction pass. Pick the best
+  candidate by execution validity + non-empty result (no gold). Fully compliant:
+  read-only dev DB, no gold SQL, no retrieval corpus.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  template: prompts/e3v_value_grounding.md
+
+value_grounding:
+  sample_limit: 200
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+agent:
+  max_repairs: 0
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true
