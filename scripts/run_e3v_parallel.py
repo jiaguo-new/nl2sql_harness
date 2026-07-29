@@ -151,6 +151,8 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--per-call-timeout", type=float, default=120.0)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--fail-qids", type=Path, default=None,
+                    help="JSON list of question_ids to process (overrides auto fail detection)")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(args.config))
@@ -166,10 +168,12 @@ def main():
             d = json.loads(l)
             base[d["question_id"]] = d
 
-    # determine failures (need gold to know — but we use base eval metrics)
-    # If failures-only, load the metrics to find ex=False
+    # determine failures
     fail_ids = None
-    if args.failures_only:
+    if args.fail_qids is not None:
+        fail_ids = set(json.load(open(args.fail_qids)))
+        print(f"fail-qids: {len(fail_ids)} questions", flush=True)
+    elif args.failures_only:
         import glob
         mfiles = glob.glob(str(ROOT / "metrics/e0_bird_dev_full_glm5.2_cot8k_20260724_eval.json"))
         if mfiles:
