@@ -1,0 +1,31 @@
+run_id: e3c_column_grounding_20260730
+experiment: E3c
+experiment_name: Column Grounding Agent on current-chain failures
+description: |
+  For each current-chain failure question, diagnose SELECT-clause column
+  selection errors by probing DB column names + samples, semantically match
+  question entities to correct columns, and feed the report to GLM-5.2 for
+  SELECT-clause correction. Compliant (read-only dev DB, no gold).
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+prompt:
+  template: prompts/e3c_column_grounding.md
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
