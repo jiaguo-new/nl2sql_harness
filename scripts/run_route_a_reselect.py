@@ -70,6 +70,42 @@ def _parse_winner(text, n_candidates):
     return "parse_error"
 
 
+def _pairwise_judge(client, question, evidence, cand_a, cand_b, qid, rng):
+    """Run a single pairwise judge call, return the winning candidate dict or None on error."""
+    a_first = rng.random() < 0.5
+    if a_first:
+        ca, cb = cand_a, cand_b
+    else:
+        ca, cb = cand_b, cand_a
+    prompt = (
+        "You are an expert SQL judge. Two candidate SQL queries answer the same "
+        "question but produce different results. Choose the one that correctly "
+        "answers the question based on the question intent.\n\n"
+        f"Question: {question}\n"
+        f"Evidence: {evidence}\n\n"
+        f"Candidate A SQL:\n```sql\n{ca['sql'].strip()}\n```\n"
+        f"Result of A:\n{ca['result_text']}\n\n"
+        f"Candidate B SQL:\n```sql\n{cb['sql'].strip()}\n```\n"
+        f"Result of B:\n{cb['result_text']}\n\n"
+        'Return ONLY: {"winner": "A"} or {"winner": "B"} or {"winner": "tie"}'
+    )
+    try:
+        comp = client.chat_completion(
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0, max_tokens=64, thinking={"type": "disabled"},
+        )
+        raw = comp["response"]["choices"][0]["message"]["content"]
+        w = _parse_winner(raw, 2)
+        if w == "tie" or w == "parse_error":
+            return None
+        if (w == "a") == a_first:
+            return cand_a
+        else:
+            return cand_b
+    except Exception:
+        return None
+
+
 def judge_top_k(args):
     ex, scored_sample, cur_sql, cfg, client, seed = args
     qid = ex.get("question_id")
@@ -87,7 +123,7 @@ def judge_top_k(args):
     if len(exec_cands) < 2:
         return {"question_id": qid, "chosen": "base", "pred_sql": cur_sql}
     exec_cands.sort(key=lambda c: -c.get("orm_score", 0.5))
-    top_k = exec_cands[:3]
+    top_k = exec_cands[:5]  # expand to top-5
 
     # execute top-k, get result hashes
     results = []
@@ -107,12 +143,7 @@ def judge_top_k(args):
     if len(set(hashes)) <= 1:
         return {"question_id": qid, "chosen": "base", "pred_sql": cur_sql}
 
-    # hash-majority among top-k
-    from collections import Counter
-    hash_groups = Counter(hashes)
-    max_hash = hash_groups.most_common(1)[0][0]
-
-    # GLM tournament judge: compare top-2 distinct-hash candidates
+    # collect distinct-hash candidates (best ORM per hash)
     distinct = []
     seen_hashes = set()
     for r in results:
@@ -121,14 +152,25 @@ def judge_top_k(args):
     if len(distinct) < 2:
         return {"question_id": qid, "chosen": "base", "pred_sql": cur_sql}
 
-    # pairwise: distinct[0] vs distinct[1] (highest ORM each)
-    a, b = distinct[0], distinct[1]
+    # Tournament: pairwise knockout among distinct candidates
+    # Seed 0 = highest ORM. Brackets by ORM order.
     rng = random.Random(seed + qid)
-    a_first = rng.random() < 0.5
-    if a_first:
-        cand_a, cand_b = a, b
-    else:
-        cand_a, cand_b = b, a
+    tournament = list(distinct)
+    while len(tournament) > 1:
+        # pair up: 0v1, 2v3, ... (by ORM order)
+        next_round = []
+        for i in range(0, len(tournament), 2):
+            if i + 1 >= len(tournament):
+                next_round.append(tournament[i]); continue
+            a, b = tournament[i], tournament[i+1]
+            a_first = rng.random() < 0.5
+            if a_first: cand_a, cand_b = a, b
+            else: cand_a, cand_b = b, a
+            winner = _pairwise_judge(client, question, evidence, cand_a, cand_b, qid, rng)
+            next_round.append(winner if winner else a)  # fallback to higher-ORM a
+        tournament = next_round
+
+    winner = tournament[0]
 
     prompt = (
         "You are an expert SQL judge. Two candidate SQL queries answer the same "
@@ -144,34 +186,13 @@ def judge_top_k(args):
     )
 
     rec = {"question_id": qid}
-    rec["presented_order"] = "a_first" if a_first else "b_first"
-    try:
-        comp = client.chat_completion(
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.0, max_tokens=64, thinking={"type": "disabled"},
-        )
-        raw = comp["response"]["choices"][0]["message"]["content"]
-        w = _parse_winner(raw, 2)
-        rec["judge_raw"] = raw[:200]
-        if w == "tie" or w == "parse_error":
-            rec["chosen"] = "base"; rec["pred_sql"] = cur_sql
-        elif (w == "a") == a_first:
-            # a won, a is cand_a
-            winner = cand_a
-            rec["chosen"] = "judge_a"
-        else:
-            winner = cand_b
-            rec["chosen"] = "judge_b"
-        if rec["chosen"] in ("judge_a","judge_b"):
-            # accept only if ok+non-empty
-            wres = db.execute(winner["sql"])
-            if wres.get("ok") and wres.get("rows"):
-                rec["pred_sql"] = winner["sql"]
-            else:
-                rec["chosen"] = "base"; rec["pred_sql"] = cur_sql
-    except Exception as e:
+    # accept tournament winner if ok+non-empty
+    wres = db.execute(winner["sql"])
+    if wres.get("ok") and wres.get("rows"):
+        rec["pred_sql"] = winner["sql"]
+        rec["chosen"] = "tournament"
+    else:
         rec["chosen"] = "base"; rec["pred_sql"] = cur_sql
-        rec["judge_error"] = str(e)[:150]
 
     return rec
 
