@@ -1,0 +1,25 @@
+run_id: route_a_reselect_20260730
+experiment: RouteA
+experiment_name: GLM top-3 reselection on selector failures
+description: |
+  For selector-failure questions (oracle has correct candidate), take ORM top-3
+  candidates, execute, GLM-5.2 pairwise judge among distinct-result candidates.
+  Accept judged winner if ok+non-empty. No gold. Compliant.
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
