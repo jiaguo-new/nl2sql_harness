@@ -257,6 +257,75 @@ def probe_columns(sql: str, question: str, db: BirdDatabase) -> dict[str, Any]:
                                 f"(score {alt_score:.2f}), samples: {[str(s) for s in samples[:3]]}")
                         break
 
+    # ── Post-loop checks: aggregation, DISTINCT, extra columns ──────
+
+    q_lower = question.lower()
+
+    # Check: COUNT(*) anywhere in SELECT (catches complex expressions too)
+    select_raw = ""
+    sm = re.search(r"\bSELECT\s+(.*?)\s+FROM", sql, re.IGNORECASE | re.DOTALL)
+    if sm:
+        select_raw = sm.group(1)
+    if re.search(r"count\s*\(\s*\*\s*\)", select_raw, re.IGNORECASE):
+        already_caught = any(e.get("is_count_star") for e in select_cols)
+        if not already_caught:
+            # find best entity column
+            pk_candidates = []
+            for t in tables:
+                for c in all_cols.get(t, []):
+                    if any(k in c.lower() for k in ["id", "code", "cds", "name"]):
+                        pk_candidates.append(f"{t}.{c}")
+            if pk_candidates:
+                best_pk = pk_candidates[0]
+                suggestions.append({"current": "COUNT(*)", "suggested": f"COUNT({best_pk})",
+                                    "reason": "COUNT(*) includes NULL rows; COUNT(entity_column) is more precise",
+                                    "score": 0.8})
+                has_issues = True
+                report_lines.append(f"  COUNT(*) found in SELECT. Consider COUNT({best_pk}) instead.")
+
+    # Check: missing aggregation (question asks "lowest/highest/average" but no agg in SELECT)
+    agg_keywords = {
+        "lowest": "MIN", "minimum": "MIN", "smallest": "MIN", "least": "MIN",
+        "highest": "MAX", "maximum": "MAX", "largest": "MAX", "biggest": "MAX",
+        "average": "AVG", "mean": "AVG",
+        "total": "SUM", "sum of": "SUM",
+    }
+    has_agg_in_select = any(e.get("agg") for e in select_cols)
+    for kw, agg_fn in agg_keywords.items():
+        if kw in q_lower and not has_agg_in_select:
+            # find the column the question is asking about
+            for e in select_cols:
+                if e.get("col") and e["col"] != "*":
+                    suggestions.append({
+                        "current": e["col"], "suggested": f"{agg_fn}({e['col']})",
+                        "reason": f"question asks '{kw}', should use {agg_fn}()",
+                        "score": 0.9})
+                    has_issues = True
+                    report_lines.append(
+                        f"  Question asks '{kw}' but SELECT has no aggregation. "
+                        f"Consider {agg_fn}({e['col']}).")
+                    break
+            break
+
+    # Check: missing DISTINCT (gold often uses DISTINCT for "different"/"unique")
+    if any(w in q_lower for w in ["different", "unique", "distinct"]) and \
+       not any("distinct" in e.get("raw","").lower() for e in select_cols):
+        has_issues = True
+        report_lines.append(
+            "  Question asks for 'different/unique' results. "
+            "Consider adding DISTINCT to the SELECT clause.")
+
+    # Check: extra columns (pred has more columns than question requests)
+    # Count question-requested entities vs SELECT columns
+    n_select = len([e for e in select_cols if not e.get("is_star")])
+    if n_select > 1:
+        # crude: if question is a simple "what is the X" (singular), shouldn't have many columns
+        if re.search(r'\bwhat is\b|\bphone number\b|\bemail\b', q_lower) and n_select > 2:
+            has_issues = True
+            report_lines.append(
+                f"  SELECT has {n_select} columns but the question seems to ask for "
+                f"a single value. Consider removing unnecessary columns.")
+
     # build report
     if not report_lines:
         report_text = "No column-selection issues detected."
