@@ -123,7 +123,7 @@ def judge_top_k(args):
     if len(exec_cands) < 2:
         return {"question_id": qid, "chosen": "base", "pred_sql": cur_sql}
     exec_cands.sort(key=lambda c: -c.get("orm_score", 0.5))
-    top_k = exec_cands[:5]  # expand to top-5
+    top_k = exec_cands[:8]  # expand to top-8
 
     # execute top-k, get result hashes
     results = []
