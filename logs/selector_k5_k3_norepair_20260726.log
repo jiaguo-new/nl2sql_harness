@@ -1,0 +1,74 @@
+  [50/1534] qid=49 candidates=4 chosen=retrieval_k5_v2 joins=0
+  [100/1534] qid=99 candidates=5 chosen=retrieval_k5_v2 joins=1
+  [150/1534] qid=149 candidates=3 chosen=retrieval_k5_v2 joins=2
+  [200/1534] qid=199 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [250/1534] qid=249 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [300/1534] qid=299 candidates=3 chosen=retrieval_k5_v2 joins=0
+  [350/1534] qid=349 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [400/1534] qid=399 candidates=4 chosen=retrieval_k5_v2 joins=0
+  [450/1534] qid=449 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [500/1534] qid=499 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [550/1534] qid=549 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [600/1534] qid=599 candidates=3 chosen=retrieval_k5_v2 joins=0
+  [650/1534] qid=649 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [700/1534] qid=699 candidates=3 chosen=retrieval_k5_v2 joins=0
+  [750/1534] qid=749 candidates=3 chosen=retrieval_k5_v2 joins=2
+  [800/1534] qid=799 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [850/1534] qid=849 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [900/1534] qid=899 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [950/1534] qid=949 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1000/1534] qid=999 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1050/1534] qid=1049 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1100/1534] qid=1099 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1150/1534] qid=1149 candidates=3 chosen=retrieval_k5_v2 joins=0
+  [1200/1534] qid=1199 candidates=4 chosen=retrieval_k5_v2 joins=0
+  [1250/1534] qid=1249 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1300/1534] qid=1299 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [1350/1534] qid=1349 candidates=3 chosen=retrieval_k5_v2 joins=1
+  [1400/1534] qid=1399 candidates=4 chosen=retrieval_k5_v2 joins=2
+  [1450/1534] qid=1449 candidates=3 chosen=retrieval_k5_v2 joins=2
+  [1500/1534] qid=1499 candidates=4 chosen=retrieval_k5_v2 joins=1
+  [1534/1534] qid=1533 candidates=3 chosen=retrieval_k5_v2 joins=1
+Evaluating 1534 BIRD queries with subprocess timeout=12s ...
+  [50/1534] EX=43/50 (86.0%), Valid=46/50 (92.0%)
+  [100/1534] EX=85/100 (85.0%), Valid=96/100 (96.0%)
+  [150/1534] EX=126/150 (84.0%), Valid=145/150 (96.7%)
+  [200/1534] EX=167/200 (83.5%), Valid=193/200 (96.5%)
+  [250/1534] EX=207/250 (82.8%), Valid=241/250 (96.4%)
+  [300/1534] EX=247/300 (82.3%), Valid=290/300 (96.7%)
+  [350/1534] EX=289/350 (82.6%), Valid=338/350 (96.6%)
+  [400/1534] EX=323/400 (80.8%), Valid=380/400 (95.0%)
+  [450/1534] EX=358/450 (79.6%), Valid=426/450 (94.7%)
+  [500/1534] EX=402/500 (80.4%), Valid=475/500 (95.0%)
+  [550/1534] EX=441/550 (80.2%), Valid=522/550 (94.9%)
+  [600/1534] EX=481/600 (80.2%), Valid=571/600 (95.2%)
+  [650/1534] EX=518/650 (79.7%), Valid=620/650 (95.4%)
+  [700/1534] EX=562/700 (80.3%), Valid=669/700 (95.6%)
+  [750/1534] EX=605/750 (80.7%), Valid=715/750 (95.3%)
+  [800/1534] EX=653/800 (81.6%), Valid=765/800 (95.6%)
+  [850/1534] EX=695/850 (81.8%), Valid=815/850 (95.9%)
+  [900/1534] EX=731/900 (81.2%), Valid=865/900 (96.1%)
+  [950/1534] EX=774/950 (81.5%), Valid=915/950 (96.3%)
+  [1000/1534] EX=813/1000 (81.3%), Valid=964/1000 (96.4%)
+  [1050/1534] EX=849/1050 (80.9%), Valid=1014/1050 (96.6%)
+  [1100/1534] EX=894/1100 (81.3%), Valid=1062/1100 (96.5%)
+  [1150/1534] EX=939/1150 (81.7%), Valid=1110/1150 (96.5%)
+  [1200/1534] EX=981/1200 (81.8%), Valid=1160/1200 (96.7%)
+  [1250/1534] EX=1024/1250 (81.9%), Valid=1210/1250 (96.8%)
+  [1300/1534] EX=1060/1300 (81.5%), Valid=1260/1300 (96.9%)
+  [1350/1534] EX=1107/1350 (82.0%), Valid=1310/1350 (97.0%)
+  [1400/1534] EX=1154/1400 (82.4%), Valid=1360/1400 (97.1%)
+  [1450/1534] EX=1200/1450 (82.8%), Valid=1410/1450 (97.2%)
+  [1500/1534] EX=1243/1500 (82.9%), Valid=1460/1500 (97.3%)
+  [1534/1534] EX=1275/1534 (83.1%), Valid=1494/1534 (97.4%)
+
+========== BIRD Official-style Evaluation ==========
+Total queries: 1534
+Exact Match (EM): 1034 / 1534 = 67.41%
+Execution Match (EX): 1275 / 1534 = 83.12%
+Valid SQL Rate: 1494 / 1534 = 97.39%
+JOIN EX: 953 / 1140 = 83.60%
+====================================================
+Results written to metrics/e5b_bird_dev_full_selector_k5_k3_base_e3_dh_norepair_20260726/bird_official_eval.json
+Run e5b_bird_dev_full_selector_k5_k3_base_e3_dh_norepair_20260726 complete.
+Metrics: EX=83.12%, Valid=97.39%

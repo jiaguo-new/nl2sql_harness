@@ -1,0 +1,22 @@
+QID 94: fallback to k5_detvg
+QID 113: fallback to k5_detvg
+QID 269: fallback to k5_detvg
+QID 286: fallback to k5_detvg
+QID 340: fallback to k5_detvg
+QID 341: fallback to k5_detvg
+QID 349: fallback to k5_detvg
+QID 444: fallback to k5_detvg
+QID 483: fallback to k5_detvg
+QID 529: fallback to k5_detvg
+QID 556: fallback to k5_detvg
+QID 596: fallback to k5_detvg
+QID 847: fallback to k5_detvg
+QID 849: fallback to k5_detvg
+QID 851: fallback to retrieval_k3_v2
+QID 897: fallback to k5_detvg
+QID 922: fallback to k5_detvg
+QID 990: fallback to k5_detvg
+QID 1243: fallback to k5_detvg
+QID 1252: fallback to k5_detvg
+QID 1467: fallback to k5_detvg
+Wrote 53 judge predictions to predictions/llm_judge_k5_failures_20260726/predictions.jsonl

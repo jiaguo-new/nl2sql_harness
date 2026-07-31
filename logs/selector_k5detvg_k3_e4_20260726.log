@@ -1,0 +1,74 @@
+  [50/1534] qid=49 candidates=5 chosen=k5_detvg joins=0
+  [100/1534] qid=99 candidates=6 chosen=k5_detvg joins=1
+  [150/1534] qid=149 candidates=3 chosen=k5_detvg joins=2
+  [200/1534] qid=199 candidates=3 chosen=k5_detvg joins=1
+  [250/1534] qid=249 candidates=3 chosen=k5_detvg joins=1
+  [300/1534] qid=299 candidates=3 chosen=k5_detvg joins=0
+  [350/1534] qid=349 candidates=5 chosen=k5_detvg joins=1
+  [400/1534] qid=399 candidates=4 chosen=k5_detvg joins=0
+  [450/1534] qid=449 candidates=4 chosen=k5_detvg joins=1
+  [500/1534] qid=499 candidates=3 chosen=k5_detvg joins=1
+  [550/1534] qid=549 candidates=3 chosen=k5_detvg joins=1
+  [600/1534] qid=599 candidates=3 chosen=k5_detvg joins=0
+  [650/1534] qid=649 candidates=5 chosen=k5_detvg joins=1
+  [700/1534] qid=699 candidates=3 chosen=k5_detvg joins=0
+  [750/1534] qid=749 candidates=3 chosen=k5_detvg joins=2
+  [800/1534] qid=799 candidates=3 chosen=k5_detvg joins=1
+  [850/1534] qid=849 candidates=5 chosen=k5_detvg joins=1
+  [900/1534] qid=899 candidates=3 chosen=k5_detvg joins=1
+  [950/1534] qid=949 candidates=3 chosen=k5_detvg joins=1
+  [1000/1534] qid=999 candidates=3 chosen=k5_detvg joins=1
+  [1050/1534] qid=1049 candidates=3 chosen=k5_detvg joins=1
+  [1100/1534] qid=1099 candidates=3 chosen=k5_detvg joins=1
+  [1150/1534] qid=1149 candidates=3 chosen=k5_detvg joins=0
+  [1200/1534] qid=1199 candidates=5 chosen=k5_detvg joins=0
+  [1250/1534] qid=1249 candidates=3 chosen=k5_detvg joins=1
+  [1300/1534] qid=1299 candidates=4 chosen=k5_detvg joins=1
+  [1350/1534] qid=1349 candidates=3 chosen=k5_detvg joins=1
+  [1400/1534] qid=1399 candidates=4 chosen=k5_detvg joins=2
+  [1450/1534] qid=1449 candidates=3 chosen=k5_detvg joins=2
+  [1500/1534] qid=1499 candidates=4 chosen=k5_detvg joins=1
+  [1534/1534] qid=1533 candidates=3 chosen=k5_detvg joins=1
+Evaluating 1534 BIRD queries with subprocess timeout=12s ...
+  [50/1534] EX=43/50 (86.0%), Valid=46/50 (92.0%)
+  [100/1534] EX=85/100 (85.0%), Valid=96/100 (96.0%)
+  [150/1534] EX=127/150 (84.7%), Valid=146/150 (97.3%)
+  [200/1534] EX=168/200 (84.0%), Valid=194/200 (97.0%)
+  [250/1534] EX=208/250 (83.2%), Valid=242/250 (96.8%)
+  [300/1534] EX=248/300 (82.7%), Valid=291/300 (97.0%)
+  [350/1534] EX=290/350 (82.9%), Valid=339/350 (96.9%)
+  [400/1534] EX=324/400 (81.0%), Valid=381/400 (95.2%)
+  [450/1534] EX=360/450 (80.0%), Valid=427/450 (94.9%)
+  [500/1534] EX=404/500 (80.8%), Valid=476/500 (95.2%)
+  [550/1534] EX=444/550 (80.7%), Valid=523/550 (95.1%)
+  [600/1534] EX=484/600 (80.7%), Valid=572/600 (95.3%)
+  [650/1534] EX=521/650 (80.2%), Valid=621/650 (95.5%)
+  [700/1534] EX=565/700 (80.7%), Valid=670/700 (95.7%)
+  [750/1534] EX=608/750 (81.1%), Valid=716/750 (95.5%)
+  [800/1534] EX=657/800 (82.1%), Valid=766/800 (95.8%)
+  [850/1534] EX=700/850 (82.4%), Valid=816/850 (96.0%)
+  [900/1534] EX=736/900 (81.8%), Valid=866/900 (96.2%)
+  [950/1534] EX=780/950 (82.1%), Valid=916/950 (96.4%)
+  [1000/1534] EX=819/1000 (81.9%), Valid=965/1000 (96.5%)
+  [1050/1534] EX=855/1050 (81.4%), Valid=1015/1050 (96.7%)
+  [1100/1534] EX=900/1100 (81.8%), Valid=1063/1100 (96.6%)
+  [1150/1534] EX=945/1150 (82.2%), Valid=1111/1150 (96.6%)
+  [1200/1534] EX=987/1200 (82.2%), Valid=1161/1200 (96.8%)
+  [1250/1534] EX=1030/1250 (82.4%), Valid=1211/1250 (96.9%)
+  [1300/1534] EX=1066/1300 (82.0%), Valid=1261/1300 (97.0%)
+  [1350/1534] EX=1113/1350 (82.4%), Valid=1311/1350 (97.1%)
+  [1400/1534] EX=1160/1400 (82.9%), Valid=1361/1400 (97.2%)
+  [1450/1534] EX=1206/1450 (83.2%), Valid=1411/1450 (97.3%)
+  [1500/1534] EX=1249/1500 (83.3%), Valid=1461/1500 (97.4%)
+  [1534/1534] EX=1281/1534 (83.5%), Valid=1495/1534 (97.5%)
+
+========== BIRD Official-style Evaluation ==========
+Total queries: 1534
+Exact Match (EM): 1034 / 1534 = 67.41%
+Execution Match (EX): 1281 / 1534 = 83.51%
+Valid SQL Rate: 1495 / 1534 = 97.46%
+JOIN EX: 956 / 1140 = 83.86%
+====================================================
+Results written to metrics/e5b_bird_dev_full_selector_k5detvg_k3_e4_20260726/bird_official_eval.json
+Run e5b_bird_dev_full_selector_k5detvg_k3_e4_20260726 complete.
+Metrics: EX=83.51%, Valid=97.46%

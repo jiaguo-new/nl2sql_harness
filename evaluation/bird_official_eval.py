@@ -6,13 +6,15 @@ with float rounding) to match the upstream BIRD evaluation semantics.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import multiprocessing
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any
 
-QUERY_TIMEOUT = 12
+QUERY_TIMEOUT = int(os.environ.get("BIRD_QUERY_TIMEOUT", 12))
 RESULT_LIMIT = 5000
 
 
@@ -22,6 +24,27 @@ def _normalize_cell(v):
     if isinstance(v, (int, float)):
         return round(float(v), 3)
     return str(v).strip().lower()
+
+
+def _rows_key(rows) -> str | None:
+    """Deterministic set hash for a result set, matching _compare semantics.
+
+    _compare treats result sets as unordered sets of normalized rows.  This
+    function serializes each normalized row as JSON (which is unambiguous for the
+    primitive values returned by SQLite) and hashes the sorted set of row
+    digests.  It is therefore order- and multiplicity-independent and should agree
+    with _compare for all practical purposes (MD5 collisions excluded).
+    """
+    if rows is None:
+        return None
+    try:
+        row_hashes = set()
+        for row in rows:
+            normalized = tuple(_normalize_cell(v) for v in row)
+            row_hashes.add(hashlib.md5(json.dumps(normalized, ensure_ascii=False).encode("utf-8")).hexdigest())
+        return hashlib.md5(",".join(sorted(row_hashes)).encode("utf-8")).hexdigest()
+    except Exception:
+        return None
 
 
 def _compare(pred_rows, gold_rows) -> bool:
@@ -99,12 +122,14 @@ def _worker_main(args, queue):
             "gold_error": None,
             "pred_error": None,
             "is_join": is_join,
+            "pred_hash": _rows_key(pred_rows),
+            "gold_hash": _rows_key(gold_rows),
         }
     )
 
 
 def evaluate_one_with_timeout(args, timeout: int):
-    queue = multiprocessing.Queue(maxsize=1)
+    queue = multiprocessing.Queue(maxsize=0)
     p = multiprocessing.Process(target=_worker_main, args=(args, queue))
     p.start()
     p.join(timeout)
