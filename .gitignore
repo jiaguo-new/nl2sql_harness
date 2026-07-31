@@ -22,8 +22,14 @@ venv/
 *~
 
 # Data and databases (do not commit large datasets)
-datasets/*/
-!datasets/.gitkeep
+datasets/**/*.json
+datasets/**/*.jsonl
+datasets/**/*.db
+datasets/**/*.sqlite
+datasets/**/*.sqlite3
+datasets/**/*.zip
+!datasets/**/data_manifest*.json
+!datasets/**/.gitkeep
 *.db
 *.sqlite
 *.sqlite3
@@ -36,17 +42,25 @@ models/
 *.pt
 *.pth
 
-# Runs, predictions, traces, metrics
-runs/*/
-!runs/.gitkeep
-traces/*/
-!traces/.gitkeep
-predictions/*/
-!predictions/.gitkeep
-metrics/*/
-!metrics/.gitkeep
-errors/*/
-!errors/.gitkeep
+# Runs, predictions, traces, metrics, errors, logs are now tracked as artifacts.
+# (To ignore future generated outputs, uncomment the block below.)
+# runs/*/
+# !runs/.gitkeep
+# !runs/e6_hybrid_k5_emptyfix_ormv2_20260727/
+# traces/*/
+# !traces/.gitkeep
+# predictions/*/
+# !predictions/.gitkeep
+# metrics/*/
+# !metrics/.gitkeep
+# errors/*/
+# !errors/.gitkeep
+# logs/*.log
+# logs/*.pid
+
+# Allow logs (must come after the global *.log to override)
+!logs/*.log
+!logs/*.pid
 
 # Secrets
 .envrc
