@@ -217,3 +217,39 @@ Agent 指标：First-Pass Success Rate、Repair Success Rate、Repair Damage Rat
 8. test 只用于冻结方案后的正式提交。
 9. 不修改上游项目文件。
 10. 每次运行保存完整审计材料。
+
+## 15. 判定来源红线（结果优于陈述）
+
+> 实验结论、方案取舍、提交决策一律以**落盘可核验的实验产物**为准；对话上下文（含本会话）中的任何数字、结论、记忆仅作参考，不得作为最终判定依据。**没有落盘产物支撑的数字，等于没有发生。**
+
+### 15.1 适用范围
+凡涉及以下决策，必须基于落盘产物，不得依据对话陈述：
+- A/B 方案、模型、Agent、链路的优劣与排名；
+- 是否采用、合并、回滚、提交某条链路或预测文件；
+- 是否进入下一步、是否冻结方案；
+- 误差分析结论、错误归类、报告中引用的指标数字。
+
+### 15.2 可核验判定来源（最小单元）
+给出结论时，必须能追溯到下列文件之一，并标注 `run_id` 与路径：
+- `metrics/{run_id}/metrics.json` —— 指标 `{total, ex, em, valid_rate, join_errors, ...}`；**指标冲突时以此为准**；
+- `predictions/{run_id}/predictions.jsonl` —— 逐题预测；
+- `runs/{run_id}/run_manifest.json` / `data_manifest.json` —— 配置、内嵌指标、数据来源；
+- `traces/{run_id}/tool_traces.jsonl`、`errors/{run_id}/errors.jsonl`；
+- 官方评测产物与来源哈希（如 `metrics/base_hash_*/bird_official_eval.json`）。
+
+### 15.3 禁止行为
+- 不得用对话上下文中的数字（EX、chain、命中率等）直接下结论或做决策；
+- 不得引用**未落盘或已丢失**的产物作为依据，即使它出现在某份报告里；
+- 不得用 `manifests/`（当前为空）、`.zcode/`（会话计划）、临时脚本 stdout 作为正式判定依据；
+- `reports/*.md` 仅作叙述性参考，与 `metrics.json` 冲突时**以 `metrics.json` 为准**。
+
+### 15.4 操作要求
+- 引用任何结论性数字时，必须同时给出 `run_id`、产物路径、字段值；
+- 对话数字与落盘不一致时，以落盘为准，并主动向用户指出冲突；
+- 需引用某产物但该产物不在盘上时，先标记「未核验」，不得据此推进；
+- 重算结论应从产物重新读取，不得复述上下文中的旧数字。
+
+### 15.5 动机备忘（实测案例）
+- 同日期两份报告口径冲突：`reports/full_audit_20260730.md` 引用 EX≈1158，而 `reports/full_pipeline_final_20260730.md` 记录 EX=1105；
+- 产物缺失：`full_audit_20260730.md` 引用的 `predictions/full_chain_n8ra5_20260730/` 已不在文件系统中。
+- 此类即为「上下文/报告可能错误，必须以落盘为准」的典型。
