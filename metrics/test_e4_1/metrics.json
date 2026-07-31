@@ -1,0 +1,28 @@
+{
+  "total": 1,
+  "em": 0,
+  "ex": 0,
+  "valid": 1,
+  "em_rate": 0.0,
+  "ex_rate": 0.0,
+  "valid_rate": 100.0,
+  "join_total": 0,
+  "join_ex": 0,
+  "join_ex_rate": 0,
+  "per_query": [
+    {
+      "idx": 0,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": false
+    }
+  ],
+  "repair_stats": {
+    "attempted": 1,
+    "success": 1,
+    "damage": 0
+  }
+}

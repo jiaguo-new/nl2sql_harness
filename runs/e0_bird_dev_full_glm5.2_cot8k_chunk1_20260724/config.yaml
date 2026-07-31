@@ -1,0 +1,42 @@
+run_id: e0_bird_dev_full_glm5.2_cot8k_chunk1_20260724
+experiment: E0-COT-8K
+experiment_name: Direct SQL with CoT/Rules (chunk 1) on full BIRD dev
+description: Direct SQL with step-by-step reasoning and anti-error rules on full BIRD dev chunk 1 using GLM 5.2.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /tmp/bird_dev_full_chunk1.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+
+prompt:
+  template: prompts/e0_direct_sql_cot.md
+
+agent:
+  per_example_timeout_seconds: 120
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

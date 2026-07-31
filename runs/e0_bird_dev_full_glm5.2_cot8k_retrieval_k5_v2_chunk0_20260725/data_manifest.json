@@ -1,0 +1,18 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "/home/dameng/bird_dev/chunks/dev_chunk0.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "train_source": "/home/dameng/bird_dev/dev_train1234.json",
+  "contains_gold": true,
+  "allowed_usage": [
+    "evaluation",
+    "error_analysis"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "retrieval_corpus_for_test"
+  ],
+  "loaded_at": "2026-07-25T14:38:48.456592+00:00"
+}

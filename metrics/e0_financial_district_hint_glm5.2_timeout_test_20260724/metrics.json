@@ -1,0 +1,32 @@
+{
+  "total": 2,
+  "em": 0,
+  "ex": 1,
+  "valid": 2,
+  "em_rate": 0.0,
+  "ex_rate": 50.0,
+  "valid_rate": 100.0,
+  "join_total": 2,
+  "join_ex": 1,
+  "join_ex_rate": 50.0,
+  "per_query": [
+    {
+      "idx": 0,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 1,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    }
+  ]
+}

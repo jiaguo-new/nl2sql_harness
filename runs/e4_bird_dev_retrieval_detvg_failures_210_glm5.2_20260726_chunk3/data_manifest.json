@@ -1,0 +1,17 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "datasets/dev/e4_failures_210_chunk3.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": [
+    "evaluation",
+    "error_analysis"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "retrieval_corpus"
+  ],
+  "loaded_at": "2026-07-25T18:08:28.300803+00:00"
+}

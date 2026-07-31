@@ -1,0 +1,9 @@
+{
+  "total": 200,
+  "ex": 0.83,
+  "em": 0.675,
+  "valid_rate": 0.985,
+  "join_errors": 0,
+  "empty_results": 0,
+  "error_types": {}
+}

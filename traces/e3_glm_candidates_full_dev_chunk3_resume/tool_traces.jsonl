@@ -1,0 +1,4 @@
+{"question_id": 1529, "pred_sql": "", "model_meta": {"latency_seconds": 20.074, "prompt_tokens": 495, "completion_tokens": 2048}}
+{"question_id": 1530, "pred_sql": "SELECT p.Description\nFROM transactions_1k t\nJOIN products p ON t.ProductID = p.ProductID\nGROUP BY p.Description\nORDER BY SUM(t.Amount) DESC\nLIMIT 5", "model_meta": {"latency_seconds": 2.66, "prompt_tokens": 498, "completion_tokens": 128}}
+{"question_id": 1531, "pred_sql": "", "model_meta": {"latency_seconds": 9.196, "prompt_tokens": 559, "completion_tokens": 548}}
+{"question_id": 1532, "pred_sql": "SELECT gs.Country\nFROM transactions_1k t\nJOIN gasstations gs ON t.GasStationID = gs.GasStationID\nWHERE t.ProductID = 2\nORDER BY t.Price / t.Amount DESC\nLIMIT 1", "model_meta": {"latency_seconds": 6.23, "prompt_tokens": 512, "completion_tokens": 420}}

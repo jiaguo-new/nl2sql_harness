@@ -1,0 +1,11 @@
+{
+  "baseline": "predictions/e5b_retrieval_k5_v2_merged_detvg_20260725/predictions.jsonl",
+  "scored": "runs/merged4model_n4_plus_k5_k5failures_scored_vllm.jsonl",
+  "rule": "band",
+  "band": 0.1,
+  "trigger_size": 210,
+  "replaced": 210,
+  "triggered_but_missing_pool": 0,
+  "question_text_mismatches": 183,
+  "total": 1534
+}

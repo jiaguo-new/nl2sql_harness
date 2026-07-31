@@ -1,0 +1,108 @@
+{
+  "run_id": "e0_financial_district_hint_glm5.2_district_targets_20260724",
+  "experiment": "E0-FINANCIAL-HINT",
+  "experiment_name": "Direct SQL with financial district_id join hint (5 district-join target failures)",
+  "description": "Test the financial district_id join hint on the 5 BIRD dev financial failures where the gold SQL joins client and account via district_id.",
+  "started_at": "2026-07-25T05:01:05.796609+00:00",
+  "duration_seconds": 166.84,
+  "config": {
+    "run_id": "e0_financial_district_hint_glm5.2_district_targets_20260724",
+    "experiment": "E0-FINANCIAL-HINT",
+    "experiment_name": "Direct SQL with financial district_id join hint (5 district-join target failures)",
+    "description": "Test the financial district_id join hint on the 5 BIRD dev financial failures where the gold SQL joins client and account via district_id.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/tmp/bird_dev_financial_district_targets.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "data_manifest": "manifests/data_bird_dev_200.json"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_financial_district_hint.md"
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 5,
+    "em": 1,
+    "ex": 3,
+    "valid": 3,
+    "em_rate": 20.0,
+    "ex_rate": 60.0,
+    "valid_rate": 60.0,
+    "join_total": 5,
+    "join_ex": 3,
+    "join_ex_rate": 60.0,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 1,
+        "ex": true,
+        "em": true,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 2,
+        "ex": true,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": true
+      },
+      {
+        "idx": 3,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      },
+      {
+        "idx": 4,
+        "ex": false,
+        "em": false,
+        "valid": false,
+        "gold_error": null,
+        "pred_error": "empty_sql",
+        "is_join": true
+      }
+    ]
+  }
+}

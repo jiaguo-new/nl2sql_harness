@@ -1,0 +1,76 @@
+{
+  "run_id": "e0_bird_dev_full_glm5.2_cot8k_20260724",
+  "experiment": "E0-COT-8K",
+  "experiment_name": "Direct SQL with CoT/Rules on full BIRD dev",
+  "description": "Direct SQL with step-by-step reasoning and anti-error rules on full BIRD dev using GLM 5.2, generated in 4 chunks and merged.",
+  "completed_at": "2026-07-25T11:10:54.716246+00:00",
+  "model": {
+    "provider": "openai-compatible",
+    "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+    "model_name": "glm-5.2",
+    "api_key_env": "GLM_API_KEY",
+    "temperature": 0,
+    "top_p": 1.0,
+    "max_tokens": 8192
+  },
+  "prompt": {
+    "template": "prompts/e0_direct_sql_cot.md"
+  },
+  "dataset": {
+    "dataset": "BIRD",
+    "split": "dev",
+    "source": "/home/dameng/bird_dev/dev.json",
+    "sha256": "9b4c38da7f07999180dc1a463e03371e3b4eb685ce8a110e5944eb8fe3a70853",
+    "contains_gold": true,
+    "allowed_usage": [
+      "evaluation",
+      "error_analysis"
+    ],
+    "forbidden_usage": [
+      "training",
+      "sft",
+      "retrieval_corpus",
+      "prompt_engineering_with_gold"
+    ],
+    "loaded_at": "2026-07-25T11:10:54.695711+00:00"
+  },
+  "metrics": {
+    "total": 1534,
+    "em": 75,
+    "ex": 908,
+    "valid": 1494,
+    "em_rate": 4.889178617992178,
+    "ex_rate": 59.19165580182529,
+    "valid_rate": 97.39243807040417,
+    "join_total": 1140,
+    "join_ex": 658,
+    "join_ex_rate": 57.719298245614034
+  },
+  "source_chunks": [
+    "predictions/e0_bird_dev_full_glm5.2_cot8k_chunk0_20260724/predictions.jsonl",
+    "predictions/e0_bird_dev_full_glm5.2_cot8k_chunk1_20260724/predictions.jsonl",
+    "predictions/e0_bird_dev_full_glm5.2_cot8k_chunk2_20260724/predictions.jsonl",
+    "predictions/e0_bird_dev_full_glm5.2_cot8k_chunk3_20260724/predictions.jsonl"
+  ],
+  "postprocessing": {
+    "note": "Initial pred_sql stored raw model output due to a markdown extraction bug; fixed by scripts/fix_prediction_sql_extraction.py.",
+    "raw_file": "predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions_raw_unextracted.jsonl",
+    "fixed_file": "predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions.jsonl",
+    "raw_sha256": "9b0c08624d6951c278f8ec6c81e29fdb388da096f3c6f56110fea24944bdaca8",
+    "fixed_sha256": "ac8abab7a2763e36784d5ab328b972046d6d05aed92f7be45e88418648b06d3e"
+  },
+  "code_commit": "9e0c7fc69366671f1bad219bfeec8902f8f50221",
+  "branch": "dev",
+  "predictions_sha256": "ac8abab7a2763e36784d5ab328b972046d6d05aed92f7be45e88418648b06d3e",
+  "audit": {
+    "finalized_at": "2026-07-25T13:51:43.163387+00:00",
+    "predictions_file": "predictions/e0_bird_dev_full_glm5.2_cot8k_20260724/predictions.jsonl",
+    "predictions_sha256": "ac8abab7a2763e36784d5ab328b972046d6d05aed92f7be45e88418648b06d3e",
+    "data_manifest": "/home/dameng/project/nl2sql_harness_dev/runs/e0_bird_dev_full_glm5.2_cot8k_20260724/data_manifest.json",
+    "code_commit_file": "/home/dameng/project/nl2sql_harness_dev/runs/e0_bird_dev_full_glm5.2_cot8k_20260724/code_commit.txt",
+    "code_commit": "9e0c7fc69366671f1bad219bfeec8902f8f50221",
+    "code_dirty": true,
+    "code_snapshot_patch": "/home/dameng/project/nl2sql_harness_dev/runs/e0_bird_dev_full_glm5.2_cot8k_20260724/code_snapshot.patch",
+    "environment_file": "/home/dameng/project/nl2sql_harness_dev/runs/e0_bird_dev_full_glm5.2_cot8k_20260724/environment.txt"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "run_id": "test_e4_1",
+  "experiment": "E4",
+  "experiment_name": "Execution Repair Agent test on 1 retrieval failure",
+  "description": "E4 from scratch on 1 retrieval detVG failure.",
+  "started_at": "2026-07-25T17:06:10.120867+00:00",
+  "duration_seconds": 8.14,
+  "config": {
+    "run_id": "test_e4_1",
+    "experiment": "E4",
+    "experiment_name": "Execution Repair Agent test on 1 retrieval failure",
+    "description": "E4 from scratch on 1 retrieval detVG failure.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "datasets/dev/bird_dev_retrieval_detvg_failures_1.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "data_manifest": "manifests/data_bird_dev.json"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "prompt": {
+      "generate": "prompts/e0_direct_sql_cot.md",
+      "repair": "prompts/e4_repair_sql.md"
+    },
+    "agent": {
+      "max_repairs": 2
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 1,
+    "em": 0,
+    "ex": 0,
+    "valid": 1,
+    "em_rate": 0.0,
+    "ex_rate": 0.0,
+    "valid_rate": 100.0,
+    "join_total": 0,
+    "join_ex": 0,
+    "join_ex_rate": 0,
+    "per_query": [
+      {
+        "idx": 0,
+        "ex": false,
+        "em": false,
+        "valid": true,
+        "gold_error": null,
+        "pred_error": null,
+        "is_join": false
+      }
+    ],
+    "repair_stats": {
+      "attempted": 1,
+      "success": 1,
+      "damage": 0
+    }
+  }
+}

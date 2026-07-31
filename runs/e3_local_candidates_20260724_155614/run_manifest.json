@@ -1,0 +1,13 @@
+{
+  "run_id": "e3_local_candidates_20260724_155614",
+  "experiment": "E3-LOCAL-CANDIDATE",
+  "experiment_name": "e3_local_candidates_20260724_155614",
+  "description": "Local 32B candidate generation for E3 failures using schema/value-grounding prompt.",
+  "started_at": "2026-07-24T15:56:14.747543+00:00",
+  "duration_seconds": 1643.6671011447906,
+  "num_candidates": 18,
+  "model": {
+    "url": "http://localhost:8080/v1/chat/completions",
+    "model_name": "local"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "run_id": "e3_glm_candidates_full_dev_test5",
+  "experiment": "E3-GLM-CANDIDATE",
+  "experiment_name": "e3_glm_candidates_full_dev_test5",
+  "description": "GLM-5.2 E3-style schema/value-grounding candidate generation for failed queries with per-example timeout.",
+  "started_at": "2026-07-25T12:18:54.035911+00:00",
+  "duration_seconds": 29.27391815185547,
+  "num_candidates": 5,
+  "num_timeouts": 0,
+  "num_errors": 0,
+  "model": {
+    "url": "https://open.bigmodel.cn/api/paas/v4/",
+    "model_name": "glm-5.2"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "run_id": "e0_bird_dev200_glm5.2_cot8k_retrieval_k5_tfidf_16k_20260724",
+  "experiment": "E0-COT-8K-RETRIEVAL-K5-TFIDF-16K",
+  "experiment_name": "TF-IDF retrieval k=5 + 16k output tokens on dev200",
+  "description": "Retrieve top-5 similar BIRD train examples per DB using TF-IDF on question+evidence+SQL, then CoT/Rules prompt on dev 200-subset using GLM 5.2 with max_tokens=16384 to avoid truncation.",
+  "started_at": "2026-07-24T12:13:39.812987+00:00",
+  "duration_seconds": 1480.21,
+  "config": {
+    "run_id": "e0_bird_dev200_glm5.2_cot8k_retrieval_k5_tfidf_16k_20260724",
+    "experiment": "E0-COT-8K-RETRIEVAL-K5-TFIDF-16K",
+    "experiment_name": "TF-IDF retrieval k=5 + 16k output tokens on dev200",
+    "description": "Retrieve top-5 similar BIRD train examples per DB using TF-IDF on question+evidence+SQL, then CoT/Rules prompt on dev 200-subset using GLM 5.2 with max_tokens=16384 to avoid truncation.",
+    "dataset": {
+      "name": "BIRD",
+      "split": "dev",
+      "source": "/home/dameng/bird_dev/dev_200.json",
+      "db_root": "/home/dameng/bird_dev/dev_databases",
+      "train_source": "/home/dameng/bird_dev/dev_train1234.json",
+      "data_manifest": "manifests/data_bird_dev_200.json"
+    },
+    "few_shot": {
+      "k": 5,
+      "method": "tfidf"
+    },
+    "model": {
+      "provider": "openai-compatible",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "model_name": "glm-5.2",
+      "api_key_env": "GLM_API_KEY",
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 16384
+    },
+    "prompt": {
+      "template": "prompts/e0_direct_sql_cot_retrieval.md"
+    },
+    "execution": {
+      "timeout_seconds": 30,
+      "max_rows": 100
+    },
+    "output": {
+      "run_dir": "runs/{run_id}",
+      "predictions": "predictions/{run_id}/predictions.jsonl",
+      "tool_traces": "traces/{run_id}/tool_traces.jsonl",
+      "errors": "errors/{run_id}/errors.jsonl",
+      "metrics": "metrics/{run_id}/metrics.json"
+    },
+    "compliance": {
+      "no_gold_in_prompt": true,
+      "no_test_data": true,
+      "save_api_request_id": true
+    }
+  },
+  "metrics": {
+    "total": 200,
+    "ex": 0.83,
+    "em": 0.675,
+    "valid_rate": 0.985,
+    "join_errors": 0,
+    "empty_results": 0,
+    "error_types": {}
+  }
+}

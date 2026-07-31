@@ -1,0 +1,113 @@
+{
+  "total": 11,
+  "em": 2,
+  "ex": 4,
+  "valid": 11,
+  "em_rate": 18.181818181818183,
+  "ex_rate": 36.36363636363637,
+  "valid_rate": 100.0,
+  "join_total": 9,
+  "join_ex": 4,
+  "join_ex_rate": 44.44444444444444,
+  "per_query": [
+    {
+      "idx": 0,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 1,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 2,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 3,
+      "ex": true,
+      "em": true,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 4,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": false
+    },
+    {
+      "idx": 5,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 6,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 7,
+      "ex": true,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 8,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": false
+    },
+    {
+      "idx": 9,
+      "ex": true,
+      "em": true,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    },
+    {
+      "idx": 10,
+      "ex": false,
+      "em": false,
+      "valid": true,
+      "gold_error": null,
+      "pred_error": null,
+      "is_join": true
+    }
+  ]
+}

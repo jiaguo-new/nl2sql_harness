@@ -1,0 +1,17 @@
+{
+  "run_id": "e5b_retrieval_k5_v2_merged_detvg_20260725",
+  "total_failures": 210,
+  "category_counts": {
+    "Table Selection Error": 61,
+    "Column Selection Error": 51,
+    "Semantic Mismatch": 26,
+    "Value Grounding Error": 23,
+    "Join Path Error": 17,
+    "ON Predicate Error": 10,
+    "Filter Condition Error": 9,
+    "Aggregation Error": 7,
+    "Syntax or Invalid SQL": 5,
+    "Ordering / TopN Error": 1
+  },
+  "classification_file": "errors/e5b_retrieval_k5_v2_merged_detvg_20260725/error_classifications.jsonl"
+}

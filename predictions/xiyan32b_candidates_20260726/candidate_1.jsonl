@@ -1,0 +1,1534 @@
+{"question_id": 0, "db_id": "california_schools", "pred_sql": "SELECT MAX(`Percent (%) Eligible Free (K-12)`) FROM frpm WHERE `County Name` = 'Alameda'"}
+{"question_id": 1, "db_id": "california_schools", "pred_sql": "SELECT CAST(T1.`Free Meal Count (Ages 5-17)` AS REAL) / T1.`Enrollment (Ages 5-17)` AS rate FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.EdOpsName = 'Continuation School' ORDER BY rate ASC LIMIT 3"}
+{"question_id": 2, "db_id": "california_schools", "pred_sql": "SELECT T1.Zip FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`Charter School (Y/N)` = 1 AND T1.District = 'Fresno County Office of Education'"}
+{"question_id": 3, "db_id": "california_schools", "pred_sql": "SELECT T1.MailStreet FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode ORDER BY T2.`FRPM Count (K-12)` DESC LIMIT 1"}
+{"question_id": 4, "db_id": "california_schools", "pred_sql": "SELECT T1.Phone FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`Charter School (Y/N)` = 1 AND T2.`Charter Funding Type` = 'Directly funded' AND T1.OpenDate > '2000-01-01'"}
+{"question_id": 5, "db_id": "california_schools", "pred_sql": "SELECT COUNT(T1.cds) FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T1.AvgScrMath < 400 AND T2.Virtual = 'F'"}
+{"question_id": 6, "db_id": "california_schools", "pred_sql": "SELECT T2.School FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T1.NumTstTakr > 500 AND T2.Magnet = 1"}
+{"question_id": 7, "db_id": "california_schools", "pred_sql": "SELECT T1.Phone FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.NumGE1500 DESC LIMIT 1"}
+{"question_id": 8, "db_id": "california_schools", "pred_sql": "SELECT T1.NumTstTakr FROM satscores AS T1 INNER JOIN frpm AS T2 ON T1.cds = T2.CDSCode ORDER BY T2.`FRPM Count (K-12)` DESC LIMIT 1"}
+{"question_id": 9, "db_id": "california_schools", "pred_sql": "SELECT COUNT(T1.cds) FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T1.AvgScrMath > 560 AND T2.FundingType = 'Directly funded'"}
+{"question_id": 10, "db_id": "california_schools", "pred_sql": "SELECT T1.`FRPM Count (Ages 5-17)` FROM frpm AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.AvgScrRead DESC LIMIT 1"}
+{"question_id": 11, "db_id": "california_schools", "pred_sql": "SELECT CDSCode FROM frpm WHERE `Enrollment (K-12)` + `Enrollment (Ages 5-17)` > 500"}
+{"question_id": 12, "db_id": "california_schools", "pred_sql": "SELECT MAX(T1.`Percent (%) Eligible Free (Ages 5-17)`) FROM frpm AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T2.NumGE1500 / T2.NumTstTakr > 0.3"}
+{"question_id": 13, "db_id": "california_schools", "pred_sql": "SELECT T2.Phone FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY CAST(T1.NumGE1500 AS REAL) / T1.NumTstTakr DESC LIMIT 3"}
+{"question_id": 14, "db_id": "california_schools", "pred_sql": "SELECT T1.NCESSchool FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode ORDER BY T2.`Enrollment (Ages 5-17)` DESC LIMIT 5"}
+{"question_id": 15, "db_id": "california_schools", "pred_sql": "SELECT T2.District FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T2.StatusType = 'Active' GROUP BY T2.District ORDER BY AVG(T1.AvgScrRead) DESC LIMIT 1"}
+{"question_id": 16, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T2.County = 'Alameda' AND T2.StatusType = 'Merged' AND T1.NumTstTakr < 100"}
+{"question_id": 17, "db_id": "california_schools", "pred_sql": "SELECT T1.CharterNum FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T2.AvgScrWrite = 499"}
+{"question_id": 18, "db_id": "california_schools", "pred_sql": "SELECT COUNT(T1.CDSCode) FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.County = 'Contra Costa' AND T1.FundingType = 'Directly funded' AND T2.NumTstTakr <= 250"}
+{"question_id": 19, "db_id": "california_schools", "pred_sql": "SELECT T1.Phone FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.AvgScrMath DESC LIMIT 1"}
+{"question_id": 20, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.County = 'Amador' AND T1.`Low Grade` = 9 AND T1.`High Grade` = 12"}
+{"question_id": 21, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.City = 'Los Angeles' AND T1.`Free Meal Count (K-12)` > 500 AND T1.`FRPM Count (K-12)` < 700"}
+{"question_id": 22, "db_id": "california_schools", "pred_sql": "SELECT T2.sname FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.County = 'Contra Costa' ORDER BY T2.NumTstTakr DESC LIMIT 1"}
+{"question_id": 23, "db_id": "california_schools", "pred_sql": "SELECT T2.School, T2.Street FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T1.`Enrollment (K-12)` - T1.`Enrollment (Ages 5-17)` > 30"}
+{"question_id": 24, "db_id": "california_schools", "pred_sql": "SELECT T2.School FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode INNER JOIN satscores AS T3 ON T2.CDSCode = T3.cds WHERE T1.`Percent (%) Eligible Free (K-12)` > 0.1 AND T3.NumGE1500 >= 1500"}
+{"question_id": 25, "db_id": "california_schools", "pred_sql": "SELECT T1.FundingType FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.City = 'Riverside' GROUP BY T1.School HAVING AVG(T2.AvgScrMath) > 400"}
+{"question_id": 26, "db_id": "california_schools", "pred_sql": "SELECT T2.School, T2.Street, T2.City, T2.Zip, T2.State FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.County = 'Monterey' AND T1.`FRPM Count (Ages 5-17)` > 800 AND T2.SOCType = 'High Schools (Public)'"}
+{"question_id": 27, "db_id": "california_schools", "pred_sql": "SELECT T1.School, T2.AvgScrWrite, T1.Phone FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.OpenDate > '1991-01-01' OR T1.ClosedDate < '2000-01-01'"}
+{"question_id": 28, "db_id": "california_schools", "pred_sql": "SELECT T2.School, T2.DOCType FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.FundingType = 'Locally funded' AND T1.`Enrollment (K-12)` - T1.`Enrollment (Ages 5-17)` > ( SELECT AVG(T1.`Enrollment (K-12)` - T1.`Enrollment (Ages 5-17)`) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.FundingType = 'Locally funded' )"}
+{"question_id": 29, "db_id": "california_schools", "pred_sql": "SELECT T1.OpenDate FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`Low Grade` = 'K' AND T2.`High Grade` = '12' ORDER BY T2.`Enrollment (K-12)` DESC LIMIT 1"}
+{"question_id": 30, "db_id": "california_schools", "pred_sql": "SELECT T2.City FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode ORDER BY T1.`Enrollment (K-12)` LIMIT 5"}
+{"question_id": 31, "db_id": "california_schools", "pred_sql": "SELECT `Percent (%) Eligible Free (K-12)` FROM frpm ORDER BY `Enrollment (K-12)` DESC LIMIT 9, 2"}
+{"question_id": 32, "db_id": "california_schools", "pred_sql": "SELECT T1.`Percent (%) Eligible FRPM (K-12)` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.SOC = 66 ORDER BY T1.`FRPM Count (K-12)` DESC LIMIT 5"}
+{"question_id": 33, "db_id": "california_schools", "pred_sql": "SELECT T1.Website, T1.School FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`Free Meal Count (Ages 5-17)` BETWEEN 1900 AND 2000"}
+{"question_id": 34, "db_id": "california_schools", "pred_sql": "SELECT CAST(T1.`Free Meal Count (Ages 5-17)` AS REAL) / T1.`Enrollment (Ages 5-17)` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.AdmFName1 = 'Kacey' AND T2.AdmLName1 = 'Gibson'"}
+{"question_id": 35, "db_id": "california_schools", "pred_sql": "SELECT T2.AdmEmail1 FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T1.`Charter School (Y/N)` = 1 ORDER BY T1.`Enrollment (K-12)` ASC LIMIT 1"}
+{"question_id": 36, "db_id": "california_schools", "pred_sql": "SELECT T2.AdmFName1, T2.AdmLName1 FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY T1.NumGE1500 DESC LIMIT 1"}
+{"question_id": 37, "db_id": "california_schools", "pred_sql": "SELECT T2.Street, T2.City, T2.Zip, T2.State FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY CAST(T1.NumGE1500 AS REAL) / T1.NumTstTakr LIMIT 1"}
+{"question_id": 38, "db_id": "california_schools", "pred_sql": "SELECT T1.Website FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.County = 'Los Angeles' AND T2.NumTstTakr BETWEEN 2000 AND 3000"}
+{"question_id": 39, "db_id": "california_schools", "pred_sql": "SELECT AVG(T1.NumTstTakr) FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE STRFTIME('%Y', T2.OpenDate) = '1980' AND T2.County = 'Fresno'"}
+{"question_id": 40, "db_id": "california_schools", "pred_sql": "SELECT T1.Phone FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.District = 'Fresno Unified' ORDER BY T2.AvgScrRead ASC LIMIT 1"}
+{"question_id": 41, "db_id": "california_schools", "pred_sql": "SELECT T2.School FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T2.Virtual = 'F' ORDER BY T1.AvgScrRead DESC LIMIT 5"}
+{"question_id": 42, "db_id": "california_schools", "pred_sql": "SELECT T2.EdOpsName FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY T1.AvgScrMath DESC LIMIT 1"}
+{"question_id": 43, "db_id": "california_schools", "pred_sql": "SELECT T1.AvgScrMath, T2.County FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY T1.AvgScrMath + T1.AvgScrRead + T1.AvgScrWrite LIMIT 1"}
+{"question_id": 44, "db_id": "california_schools", "pred_sql": "SELECT T1.AvgScrWrite , T2.City FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY T1.NumGE1500 DESC LIMIT 1"}
+{"question_id": 45, "db_id": "california_schools", "pred_sql": "SELECT T2.School, T1.AvgScrWrite FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T2.AdmFName1 = 'Ricci' AND T2.AdmLName1 = 'Ulrich'"}
+{"question_id": 46, "db_id": "california_schools", "pred_sql": "SELECT T2.School FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.DOC = 31 ORDER BY T1.`Enrollment (K-12)` DESC LIMIT 1"}
+{"question_id": 47, "db_id": "california_schools", "pred_sql": "SELECT CAST(COUNT(*) AS REAL) / 12 FROM schools WHERE County = 'Alameda' AND DOC = 52 AND STRFTIME('%Y', OpenDate) = '1980'"}
+{"question_id": 48, "db_id": "california_schools", "pred_sql": "SELECT CAST(SUM(CASE WHEN DOC = 54 THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN DOC = 52 THEN 1 ELSE 0 END) AS ratio FROM schools WHERE StatusType = 'Merged' AND County = 'Orange'"}
+{"question_id": 49, "db_id": "california_schools", "pred_sql": "SELECT T.County, T.School, T.ClosedDate FROM schools AS T WHERE T.StatusType = 'Closed' GROUP BY T.County ORDER BY COUNT(T.School) DESC LIMIT 1"}
+{"question_id": 50, "db_id": "california_schools", "pred_sql": "SELECT T1.Street, T1.School FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.AvgScrMath DESC LIMIT 5, 1"}
+{"question_id": 51, "db_id": "california_schools", "pred_sql": "SELECT T2.MailStreet, T2.School FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode ORDER BY T1.AvgScrRead LIMIT 1"}
+{"question_id": 52, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM satscores AS T1 INNER JOIN schools AS T2 ON T1.cds = T2.CDSCode WHERE T2.MailCity = 'Lakeport' AND T1.AvgScrRead + T1.AvgScrMath + T1.AvgScrWrite >= 1500"}
+{"question_id": 53, "db_id": "california_schools", "pred_sql": "SELECT SUM(T2.NumTstTakr) FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds WHERE T1.MailCity = 'Fresno'"}
+{"question_id": 54, "db_id": "california_schools", "pred_sql": "SELECT School, MailZip FROM schools WHERE AdmFName1 = 'Avetik' AND AdmLName1 = 'Atoian'"}
+{"question_id": 55, "db_id": "california_schools", "pred_sql": "SELECT CAST(COUNT(CASE WHEN County = 'Colusa' THEN 1 ELSE NULL END) AS REAL) / COUNT(CASE WHEN County = 'Humboldt' THEN 1 ELSE NULL END) AS RATIO FROM schools WHERE MailState = 'CA'"}
+{"question_id": 56, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM schools WHERE MailState = 'CA' AND StatusType = 'Active' AND County = 'San Joaquin'"}
+{"question_id": 57, "db_id": "california_schools", "pred_sql": "SELECT T1.Phone, T1.Ext FROM schools AS T1 INNER JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.AvgScrWrite DESC LIMIT 332, 1"}
+{"question_id": 58, "db_id": "california_schools", "pred_sql": "SELECT Phone , Ext , School FROM schools WHERE zip = '95203-3704'"}
+{"question_id": 59, "db_id": "california_schools", "pred_sql": "SELECT Website FROM schools WHERE AdmFName1 = 'Mike' AND AdmLName1 = 'Larson' UNION SELECT Website FROM schools WHERE AdmFName1 = 'Dante' AND AdmLName1 = 'Alvarez'"}
+{"question_id": 60, "db_id": "california_schools", "pred_sql": "SELECT Website FROM schools WHERE Virtual = 'P' AND Charter = 1 AND County = 'San Joaquin'"}
+{"question_id": 61, "db_id": "california_schools", "pred_sql": "SELECT COUNT(CDSCode) FROM schools WHERE City = 'Hickman' AND DOC = 52 AND Charter = 1"}
+{"question_id": 62, "db_id": "california_schools", "pred_sql": "SELECT COUNT(T1.CDSCode) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.County = 'Los Angeles' AND T2.Charter = 0 AND T1.`Percent (%) Eligible Free (K-12)` < 0.18"}
+{"question_id": 63, "db_id": "california_schools", "pred_sql": "SELECT AdmFName1, AdmLName1, AdmFName2, AdmLName2, AdmFName3, AdmLName3, School, City FROM schools WHERE Charter = 1 AND CharterNum = '00D2'"}
+{"question_id": 64, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM schools WHERE MailCity = 'Hickman' AND CharterNum = '00D4'"}
+{"question_id": 65, "db_id": "california_schools", "pred_sql": "SELECT CAST(SUM(IIF(FundingType = 'Locally funded', 1, 0)) AS REAL) * 100 / COUNT(*) FROM schools WHERE County = 'Santa Clara'"}
+{"question_id": 66, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM schools WHERE FundingType = 'Directly funded' AND County = 'Stanislaus' AND OpenDate BETWEEN '2000-01-01' AND '2005-12-31'"}
+{"question_id": 67, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM schools WHERE City = 'San Francisco' AND StatusType = 'Closed' AND ClosedDate LIKE '1989%' AND District LIKE '%Community College District%';"}
+{"question_id": 68, "db_id": "california_schools", "pred_sql": "SELECT County FROM schools WHERE ClosedDate LIKE '198%' AND SOC = 11 GROUP BY County ORDER BY COUNT(CDSCode) DESC LIMIT 1"}
+{"question_id": 69, "db_id": "california_schools", "pred_sql": "SELECT NCESDist FROM schools WHERE SOC = 31"}
+{"question_id": 70, "db_id": "california_schools", "pred_sql": "SELECT COUNT(*) FROM schools WHERE County = 'Alpine' AND StatusType IN ('Active', 'Closed') AND EdOpsName = 'District Community Day School'"}
+{"question_id": 71, "db_id": "california_schools", "pred_sql": "SELECT T1.`District Code` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.Magnet = 0 AND T2.City = 'Fresno'"}
+{"question_id": 72, "db_id": "california_schools", "pred_sql": "SELECT SUM(T1.`Enrollment (Ages 5-17)`) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T1.`Academic Year` = '2014-2015' AND T2.City = 'Fremont' AND T2.EdOpsCode = 'SSS'"}
+{"question_id": 73, "db_id": "california_schools", "pred_sql": "SELECT T1.`FRPM Count (Ages 5-17)` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.MailStreet = 'PO Box 1040' AND T2.EdOpsName = 'Youth Authority School'"}
+{"question_id": 74, "db_id": "california_schools", "pred_sql": "SELECT T1.`Low Grade` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.NCESDist = 613360 AND T2.EdOpsCode = 'SPECON'"}
+{"question_id": 75, "db_id": "california_schools", "pred_sql": "SELECT T1.EILName, T1.School FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`County Code` = 37 AND T2.`NSLP Provision Status` = 'Breakfast Provision 2'"}
+{"question_id": 76, "db_id": "california_schools", "pred_sql": "SELECT T1.City FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.`Low Grade` = 9 AND T2.`High Grade` = 12 AND T2.`NSLP Provision Status` = 'Provision 2' AND T1.County = 'Merced' AND T1.EILCode = 'HS'"}
+{"question_id": 77, "db_id": "california_schools", "pred_sql": "SELECT T1.School, T2.`Percent (%) Eligible FRPM (Ages 5-17)` FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode WHERE T1.GSoffered = 'K-9' AND T1.County = 'Los Angeles'"}
+{"question_id": 78, "db_id": "california_schools", "pred_sql": "SELECT GSserved FROM schools WHERE city = 'Adelanto' GROUP BY GSserved ORDER BY COUNT(*) DESC LIMIT 1"}
+{"question_id": 79, "db_id": "california_schools", "pred_sql": "SELECT County, COUNT(*) FROM schools WHERE County IN ('San Diego', 'Santa Barbara') AND Virtual = 'F' GROUP BY County ORDER BY COUNT(*) DESC LIMIT 1"}
+{"question_id": 80, "db_id": "california_schools", "pred_sql": "SELECT T2.`School Type`, T1.School, T1.Latitude FROM schools AS T1 INNER JOIN frpm AS T2 ON T1.CDSCode = T2.CDSCode ORDER BY T1.Latitude DESC LIMIT 1"}
+{"question_id": 81, "db_id": "california_schools", "pred_sql": "SELECT T2.City, T1.`Low Grade`, T1.`School Name` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.State = 'CA' ORDER BY T2.Latitude ASC LIMIT 1"}
+{"question_id": 82, "db_id": "california_schools", "pred_sql": "SELECT GSoffered FROM schools ORDER BY Longitude DESC LIMIT 1"}
+{"question_id": 83, "db_id": "california_schools", "pred_sql": "SELECT COUNT(DISTINCT T1.CDSCode) FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.Magnet = 1 AND T2.GSoffered = 'K-8'"}
+{"question_id": 84, "db_id": "california_schools", "pred_sql": "SELECT AdmFName1 , District FROM schools GROUP BY AdmFName1 ORDER BY COUNT(*) DESC LIMIT 2"}
+{"question_id": 85, "db_id": "california_schools", "pred_sql": "SELECT T1.`Percent (%) Eligible Free (K-12)`, T1.`District Code` FROM frpm AS T1 INNER JOIN schools AS T2 ON T1.CDSCode = T2.CDSCode WHERE T2.AdmFName1 = 'Alusine'"}
+{"question_id": 86, "db_id": "california_schools", "pred_sql": "SELECT AdmLName1, District, County, School FROM schools WHERE CharterNum = 40"}
+{"question_id": 87, "db_id": "california_schools", "pred_sql": "SELECT AdmEmail1 FROM schools WHERE County = 'San Bernardino' AND District = 'San Bernardino City Unified' AND OpenDate BETWEEN '2009-01-01' AND '2010-12-31' AND SOC = 62 AND DOC = 54"}
+{"question_id": 88, "db_id": "california_schools", "pred_sql": "SELECT T1.AdmEmail1 , T1.School FROM schools AS T1 JOIN satscores AS T2 ON T1.CDSCode = T2.cds ORDER BY T2.NumGE1500 DESC LIMIT 1"}
+{"question_id": 89, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'East Bohemia' AND T1.frequency = 'POPLATEK PO OBRATU'"}
+{"question_id": 90, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'Prague'"}
+{"question_id": 91, "db_id": "financial", "pred_sql": "SELECT AVG(A12) AS avg_1995, AVG(A13) AS avg_1996 FROM district"}
+{"question_id": 92, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.district_id) FROM district AS T1 INNER JOIN client AS T2 ON T1.district_id = T2.district_id WHERE T1.A11 > 6000 AND T1.A11 < 10000 AND T2.gender = 'F'"}
+{"question_id": 93, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'North Bohemia' AND T1.gender = 'M' AND T2.A11 > 8000"}
+{"question_id": 94, "db_id": "financial", "pred_sql": "SELECT T1.account_id, MAX(T3.A11) - MIN(T3.A11) FROM disp AS T1 INNER JOIN client AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T2.gender = 'F' ORDER BY T2.birth_date LIMIT 1"}
+{"question_id": 95, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM disp AS T1 INNER JOIN client AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id ORDER BY T2.birth_date DESC, T3.A11 DESC LIMIT 1"}
+{"question_id": 96, "db_id": "financial", "pred_sql": "SELECT COUNT(T2.client_id) FROM disp AS T2 INNER JOIN account AS T1 ON T1.account_id = T2.account_id WHERE T1.frequency = 'POPLATEK TYDNE' AND T2.type = 'OWNER'"}
+{"question_id": 97, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T1.type = 'DISPONENT' AND T2.frequency = 'POPLATEK PO OBRATU'"}
+{"question_id": 98, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM account AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T2.date LIKE '1997%' AND T1.frequency = 'POPLATEK TYDNE' ORDER BY T2.amount LIMIT 1"}
+{"question_id": 99, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T1.duration > 12 AND STRFTIME('%Y', T2.date) = '1993' ORDER BY T1.amount DESC LIMIT 1"}
+{"question_id": 100, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id WHERE T3.A2 = 'Slokolov' AND T1.gender = 'F' AND strftime('%Y', T1.birth_date) < '1950'"}
+{"question_id": 101, "db_id": "financial", "pred_sql": "SELECT account_id FROM trans WHERE date LIKE '1995%' ORDER BY date LIMIT 1"}
+{"question_id": 102, "db_id": "financial", "pred_sql": "SELECT DISTINCT T1.account_id FROM account AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id WHERE T1.date < '1997-01-01' AND T2.amount > 3000"}
+{"question_id": 103, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 JOIN card AS T2 ON T1.disp_id = T2.disp_id WHERE T2.issued = '1994-03-03'"}
+{"question_id": 104, "db_id": "financial", "pred_sql": "SELECT T1.date FROM account AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id WHERE T2.amount = 840 AND T2.date = '1998-10-14'"}
+{"question_id": 105, "db_id": "financial", "pred_sql": "SELECT T1.district_id FROM account AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T2.date = '1994-08-25'"}
+{"question_id": 106, "db_id": "financial", "pred_sql": "SELECT MAX(t1.amount) FROM trans AS t1 JOIN disp AS t2 ON t1.account_id = t2.account_id JOIN card AS t3 ON t2.disp_id = t3.disp_id WHERE t3.issued = '1996-10-21'"}
+{"question_id": 107, "db_id": "financial", "pred_sql": "SELECT T1.gender FROM client AS T1 INNER JOIN account AS T2 ON T1.district_id = T2.district_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id ORDER BY T1.birth_date ASC, T3.A11 DESC LIMIT 1"}
+{"question_id": 108, "db_id": "financial", "pred_sql": "SELECT T1.amount FROM trans AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN disp AS T3 ON T2.account_id = T3.account_id INNER JOIN client AS T4 ON T3.client_id = T4.client_id INNER JOIN loan AS T5 ON T2.account_id = T5.account_id WHERE T4.client_id = ( SELECT T3.client_id FROM loan AS T5 INNER JOIN account AS T2 ON T5.account_id = T2.account_id INNER JOIN disp AS T3 ON T2.account_id = T3.account_id ORDER BY T5.amount DESC LIMIT 1 ) ORDER BY T1.date LIMIT 1"}
+{"question_id": 109, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN account AS T3 ON T2.account_id = T3.account_id INNER JOIN district AS T4 ON T1.district_id = T4.district_id WHERE T4.A2 = 'Jesenik' AND T1.gender = 'F'"}
+{"question_id": 110, "db_id": "financial", "pred_sql": "SELECT T1.disp_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN trans AS T3 ON T2.account_id = T3.account_id WHERE T3.amount = 5100 AND T3.date = '1998-09-02'"}
+{"question_id": 111, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Litomerice' AND STRFTIME('%Y', T1.date) = '1996'"}
+{"question_id": 112, "db_id": "financial", "pred_sql": "SELECT T3.A2 FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id WHERE T1.birth_date = '1976-01-29' AND T1.gender = 'F'"}
+{"question_id": 113, "db_id": "financial", "pred_sql": "SELECT T1.birth_date FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN account AS T3 ON T2.account_id = T3.account_id INNER JOIN loan AS T4 ON T3.account_id = T4.account_id WHERE T4.amount = 98832 AND T4.date = '1996-01-03'"}
+{"question_id": 114, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'Prague' ORDER BY T1.date LIMIT 1"}
+{"question_id": 115, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(CASE WHEN T1.gender = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'south Bohemia' ORDER BY T2.A4 DESC LIMIT 1"}
+{"question_id": 116, "db_id": "financial", "pred_sql": "SELECT CAST((T1.balance - T2.balance) AS REAL) * 100 / T2.balance FROM trans AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id INNER JOIN loan AS T3 ON T1.account_id = T3.account_id WHERE T3.date = '1993-07-05' AND T1.`date` = '1998-12-27' AND T2.`date` = '1993-03-22'"}
+{"question_id": 117, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(status = 'A', amount, 0)) AS REAL) * 100 / SUM(amount) FROM loan"}
+{"question_id": 118, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(amount < 100000 AND status = 'C', 1, 0)) AS REAL) * 100 / COUNT(*) FROM loan"}
+{"question_id": 119, "db_id": "financial", "pred_sql": "SELECT T1.account_id, T2.A2, T2.A3 FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN trans AS T3 ON T1.account_id = T3.account_id WHERE T1.frequency = 'POPLATEK PO OBRATU' AND STRFTIME('%Y', T3.date) = '1993'"}
+{"question_id": 120, "db_id": "financial", "pred_sql": "SELECT T1.account_id, T1.frequency FROM account AS T1 INNER JOIN disp AS T2 ON T1.account_id = T2.account_id INNER JOIN client AS T3 ON T2.client_id = T3.client_id INNER JOIN district AS T4 ON T3.district_id = T4.district_id WHERE T4.A2 = 'east Bohemia' AND STRFTIME('%Y', T1.date) BETWEEN '1995' AND '2000'"}
+{"question_id": 121, "db_id": "financial", "pred_sql": "SELECT T1.account_id, T1.date FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Prachatice'"}
+{"question_id": 122, "db_id": "financial", "pred_sql": "SELECT T2.A2, T2.A3 FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN loan AS T3 ON T1.account_id = T3.account_id WHERE T3.loan_id = 4990"}
+{"question_id": 123, "db_id": "financial", "pred_sql": "SELECT T1.account_id, T3.A2, T3.A3 FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T1.amount > 300000"}
+{"question_id": 124, "db_id": "financial", "pred_sql": "SELECT T1.loan_id, T3.A3, T3.A11 FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T1.duration = 60"}
+{"question_id": 125, "db_id": "financial", "pred_sql": "SELECT T2.A2, T2.A3, (T2.A13 - T2.A12) / T2.A12 FROM loan AS T1 INNER JOIN district AS T2 ON T1.account_id = T2.district_id WHERE T1.status = 'D'"}
+{"question_id": 126, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(T2.A2 = 'Decin', 1, 0)) AS REAL) * 100 / COUNT(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE STRFTIME('%Y', T1.date) = '1993'"}
+{"question_id": 127, "db_id": "financial", "pred_sql": "SELECT account_id FROM account WHERE frequency = 'POPLATEK MESICNE'"}
+{"question_id": 128, "db_id": "financial", "pred_sql": "SELECT T2.A2 FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.gender = 'F' GROUP BY T2.A2 ORDER BY COUNT(T1.client_id) DESC LIMIT 10"}
+{"question_id": 129, "db_id": "financial", "pred_sql": "SELECT T3.A2 FROM trans AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T1.type = 'VYDAJ' AND T1.date LIKE '1996-01%' ORDER BY T1.amount DESC LIMIT 10"}
+{"question_id": 130, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'south Bohemia' AND T1.client_id NOT IN ( SELECT T4.client_id FROM disp AS T3 INNER JOIN card AS T4 ON T3.disp_id = T4.disp_id WHERE T3.client_id = T1.client_id )"}
+{"question_id": 131, "db_id": "financial", "pred_sql": "SELECT T3.A2 FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T1.status = 'C' OR T1.status = 'D' GROUP BY T3.A2 ORDER BY COUNT(T1.loan_id) DESC LIMIT 1"}
+{"question_id": 132, "db_id": "financial", "pred_sql": "SELECT AVG(T3.amount) FROM disp AS T1 INNER JOIN client AS T2 ON T1.client_id = T2.client_id INNER JOIN loan AS T3 ON T1.account_id = T3.account_id WHERE T2.gender = 'M'"}
+{"question_id": 133, "db_id": "financial", "pred_sql": "SELECT district_id, A2 FROM district ORDER BY A13 DESC LIMIT 1"}
+{"question_id": 134, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.district_id = ( SELECT district_id FROM district ORDER BY A16 DESC LIMIT 1 )"}
+{"question_id": 135, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM trans AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T1.operation = 'VYBER KARTOU' AND T1.balance < 0 AND T2.frequency = 'POPLATEK MESICNE'"}
+{"question_id": 136, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T2.amount >= 250000 AND T1.frequency = 'POPLATEK MESICNE' AND T2.date BETWEEN '1995-01-01' AND '1997-12-31'"}
+{"question_id": 137, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T2.district_id = 1 AND (T1.status = 'C' OR T1.status = 'D')"}
+{"question_id": 138, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A15 = ( SELECT A15 FROM district ORDER BY A15 DESC LIMIT 1, 1 ) AND T1.gender = 'M'"}
+{"question_id": 139, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.card_id) FROM card AS T1 INNER JOIN disp AS T2 ON T1.disp_id = T2.disp_id WHERE T1.type = 'gold' AND T2.type = 'DISPONENT'"}
+{"question_id": 140, "db_id": "financial", "pred_sql": "SELECT count(T1.account_id) FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Pisek'"}
+{"question_id": 141, "db_id": "financial", "pred_sql": "SELECT T1.A2 FROM district AS T1 JOIN account AS T2 ON T1.district_id = T2.district_id JOIN trans AS T3 ON T2.account_id = T3.account_id WHERE T3.date LIKE '1997%' GROUP BY T1.district_id HAVING sum(T3.amount) > 10000"}
+{"question_id": 142, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM order AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T3.A2 = 'Pisek' AND T1.k_symbol = 'SIPO'"}
+{"question_id": 143, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM disp AS T1 JOIN card AS T2 ON T1.disp_id = T2.disp_id WHERE T2.type = 'gold' INTERSECT SELECT T1.account_id FROM disp AS T1 JOIN card AS T2 ON T1.disp_id = T2.disp_id WHERE T2.type = 'junior'"}
+{"question_id": 144, "db_id": "financial", "pred_sql": "SELECT AVG(amount) FROM trans WHERE STRFTIME('%Y', date) = '2021' AND operation = 'VYBER KARTOU'"}
+{"question_id": 145, "db_id": "financial", "pred_sql": "SELECT account_id FROM trans WHERE STRFTIME('%Y', date) = '1998' AND operation = 'VYBER KARTOU' GROUP BY account_id HAVING AVG(amount) < ( SELECT AVG(amount) FROM trans WHERE STRFTIME('%Y', date) = '1998' AND operation = 'VYBER KARTOU' )"}
+{"question_id": 146, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN loan AS T3 ON T2.account_id = T3.account_id INNER JOIN client AS T4 ON T1.client_id = T4.client_id WHERE T4.gender = 'F'"}
+{"question_id": 147, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'south Bohemia' AND T1.gender = 'F'"}
+{"question_id": 148, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM disp AS T1 INNER JOIN client AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T3.A2 = 'Tabor' AND T1.type = 'OWNER'"}
+{"question_id": 149, "db_id": "financial", "pred_sql": "SELECT T2.type FROM account AS T1 INNER JOIN disp AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id WHERE T3.A11 > 8000 AND T3.A11 <= 9000 AND T2.type != 'OWNER'"}
+{"question_id": 150, "db_id": "financial", "pred_sql": "SELECT COUNT(*) FROM trans AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T3.A3 = 'North Bohemia' AND T1.bank = 'AB'"}
+{"question_id": 151, "db_id": "financial", "pred_sql": "SELECT DISTINCT T1.A2 FROM district AS T1 INNER JOIN account AS T2 ON T1.district_id = T2.district_id INNER JOIN trans AS T3 ON T2.account_id = T3.account_id WHERE T3.type = 'VYDAJ'"}
+{"question_id": 152, "db_id": "financial", "pred_sql": "SELECT AVG(T1.A15) FROM district AS T1 INNER JOIN account AS T2 ON T1.district_id = T2.district_id WHERE T1.A15 > 4000 AND STRFTIME('%Y', T2.date) >= '1997'"}
+{"question_id": 153, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.card_id) FROM card AS T1 INNER JOIN disp AS T2 ON T1.disp_id = T2.disp_id WHERE T1.type = 'classic' AND T2.type = 'OWNER'"}
+{"question_id": 154, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Hl.m. Praha' AND T1.gender = 'M'"}
+{"question_id": 155, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(type = 'gold' AND issued < '1998-01-01', 1, 0)) AS REAL) * 100 / COUNT(*) FROM card"}
+{"question_id": 156, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN loan AS T3 ON T2.account_id = T3.account_id ORDER BY T3.amount DESC LIMIT 1"}
+{"question_id": 157, "db_id": "financial", "pred_sql": "SELECT T2.A15 FROM account AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.account_id = 532"}
+{"question_id": 158, "db_id": "financial", "pred_sql": "SELECT T1.district_id FROM account AS T1 INNER JOIN `order` AS T2 ON T1.account_id = T2.account_id WHERE T2.order_id = 33333"}
+{"question_id": 159, "db_id": "financial", "pred_sql": "SELECT T2.trans_id FROM disp AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id WHERE T1.client_id = 3356 AND T2.operation = 'VYBER'"}
+{"question_id": 160, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM account AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T1.frequency = 'POPLATEK TYDNE' AND T2.amount < 200000"}
+{"question_id": 161, "db_id": "financial", "pred_sql": "SELECT T2.type FROM disp AS T1 INNER JOIN card AS T2 ON T1.disp_id = T2.disp_id WHERE T1.client_id = 13539"}
+{"question_id": 162, "db_id": "financial", "pred_sql": "SELECT T2.A3 FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.client_id = 3541"}
+{"question_id": 163, "db_id": "financial", "pred_sql": "SELECT T1.A2 FROM district AS T1 INNER JOIN account AS T2 ON T1.district_id = T2.district_id INNER JOIN loan AS T3 ON T2.account_id = T3.account_id WHERE T3.status = 'A' GROUP BY T1.district_id ORDER BY COUNT(T3.loan_id) DESC LIMIT 1"}
+{"question_id": 164, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN order AS T3 ON T2.account_id = T3.account_id WHERE T3.order_id = 32423"}
+{"question_id": 165, "db_id": "financial", "pred_sql": "SELECT T2.trans_id FROM account AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id WHERE T1.district_id = 5"}
+{"question_id": 166, "db_id": "financial", "pred_sql": "SELECT count(*) FROM account AS T1 JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Jesenik'"}
+{"question_id": 167, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN card AS T2 ON T1.disp_id = T2.disp_id WHERE T2.type = 'junior' AND T2.issued >= '1997-01-01'"}
+{"question_id": 168, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(T1.gender = 'F', 1, 0)) AS REAL) * 100 / COUNT(T1.client_id) FROM client AS T1 INNER JOIN account AS T2 ON T1.district_id = T2.district_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id WHERE T3.A11 > 10000"}
+{"question_id": 169, "db_id": "financial", "pred_sql": "SELECT CAST((SUM(CASE WHEN STRFTIME('%Y', T2.date) = '1997' THEN T2.amount ELSE 0 END) - SUM(CASE WHEN STRFTIME('%Y', T2.date) = '1996' THEN T2.amount ELSE 0 END)) AS REAL) * 100 / SUM(CASE WHEN STRFTIME('%Y', T2.date) = '1996' THEN T2.amount ELSE 0 END) FROM disp AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id INNER JOIN client AS T3 ON T1.client_id = T3.client_id WHERE T3.gender = 'M'"}
+{"question_id": 170, "db_id": "financial", "pred_sql": "SELECT COUNT(trans_id) FROM trans WHERE operation = 'VYBER KARTOU' AND strftime('%Y', date) > '1995'"}
+{"question_id": 171, "db_id": "financial", "pred_sql": "SELECT SUM(CASE WHEN A3 = 'East Bohemia' THEN A16 ELSE 0 END) - SUM(CASE WHEN A3 = 'North Bohemia' THEN A16 ELSE 0 END) AS diff FROM district"}
+{"question_id": 172, "db_id": "financial", "pred_sql": "SELECT count(*) FROM disp WHERE account_id BETWEEN 1 AND 10 AND type IN ('OWNER', 'DISPONENT')"}
+{"question_id": 173, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.order_id) FROM `order` AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T2.account_id = 3 AND T1.k_symbol = 'SLUZBY'"}
+{"question_id": 174, "db_id": "financial", "pred_sql": "SELECT T1.birth_date FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id WHERE T2.client_id = 130"}
+{"question_id": 175, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM disp AS T1 INNER JOIN trans AS T2 ON T1.account_id = T2.account_id WHERE T1.type = 'OWNER' AND T2.k_symbol = 'SLUZBY' AND T2.frequency = 'POPLATEK PO OBRATU'"}
+{"question_id": 176, "db_id": "financial", "pred_sql": "SELECT T2.amount, T2.status FROM disp AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T1.client_id = 992"}
+{"question_id": 177, "db_id": "financial", "pred_sql": "SELECT T1.balance, T3.gender FROM trans AS T1 INNER JOIN disp AS T2 ON T1.account_id = T2.account_id INNER JOIN client AS T3 ON T2.client_id = T3.client_id WHERE T2.client_id = 4 AND T1.trans_id > 851"}
+{"question_id": 178, "db_id": "financial", "pred_sql": "SELECT T3.type FROM disp AS T1 JOIN client AS T2 ON T1.client_id = T2.client_id JOIN card AS T3 ON T1.disp_id = T3.disp_id WHERE T2.client_id = 9"}
+{"question_id": 179, "db_id": "financial", "pred_sql": "SELECT sum(t.amount) FROM trans t JOIN disp d ON t.account_id = d.account_id WHERE d.client_id = 617 AND strftime('%Y', t.date) = '1998' AND t.type = 'VYDAJ'"}
+{"question_id": 180, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'East Bohemia' AND T1.birth_date BETWEEN '1983-01-01' AND '1987-12-31'"}
+{"question_id": 181, "db_id": "financial", "pred_sql": "SELECT T1.client_id FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id INNER JOIN loan AS T3 ON T2.account_id = T3.account_id INNER JOIN client AS T4 ON T1.client_id = T4.client_id WHERE T4.gender = 'F' ORDER BY T3.amount DESC LIMIT 3"}
+{"question_id": 182, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN account AS T3 ON T2.account_id = T3.account_id INNER JOIN `order` AS T4 ON T3.account_id = T4.account_id WHERE T1.gender = 'M' AND STRFTIME('%Y', T1.birth_date) BETWEEN '1974' AND '1976' AND T4.k_symbol = 'SIPO' AND T4.amount > 4000"}
+{"question_id": 183, "db_id": "financial", "pred_sql": "SELECT count(*) FROM account AS T1 JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A2 = 'Beroun' AND T1.date > '1996-12-31'"}
+{"question_id": 184, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM disp AS T1 INNER JOIN card AS T2 ON T1.disp_id = T2.disp_id INNER JOIN client AS T3 ON T1.client_id = T3.client_id WHERE T2.type = 'junior' AND T3.gender = 'F'"}
+{"question_id": 185, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(T3.gender = 'F', 1, 0)) AS REAL) * 100 / COUNT(T3.gender) FROM account AS T1 INNER JOIN disp AS T2 ON T1.account_id = T2.account_id INNER JOIN client AS T3 ON T2.client_id = T3.client_id INNER JOIN district AS T4 ON T3.district_id = T4.district_id WHERE T4.A3 = 'Prague'"}
+{"question_id": 186, "db_id": "financial", "pred_sql": "SELECT CAST(SUM(IIF(T1.gender = 'M', 1, 0)) AS REAL) * 100 / COUNT(T1.gender) FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN account AS T3 ON T2.account_id = T3.account_id WHERE T3.frequency = 'POPLATEK TYDNE'"}
+{"question_id": 187, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM disp AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T1.type = 'USER' AND T2.frequency = 'POPLATEK TYDNE'"}
+{"question_id": 188, "db_id": "financial", "pred_sql": "SELECT T1.account_id FROM account AS T1 INNER JOIN loan AS T2 ON T1.account_id = T2.account_id WHERE T2.duration > 24 AND T1.date < '1997-01-01' ORDER BY T2.amount LIMIT 1"}
+{"question_id": 189, "db_id": "financial", "pred_sql": "SELECT T2.account_id FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN district AS T3 ON T1.district_id = T3.district_id WHERE T1.gender = 'F' ORDER BY T1.birth_date ASC, T3.A11 ASC LIMIT 1"}
+{"question_id": 190, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.A3 = 'east Bohemia' AND STRFTIME('%Y', T1.birth_date) = '1920'"}
+{"question_id": 191, "db_id": "financial", "pred_sql": "SELECT COUNT(T1.account_id) FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T1.duration = 24 AND T2.frequency = 'POPLATEK TYDNE'"}
+{"question_id": 192, "db_id": "financial", "pred_sql": "SELECT AVG(T1.amount) FROM loan AS T1 INNER JOIN account AS T2 ON T1.account_id = T2.account_id WHERE T2.frequency = 'POPLATEK PO OBRATU' AND T1.status IN ('C', 'D')"}
+{"question_id": 193, "db_id": "financial", "pred_sql": "SELECT T1.client_id, T1.district_id FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id WHERE T2.type = 'OWNER'"}
+{"question_id": 194, "db_id": "financial", "pred_sql": "SELECT T1.client_id, 2023 - strftime('%Y', T1.birth_date) AS age FROM client AS T1 INNER JOIN disp AS T2 ON T1.client_id = T2.client_id INNER JOIN card AS T3 ON T2.disp_id = T3.disp_id WHERE T3.type = 'gold'"}
+{"question_id": 195, "db_id": "toxicology", "pred_sql": "SELECT bond_type FROM bond GROUP BY bond_type ORDER BY COUNT(bond_type) DESC LIMIT 1"}
+{"question_id": 196, "db_id": "toxicology", "pred_sql": "SELECT COUNT(*) FROM atom AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.label = '-' AND T1.element = 'cl'"}
+{"question_id": 197, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN T1.element = 'o' THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.element) FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id INNER JOIN bond AS T3 ON T2.bond_id = T3.bond_id WHERE T3.bond_type = '-'"}
+{"question_id": 198, "db_id": "toxicology", "pred_sql": "SELECT CAST(COUNT(CASE WHEN T3.bond_type = '-' THEN T1.molecule_id ELSE NULL END) AS REAL) / COUNT(T1.molecule_id) FROM molecule AS T1 INNER JOIN connected AS T2 ON T1.molecule_id = T2.atom_id INNER JOIN bond AS T3 ON T2.bond_id = T3.bond_id WHERE T1.label = '+'"}
+{"question_id": 199, "db_id": "toxicology", "pred_sql": "SELECT COUNT(*) FROM molecule AS T1 INNER JOIN atom AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.element = 'na' AND T1.label = '-'"}
+{"question_id": 200, "db_id": "toxicology", "pred_sql": "SELECT T1.molecule_id FROM bond AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.bond_type = '#' AND T2.label = '+'"}
+{"question_id": 201, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN T1.element = 'c' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id INNER JOIN bond AS T3 ON T2.bond_id = T3.bond_id WHERE T3.bond_type = '='"}
+{"question_id": 202, "db_id": "toxicology", "pred_sql": "SELECT COUNT(bond_id) FROM bond WHERE bond_type = '#'"}
+{"question_id": 203, "db_id": "toxicology", "pred_sql": "SELECT COUNT(atom_id) FROM atom WHERE element != 'br'"}
+{"question_id": 204, "db_id": "toxicology", "pred_sql": "SELECT COUNT(molecule_id) FROM molecule WHERE molecule_id >= 'TR000' AND molecule_id <= 'TR099' AND label = '+'"}
+{"question_id": 205, "db_id": "toxicology", "pred_sql": "SELECT molecule_id FROM atom WHERE element = 'si'"}
+{"question_id": 206, "db_id": "toxicology", "pred_sql": "SELECT T1.element FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id WHERE T2.bond_id = 'TR004_8_9'"}
+{"question_id": 207, "db_id": "toxicology", "pred_sql": "SELECT T1.element FROM atom AS T1 INNER JOIN connected AS T2 ON T1.atom_id = T2.atom_id INNER JOIN bond AS T3 ON T2.bond_id = T3.bond_id WHERE T3.bond_type = '='"}
+{"question_id": 208, "db_id": "toxicology", "pred_sql": "SELECT T2.label FROM atom AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.element = 'h' GROUP BY T2.label ORDER BY COUNT(T2.label) DESC LIMIT 1"}
+{"question_id": 209, "db_id": "toxicology", "pred_sql": "SELECT T1.bond_type FROM bond AS T1 INNER JOIN connected AS T2 ON T1.bond_id = T2.bond_id INNER JOIN atom AS T3 ON T2.atom_id = T3.atom_id WHERE T3.element = 'te'"}
+{"question_id": 210, "db_id": "toxicology", "pred_sql": "SELECT T1.atom_id, T1.atom_id2 FROM connected AS T1 INNER JOIN bond AS T2 ON T1.bond_id = T2.bond_id WHERE T2.bond_type = '-'"}
+{"question_id": 211, "db_id": "toxicology", "pred_sql": "SELECT T1.atom_id, T1.atom_id2 FROM connected AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.label = '-'"}
+{"question_id": 212, "db_id": "toxicology", "pred_sql": "SELECT element FROM atom WHERE molecule_id IN ( SELECT molecule_id FROM molecule WHERE label = '-' ) GROUP BY element ORDER BY COUNT(element) ASC LIMIT 1"}
+{"question_id": 213, "db_id": "toxicology", "pred_sql": "SELECT T1.bond_type FROM bond AS T1 INNER JOIN connected AS T2 ON T1.bond_id = T2.bond_id WHERE T2.atom_id = 'TR004_8' AND T2.atom_id2 = 'TR004_20'"}
+{"question_id": 214, "db_id": "toxicology", "pred_sql": "SELECT label FROM molecule WHERE molecule_id NOT IN ( SELECT molecule_id FROM atom WHERE element = 'sn' )"}
+{"question_id": 215, "db_id": "toxicology", "pred_sql": "SELECT COUNT(*) FROM connected AS T1 INNER JOIN bond AS T2 ON T1.bond_id = T2.bond_id INNER JOIN atom AS T3 ON T1.atom_id = T3.atom_id INNER JOIN atom AS T4 ON T1.atom_id2 = T4.atom_id WHERE T2.bond_type = '-' AND (T3.element = 'i' OR T4.element = 's')"}
+{"question_id": 216, "db_id": "toxicology", "pred_sql": "SELECT T1.atom_id, T1.atom_id2 FROM connected AS T1 INNER JOIN bond AS T2 ON T1.bond_id = T2.bond_id WHERE T2.bond_type = '#'"}
+{"question_id": 217, "db_id": "toxicology", "pred_sql": "SELECT T1.atom_id, T1.atom_id2 FROM connected AS T1 INNER JOIN atom AS T2 ON T1.atom_id = T2.atom_id WHERE T2.molecule_id = 'TR181'"}
+{"question_id": 218, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN T1.element != 'f' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.molecule_id) FROM atom AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.label = '+'"}
+{"question_id": 219, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN T1.bond_type = '#' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.bond_id) FROM bond AS T1 INNER JOIN connected AS T2 ON T1.bond_id = T2.bond_id INNER JOIN molecule AS T3 ON T1.molecule_id = T3.molecule_id WHERE T3.label = '+'"}
+{"question_id": 220, "db_id": "toxicology", "pred_sql": "SELECT element FROM atom WHERE molecule_id = 'TR000' ORDER BY element ASC LIMIT 3"}
+{"question_id": 221, "db_id": "toxicology", "pred_sql": "SELECT atom_id, atom_id2 FROM connected WHERE bond_id = 'TR001_2_6'"}
+{"question_id": 222, "db_id": "toxicology", "pred_sql": "SELECT SUM(CASE WHEN label = '+' THEN 1 ELSE 0 END) - SUM(CASE WHEN label = '-' THEN 1 ELSE 0 END) AS difference FROM molecule"}
+{"question_id": 223, "db_id": "toxicology", "pred_sql": "SELECT atom_id, atom_id2 FROM connected WHERE bond_id = 'TR_000_2_5'"}
+{"question_id": 224, "db_id": "toxicology", "pred_sql": "SELECT bond_id FROM connected WHERE atom_id2 = 'TR000_2'"}
+{"question_id": 225, "db_id": "toxicology", "pred_sql": "SELECT molecule_id FROM bond WHERE bond_type = '=' ORDER BY molecule_id LIMIT 5"}
+{"question_id": 226, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN bond_type = '=' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(bond_id) FROM bond WHERE molecule_id = 'TR008'"}
+{"question_id": 227, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN label = '+' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(molecule_id) FROM molecule"}
+{"question_id": 228, "db_id": "toxicology", "pred_sql": "SELECT CAST(SUM(CASE WHEN element = 'h' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(atom_id) FROM atom WHERE molecule_id = 'TR206'"}
+{"question_id": 229, "db_id": "toxicology", "pred_sql": "SELECT bond_type FROM bond WHERE molecule_id = 'TR000'"}
+{"question_id": 230, "db_id": "toxicology", "pred_sql": "SELECT T1.element, T2.label FROM atom AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.molecule_id = 'TR060'"}
+{"question_id": 231, "db_id": "toxicology", "pred_sql": "SELECT T1.bond_type, T2.label FROM bond AS T1 INNER JOIN molecule AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.molecule_id = 'TR018' GROUP BY T1.bond_type ORDER BY COUNT(T1.bond_type) DESC LIMIT 1"}
+{"question_id": 232, "db_id": "toxicology", "pred_sql": "SELECT T1.molecule_id FROM molecule AS T1 INNER JOIN bond AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.bond_type = '-' AND T1.label = '-' ORDER BY T1.molecule_id LIMIT 3"}
+{"question_id": 233, "db_id": "toxicology", "pred_sql": "SELECT bond_id FROM bond WHERE molecule_id = 'TR006' ORDER BY bond_id LIMIT 2"}
+{"question_id": 234, "db_id": "toxicology", "pred_sql": "SELECT COUNT(bond_id) FROM connected WHERE (atom_id = 'TR009_12' OR atom_id2 = 'TR009_12') AND bond_id LIKE 'TR009_%'"}
+{"question_id": 235, "db_id": "toxicology", "pred_sql": "SELECT COUNT(*) FROM molecule AS T1 INNER JOIN atom AS T2 ON T1.molecule_id = T2.molecule_id WHERE T1.label = '+' AND T2.element = 'br'"}
+{"question_id": 236, "db_id": "toxicology", "pred_sql": "SELECT T1.bond_type, T2.atom_id, T2.atom_id2 FROM bond AS T1 INNER JOIN connected AS T2 ON T1.bond_id = T2.bond_id WHERE T1.bond_id = 'TR001_6_9'"}
+{"question_id": 237, "db_id": "toxicology", "pred_sql": "SELECT T1.molecule_id, T1.label FROM molecule AS T1 INNER JOIN atom AS T2 ON T1.molecule_id = T2.molecule_id WHERE T2.atom_id = 'TR001_10'"}
+{"question_id": 238, "db_id": "toxicology", "pred_sql": "SELECT COUNT(molecule_id) FROM bond WHERE bond_type = '#'"}
+{"question_id": 239, "db_id": "toxicology", "pred_sql": "SELECT COUNT(bond_id) FROM connected WHERE atom_id LIKE 'TR%_19'"}
+{"question_id": 240, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 241, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 242, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 243, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 244, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 245, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 246, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 247, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 248, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 249, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 250, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 251, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 252, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 253, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 254, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 255, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 256, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 257, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 258, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 259, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 260, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 261, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 262, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 263, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 264, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 265, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 266, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 267, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 268, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 269, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 270, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 271, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 272, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 273, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 274, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 275, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 276, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 277, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 278, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 279, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 280, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 281, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 282, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 283, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 284, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 285, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 286, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 287, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 288, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 289, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 290, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 291, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 292, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 293, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 294, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 295, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 296, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 297, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 298, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 299, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 300, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 301, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 302, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 303, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 304, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 305, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 306, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 307, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 308, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 309, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 310, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 311, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 312, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 313, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 314, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 315, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 316, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 317, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 318, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 319, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 320, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 321, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 322, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 323, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 324, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 325, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 326, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 327, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 328, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 329, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 330, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 331, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 332, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 333, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 334, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 335, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 336, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 337, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 338, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 339, "db_id": "toxicology", "pred_sql": "SELECT 1"}
+{"question_id": 340, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 341, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 342, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 343, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 344, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 345, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 346, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 347, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 348, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 349, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 350, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 351, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 352, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 353, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 354, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 355, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 356, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 357, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 358, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 359, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 360, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 361, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 362, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 363, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 364, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 365, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 366, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 367, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 368, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 369, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 370, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 371, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 372, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 373, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 374, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 375, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 376, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 377, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 378, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 379, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 380, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 381, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 382, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 383, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 384, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 385, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 386, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 387, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 388, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 389, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 390, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 391, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 392, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 393, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 394, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 395, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 396, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 397, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 398, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 399, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 400, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 401, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 402, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 403, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 404, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 405, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 406, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 407, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 408, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 409, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 410, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 411, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 412, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 413, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 414, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 415, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 416, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 417, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 418, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 419, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 420, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 421, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 422, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 423, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 424, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 425, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 426, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 427, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 428, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 429, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 430, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 431, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 432, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 433, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 434, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 435, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 436, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 437, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 438, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 439, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 440, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 441, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 442, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 443, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 444, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 445, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 446, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 447, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 448, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 449, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 450, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 451, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 452, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 453, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 454, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 455, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 456, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 457, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 458, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 459, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 460, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 461, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 462, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 463, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 464, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 465, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 466, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 467, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 468, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 469, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 470, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 471, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 472, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 473, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 474, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 475, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 476, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 477, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 478, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 479, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 480, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 481, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 482, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 483, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 484, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 485, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 486, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 487, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 488, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 489, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 490, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 491, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 492, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 493, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 494, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 495, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 496, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 497, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 498, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 499, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 500, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 501, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 502, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 503, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 504, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 505, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 506, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 507, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 508, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 509, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 510, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 511, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 512, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 513, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 514, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 515, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 516, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 517, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 518, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 519, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 520, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 521, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 522, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 523, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 524, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 525, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 526, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 527, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 528, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 529, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 530, "db_id": "card_games", "pred_sql": "SELECT 1"}
+{"question_id": 531, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 532, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 533, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 534, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 535, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 536, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 537, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 538, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 539, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 540, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 541, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 542, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 543, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 544, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 545, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 546, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 547, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 548, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 549, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 550, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 551, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 552, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 553, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 554, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 555, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 556, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 557, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 558, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 559, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 560, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 561, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 562, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 563, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 564, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 565, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 566, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 567, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 568, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 569, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 570, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 571, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 572, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 573, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 574, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 575, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 576, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 577, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 578, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 579, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 580, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 581, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 582, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 583, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 584, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 585, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 586, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 587, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 588, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 589, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 590, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 591, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 592, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 593, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 594, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 595, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 596, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 597, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 598, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 599, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 600, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 601, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 602, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 603, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 604, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 605, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 606, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 607, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 608, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 609, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 610, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 611, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 612, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 613, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 614, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 615, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 616, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 617, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 618, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 619, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 620, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 621, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 622, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 623, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 624, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 625, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 626, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 627, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 628, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 629, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 630, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 631, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 632, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 633, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 634, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 635, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 636, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 637, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 638, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 639, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 640, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 641, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 642, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 643, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 644, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 645, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 646, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 647, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 648, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 649, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 650, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 651, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 652, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 653, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 654, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 655, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 656, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 657, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 658, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 659, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 660, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 661, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 662, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 663, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 664, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 665, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 666, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 667, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 668, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 669, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 670, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 671, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 672, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 673, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 674, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 675, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 676, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 677, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 678, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 679, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 680, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 681, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 682, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 683, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 684, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 685, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 686, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 687, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 688, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 689, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 690, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 691, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 692, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 693, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 694, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 695, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 696, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 697, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 698, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 699, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 700, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 701, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 702, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 703, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 704, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 705, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 706, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 707, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 708, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 709, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 710, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 711, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 712, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 713, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 714, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 715, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 716, "db_id": "codebase_community", "pred_sql": "SELECT 1"}
+{"question_id": 717, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 718, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 719, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 720, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 721, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 722, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 723, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 724, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 725, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 726, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 727, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 728, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 729, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 730, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 731, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 732, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 733, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 734, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 735, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 736, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 737, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 738, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 739, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 740, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 741, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 742, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 743, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 744, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 745, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 746, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 747, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 748, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 749, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 750, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 751, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 752, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 753, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 754, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 755, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 756, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 757, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 758, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 759, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 760, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 761, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 762, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 763, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 764, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 765, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 766, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 767, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 768, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 769, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 770, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 771, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 772, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 773, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 774, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 775, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 776, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 777, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 778, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 779, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 780, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 781, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 782, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 783, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 784, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 785, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 786, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 787, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 788, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 789, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 790, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 791, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 792, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 793, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 794, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 795, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 796, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 797, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 798, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 799, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 800, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 801, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 802, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 803, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 804, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 805, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 806, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 807, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 808, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 809, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 810, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 811, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 812, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 813, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 814, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 815, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 816, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 817, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 818, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 819, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 820, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 821, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 822, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 823, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 824, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 825, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 826, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 827, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 828, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 829, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 830, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 831, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 832, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 833, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 834, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 835, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 836, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 837, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 838, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 839, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 840, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 841, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 842, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 843, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 844, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 845, "db_id": "superhero", "pred_sql": "SELECT 1"}
+{"question_id": 846, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 847, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 848, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 849, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 850, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 851, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 852, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 853, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 854, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 855, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 856, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 857, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 858, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 859, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 860, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 861, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 862, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 863, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 864, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 865, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 866, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 867, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 868, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 869, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 870, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 871, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 872, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 873, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 874, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 875, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 876, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 877, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 878, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 879, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 880, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 881, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 882, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 883, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 884, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 885, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 886, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 887, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 888, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 889, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 890, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 891, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 892, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 893, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 894, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 895, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 896, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 897, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 898, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 899, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 900, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 901, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 902, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 903, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 904, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 905, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 906, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 907, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 908, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 909, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 910, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 911, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 912, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 913, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 914, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 915, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 916, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 917, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 918, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 919, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 920, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 921, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 922, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 923, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 924, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 925, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 926, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 927, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 928, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 929, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 930, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 931, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 932, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 933, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 934, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 935, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 936, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 937, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 938, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 939, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 940, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 941, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 942, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 943, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 944, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 945, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 946, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 947, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 948, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 949, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 950, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 951, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 952, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 953, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 954, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 955, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 956, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 957, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 958, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 959, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 960, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 961, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 962, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 963, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 964, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 965, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 966, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 967, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 968, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 969, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 970, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 971, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 972, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 973, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 974, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 975, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 976, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 977, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 978, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 979, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 980, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 981, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 982, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 983, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 984, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 985, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 986, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 987, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 988, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 989, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 990, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 991, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 992, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 993, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 994, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 995, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 996, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 997, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 998, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 999, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1000, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1001, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1002, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1003, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1004, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1005, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1006, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1007, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1008, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1009, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1010, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1011, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1012, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1013, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1014, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1015, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1016, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1017, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1018, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1019, "db_id": "formula_1", "pred_sql": "SELECT 1"}
+{"question_id": 1020, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1021, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1022, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1023, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1024, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1025, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1026, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1027, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1028, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1029, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1030, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1031, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1032, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1033, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1034, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1035, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1036, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1037, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1038, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1039, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1040, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1041, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1042, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1043, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1044, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1045, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1046, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1047, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1048, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1049, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1050, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1051, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1052, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1053, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1054, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1055, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1056, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1057, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1058, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1059, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1060, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1061, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1062, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1063, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1064, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1065, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1066, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1067, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1068, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1069, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1070, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1071, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1072, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1073, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1074, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1075, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1076, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1077, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1078, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1079, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1080, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1081, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1082, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1083, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1084, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1085, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1086, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1087, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1088, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1089, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1090, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1091, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1092, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1093, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1094, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1095, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1096, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1097, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1098, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1099, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1100, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1101, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1102, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1103, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1104, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1105, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1106, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1107, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1108, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1109, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1110, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1111, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1112, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1113, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1114, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1115, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1116, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1117, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1118, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1119, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1120, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1121, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1122, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1123, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1124, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1125, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1126, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1127, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1128, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1129, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1130, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1131, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1132, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1133, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1134, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1135, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1136, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1137, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1138, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1139, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1140, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1141, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1142, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1143, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1144, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1145, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1146, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1147, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1148, "db_id": "european_football_2", "pred_sql": "SELECT 1"}
+{"question_id": 1149, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1150, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1151, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1152, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1153, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1154, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1155, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1156, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1157, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1158, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1159, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1160, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1161, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1162, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1163, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1164, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1165, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1166, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1167, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1168, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1169, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1170, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1171, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1172, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1173, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1174, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1175, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1176, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1177, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1178, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1179, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1180, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1181, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1182, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1183, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1184, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1185, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1186, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1187, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1188, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1189, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1190, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1191, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1192, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1193, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1194, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1195, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1196, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1197, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1198, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1199, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1200, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1201, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1202, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1203, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1204, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1205, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1206, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1207, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1208, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1209, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1210, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1211, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1212, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1213, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1214, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1215, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1216, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1217, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1218, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1219, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1220, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1221, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1222, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1223, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1224, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1225, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1226, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1227, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1228, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1229, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1230, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1231, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1232, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1233, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1234, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1235, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1236, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1237, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1238, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1239, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1240, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1241, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1242, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1243, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1244, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1245, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1246, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1247, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1248, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1249, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1250, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1251, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1252, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1253, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1254, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1255, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1256, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1257, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1258, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1259, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1260, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1261, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1262, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1263, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1264, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1265, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1266, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1267, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1268, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1269, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1270, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1271, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1272, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1273, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1274, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1275, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1276, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1277, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1278, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1279, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1280, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1281, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1282, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1283, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1284, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1285, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1286, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1287, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1288, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1289, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1290, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1291, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1292, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1293, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1294, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1295, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1296, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1297, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1298, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1299, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1300, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1301, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1302, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1303, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1304, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1305, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1306, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1307, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1308, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1309, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1310, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1311, "db_id": "thrombosis_prediction", "pred_sql": "SELECT 1"}
+{"question_id": 1312, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1313, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1314, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1315, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1316, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1317, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1318, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1319, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1320, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1321, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1322, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1323, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1324, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1325, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1326, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1327, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1328, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1329, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1330, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1331, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1332, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1333, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1334, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1335, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1336, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1337, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1338, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1339, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1340, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1341, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1342, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1343, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1344, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1345, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1346, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1347, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1348, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1349, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1350, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1351, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1352, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1353, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1354, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1355, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1356, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1357, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1358, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1359, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1360, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1361, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1362, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1363, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1364, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1365, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1366, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1367, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1368, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1369, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1370, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1371, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1372, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1373, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1374, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1375, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1376, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1377, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1378, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1379, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1380, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1381, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1382, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1383, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1384, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1385, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1386, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1387, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1388, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1389, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1390, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1391, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1392, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1393, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1394, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1395, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1396, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1397, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1398, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1399, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1400, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1401, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1402, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1403, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1404, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1405, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1406, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1407, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1408, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1409, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1410, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1411, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1412, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1413, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1414, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1415, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1416, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1417, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1418, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1419, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1420, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1421, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1422, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1423, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1424, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1425, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1426, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1427, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1428, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1429, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1430, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1431, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1432, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1433, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1434, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1435, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1436, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1437, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1438, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1439, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1440, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1441, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1442, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1443, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1444, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1445, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1446, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1447, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1448, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1449, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1450, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1451, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1452, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1453, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1454, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1455, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1456, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1457, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1458, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1459, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1460, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1461, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1462, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1463, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1464, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1465, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1466, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1467, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1468, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1469, "db_id": "student_club", "pred_sql": "SELECT 1"}
+{"question_id": 1470, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1471, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1472, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1473, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1474, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1475, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1476, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1477, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1478, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1479, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1480, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1481, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1482, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1483, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1484, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1485, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1486, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1487, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1488, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1489, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1490, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1491, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1492, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1493, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1494, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1495, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1496, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1497, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1498, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1499, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1500, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1501, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1502, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1503, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1504, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1505, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1506, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1507, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1508, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1509, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1510, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1511, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1512, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1513, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1514, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1515, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1516, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1517, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1518, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1519, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1520, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1521, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1522, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1523, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1524, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1525, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1526, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1527, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1528, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1529, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1530, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1531, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1532, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}
+{"question_id": 1533, "db_id": "debit_card_specializing", "pred_sql": "SELECT 1"}

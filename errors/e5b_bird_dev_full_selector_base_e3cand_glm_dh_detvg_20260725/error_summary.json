@@ -1,0 +1,17 @@
+{
+  "run_id": "e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725",
+  "total_failures": 574,
+  "category_counts": {
+    "Table Selection Error": 435,
+    "Column Selection Error": 88,
+    "Join Path Error": 19,
+    "Syntax or Invalid SQL": 14,
+    "Semantic Mismatch": 8,
+    "Value Grounding Error": 4,
+    "Filter Condition Error": 2,
+    "Ordering / TopN Error": 2,
+    "ON Predicate Error": 1,
+    "Aggregation Error": 1
+  },
+  "classification_file": "errors/e5b_bird_dev_full_selector_base_e3cand_glm_dh_detvg_20260725/error_classifications.jsonl"
+}

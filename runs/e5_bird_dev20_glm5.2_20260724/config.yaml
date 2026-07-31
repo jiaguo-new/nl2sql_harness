@@ -1,0 +1,32 @@
+run_id: e5_bird_dev20_glm5.2_20260724
+experiment: E5
+experiment_name: Multi-Candidate Rerank
+description: Rerank existing E0/E2/E3 candidate predictions by execution-result plurality on BIRD dev 20-subset.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev_20.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_20.json
+
+candidate_sources:
+  - predictions/e0_bird_dev_glm5.2_20260724_4k/predictions.jsonl
+  - predictions/e2_bird_dev20_glm5.2_20260724/predictions.jsonl
+  - predictions/e3_bird_dev20_glm5.2_20260724/predictions.jsonl
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

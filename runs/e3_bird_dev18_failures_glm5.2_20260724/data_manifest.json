@@ -1,0 +1,17 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "/home/dameng/bird_dev/dev_18_e3_errors.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": [
+    "evaluation",
+    "error_analysis"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "retrieval_corpus"
+  ],
+  "loaded_at": "2026-07-25T03:52:48.228672+00:00"
+}
