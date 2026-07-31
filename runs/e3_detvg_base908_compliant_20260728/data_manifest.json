@@ -1,0 +1,17 @@
+{
+  "dataset": "BIRD",
+  "split": "dev_200",
+  "source": "/home/dameng/bird_dev/dev.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": [
+    "evaluation",
+    "error_analysis"
+  ],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "retrieval_corpus"
+  ],
+  "loaded_at": "2026-07-28T09:12:00.674513+00:00"
+}

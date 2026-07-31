@@ -110,3 +110,77 @@ class BirdDatabase:
                 (limit,),
             ).fetchall()
         return [r[0] for r in rows]
+
+    # ------------------------------------------------------------------
+    # Schema-Linking helpers (E2v2): column-level pruning + FK closure
+    # ------------------------------------------------------------------
+
+    def get_table_columns(self, table: str) -> list[dict[str, str]]:
+        """Return [{name, type}] for a table via PRAGMA table_info."""
+        with self._connection() as conn:
+            try:
+                rows = conn.execute(f"PRAGMA table_info(`{table}`)").fetchall()
+            except Exception:
+                return []
+        # PRAGMA table_info: cid, name, type, notnull, dflt_value, pk
+        return [{"name": r[1], "type": r[2] or ""} for r in rows]
+
+    def get_schema_subset(
+        self,
+        tables: list[str],
+        columns: dict[str, list[str]] | None = None,
+    ) -> str:
+        """Build a compact column-level DDL for only the selected tables/columns.
+
+        Emits one ``CREATE TABLE t (col TYPE, ...);`` line per table, restricted
+        to the requested columns (falls back to all columns when a table is not
+        in *columns* or its column list is empty).  Non-existent tables/columns
+        are silently dropped.  This is the core noise-reduction primitive for
+        schema-linking: the stage-2 generator only sees relevant columns.
+        """
+        columns = columns or {}
+        all_tables = set(self.list_tables())
+        parts: list[str] = []
+        for table in tables:
+            if table not in all_tables:
+                continue
+            table_cols = self.get_table_columns(table)
+            if not table_cols:
+                continue
+            wanted = columns.get(table, [])
+            if wanted:
+                # keep only requested columns that actually exist, preserve order
+                wanted_set = set(wanted)
+                table_cols = [c for c in table_cols if c["name"] in wanted_set]
+                if not table_cols:
+                    # requested columns none exist -> fall back to all (avoid empty)
+                    table_cols = self.get_table_columns(table)
+            col_defs = ", ".join(f"`{c['name']}` {c['type']}".strip() for c in table_cols)
+            parts.append(f"CREATE TABLE `{table}` ({col_defs});")
+        return "\n".join(parts)
+
+    def fk_closure(self, seed_tables: list[str]) -> list[str]:
+        """One-hop foreign-key closure: add tables reachable via FK from seed.
+
+        Deterministic, compliance-safe (only reads PRAGMA).  Prevents broken
+        join paths when the stage-1 selection omits an intermediate table.
+        """
+        all_fks = self.get_foreign_keys()
+        seed = set(seed_tables)
+        frontier = set(seed)
+        while frontier:
+            nxt: set[str] = set()
+            for fk in all_fks:
+                t = fk.get("table")
+                rt = fk.get("referenced_table")
+                if t in frontier and rt and rt not in seed:
+                    nxt.add(rt)
+                if rt in frontier and t and t not in seed:
+                    nxt.add(t)
+            seed |= nxt
+            frontier = nxt
+        # preserve original seed order (only real tables), then sorted additions
+        all_tables_set = set(self.list_tables())
+        ordered = [t for t in seed_tables if t in all_tables_set]
+        ordered += sorted(seed - set(seed_tables))
+        return ordered

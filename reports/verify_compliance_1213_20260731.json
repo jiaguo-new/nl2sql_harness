@@ -1,0 +1,53 @@
+{
+  "checks": [
+    {
+      "name": "prediction_file_exists",
+      "ok": true,
+      "detail": "predictions/coder32b_orm_best_20260731/predictions.jsonl"
+    },
+    {
+      "name": "prediction_count_1534",
+      "ok": true,
+      "detail": "lines=1534"
+    },
+    {
+      "name": "sha256_recorded",
+      "ok": true,
+      "detail": "sha256=15f72a9aa7cf96957aa4e21957b2e2399c29929347a9f93d36ce061465f15f08"
+    },
+    {
+      "name": "gold_pred_id_match",
+      "ok": true,
+      "detail": "common=1534 gold_only=0 pred_only=0"
+    },
+    {
+      "name": "eval_script_ran",
+      "ok": true,
+      "detail": "rc=0; stderr_tail="
+    },
+    {
+      "name": "ex_equals_1213",
+      "ok": true,
+      "detail": "independent EX=1213/1534 = 79.07%  valid=1528"
+    },
+    {
+      "name": "exact_match_not_abnormal",
+      "ok": true,
+      "detail": "exact_str_match=193 (12.58%); expected ~10-13% for correct systems"
+    },
+    {
+      "name": "no_dev_gold_read_into_gen_chain_prompts",
+      "ok": true,
+      "detail": "suspect=[] (analysis-only scripts reading gold are exempt)"
+    },
+    {
+      "name": "train_dev_question_overlap_zero",
+      "ok": true,
+      "detail": "train∩dev questions=0 (train=9428, dev=1534)"
+    }
+  ],
+  "status": "PASS",
+  "prediction": "predictions/coder32b_orm_best_20260731/predictions.jsonl",
+  "prediction_sha256": "15f72a9aa7cf96957aa4e21957b2e2399c29929347a9f93d36ce061465f15f08",
+  "independent_ex": 1213
+}

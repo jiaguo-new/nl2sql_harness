@@ -1,0 +1,42 @@
+run_id: e0_bird_dev_full_glm5.2_cot8k_retrieval_k5_clean_crossdb_basetpl_20260728
+experiment: E0-COT-8K-RETRIEVAL-K5-CLEAN-CROSSDB-BASETPL
+experiment_name: k5 cross-db retrieval from CLEAN train, base template (thinking on)
+description: |
+  Compliance-fixed cross-db retrieval using the SAME base template that produced
+  the 908 baseline (e0_direct_sql_cot.md) plus an {examples} slot, so the only
+  difference vs base is the injected clean cross-db few-shot examples.  Self-exclusion
+  enforced; train corpus = real BIRD train (0 dev overlap).  Measures the true
+  (non-leak) effect of cross-db few-shot.
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  train_source: /home/dameng/project/text2sql_agent/NL2SQL360/data/bird/train/train.json
+  data_manifest: manifests/data_bird_dev.json
+few_shot:
+  k: 5
+  method: keyword
+  cross_db: true
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+prompt:
+  template: prompts/e0_direct_sql_cot_retrieval_clean.md
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+agent:
+  per_example_timeout_seconds: 150
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

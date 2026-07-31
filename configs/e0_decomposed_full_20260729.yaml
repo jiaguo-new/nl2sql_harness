@@ -1,0 +1,29 @@
+run_id: e0_decomposed_full_20260729
+experiment: E0-DECOMPOSED-COT
+experiment_name: Structured step-by-step decomposition on full BIRD dev
+description: |
+  Stronger CoT prompt forcing 6-step analysis (tables/columns/filters/aggregation/
+  output/pitfalls) before SQL generation. Compliant: no gold, no few-shot.
+dataset:
+  name: BIRD
+  split: dev
+  source: /home/dameng/bird_dev/dev.json
+  db_root: /home/dameng/bird_dev/dev_databases
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 8192
+prompt:
+  template: prompts/e0_decomposed_cot.md
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+output:
+  predictions: predictions/{run_id}/predictions.jsonl
+compliance:
+  no_gold_in_prompt: true
+  save_api_request_id: true

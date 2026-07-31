@@ -1424,6 +1424,15 @@ Stage-A 定义：假设已经知道 k5 在哪 210 题失败，并用 ORM v2 band
 
 ## Test Submission Preparation (2026-07-27)
 
+> **⚠️ Historical note (2026-07-31 compliance audit):** the "1333/1534 = 86.90%"
+> figure referenced below and in commit `86f6c65` was derived from a
+> **data-leakage-contaminated** retrieval pipeline (dev_train1234.json was a dev
+> subset; 80.3% of dev questions retrieved their own gold SQL). That result is
+> **invalidated**. The current compliant, independently re-verified best is
+> **1213/1534 = 79.07%** (`predictions/coder32b_orm_best_20260731/`). See
+> `reports/verify_compliance_1213_20260731.json`. The submission package
+> structure below remains valid; only the dev-reference numbers were stale.
+
 After the dev result was frozen at **1333/1534 = 86.90% EX**, we started preparing the BIRD official test submission.
 
 ### What we have
@@ -1467,4 +1476,3 @@ We tried to fetch the linked Google Doc / Notion page and the public `test.zip` 
 - Attachments: `model_description.md`, `predictions_dev_reference.jsonl`, `README.md` (or the full `submission/` directory).
 
 All materials are committed to the `main` branch as `86f6c65`.
-

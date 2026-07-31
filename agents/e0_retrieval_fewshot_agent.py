@@ -59,19 +59,37 @@ def _retrieve_examples(
     train_index: dict[str, dict[str, Any]],
     k: int = 3,
     method: str = "keyword",
+    exclude_question_id: int | None = None,
+    cross_db: bool = False,
 ) -> list[dict[str, Any]]:
-    bucket = train_index.get(db_id, {"examples": [], "vectorizer": None, "tfidf_matrix": None})
-    candidates = bucket["examples"]
+    # Compliance: never return the query's own example.  This is a defensive
+    # self-exclusion that must hold even if the retrieval corpus is later
+    # mis-configured to contain dev questions.
+    if cross_db:
+        pool: list[dict[str, Any]] = []
+        for b in train_index.values():
+            pool.extend(b["examples"])
+    else:
+        bucket = train_index.get(db_id, {"examples": [], "vectorizer": None, "tfidf_matrix": None})
+        pool = bucket["examples"]
+    candidates = [ex for ex in pool if ex.get("question_id") != exclude_question_id]
     if not candidates:
         return []
 
-    if method == "tfidf" and bucket["vectorizer"] is not None:
-        q_text = f"{question}\n"
-        q_vec = bucket["vectorizer"].transform([q_text])
-        sims = cosine_similarity(q_vec, bucket["tfidf_matrix"]).flatten()
-        scored = [(sims[i], candidates[i]) for i in range(len(candidates))]
-        scored.sort(key=lambda x: (-x[0], x[1].get("question_id", 0)))
-        return [ex for _, ex in scored[:k]]
+    if method == "tfidf":
+        # Build a one-shot vectorizer over the (filtered) candidate docs.
+        docs = [
+            f"{ex.get('question', '')}\n{ex.get('evidence', '')}\n{ex.get('SQL', '')}"
+            for ex in candidates
+        ]
+        if len(docs) >= 2:
+            vec = TfidfVectorizer(stop_words="english", lowercase=True)
+            mat = vec.fit_transform(docs)
+            q_vec = vec.transform([f"{question}\n"])
+            sims = cosine_similarity(q_vec, mat).flatten()
+            scored = [(sims[i], candidates[i]) for i in range(len(candidates))]
+            scored.sort(key=lambda x: (-x[0], x[1].get("question_id", 0)))
+            return [ex for _, ex in scored[:k]]
 
     # Fallback to keyword overlap on the question text.
     q_tokens = _tokenize(question)
@@ -177,6 +195,7 @@ def run_e0_retrieval(config_path: Path | str) -> None:
     train_index = _build_train_index(Path(cfg["dataset"]["train_source"]))
     k = cfg.get("few_shot", {}).get("k", 3)
     method = cfg.get("few_shot", {}).get("method", "keyword")
+    cross_db = cfg.get("few_shot", {}).get("cross_db", False)
 
     metrics = EvalMetrics()
     predictions = []
@@ -199,7 +218,10 @@ def run_e0_retrieval(config_path: Path | str) -> None:
         )
         schema = db.get_schema()
 
-        retrieved = _retrieve_examples(question, db_id, train_index, k=k, method=method)
+        retrieved = _retrieve_examples(
+            question, db_id, train_index, k=k, method=method,
+            exclude_question_id=qid, cross_db=cross_db,
+        )
         examples_block = _format_examples(retrieved)
 
         prompt = render_prompt(
