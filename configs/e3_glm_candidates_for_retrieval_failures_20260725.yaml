@@ -1,0 +1,6 @@
+run_id: e3_glm_candidates_for_retrieval_failures_20260725
+errors: errors/e5b_retrieval_k5_v2_merged_detvg_20260725/error_classifications.jsonl
+dev: /home/dameng/bird_dev/dev.json
+db_root: /home/dameng/bird_dev/dev_databases
+output_dir: /home/dameng/project/nl2sql_harness_dev
+per_example_timeout: 120

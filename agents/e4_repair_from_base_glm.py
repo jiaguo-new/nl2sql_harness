@@ -1,11 +1,10 @@
-"""E4 Execution Repair Agent: generate -> execute -> repair -> execute."""
+"""E4 repair from base predictions: only repair failures using GLM execution feedback."""
 
 from __future__ import annotations
 
 import json
-import os
-import re
 import shutil
+import sqlite3
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -32,35 +31,36 @@ def render_prompt(template: str, **kwargs: Any) -> str:
 
 def extract_sql(text: str) -> str:
     text = text.strip()
-    # Remove reasoning tags that some models (e.g., GLM-5.2) emit before the SQL.
-    text = re.sub(r"<reasoning>.*?</reasoning>", "", text, flags=re.DOTALL | re.IGNORECASE)
-    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.IGNORECASE)
-    text = text.strip()
-    # Prefer the last fenced code block if present; this handles headers
-    # like "## SQL" that may appear before the opening fence.
-    if "```" in text:
-        parts = text.split("```")
-        # Pick the last non-empty fenced segment (the final empty string after
-        # a closing fence is ignored; otherwise the trailing part is used).
-        candidate = None
-        for part in reversed(parts[1:]):  # skip text before first fence
-            if part.strip():
-                candidate = part.strip()
-                break
-        if candidate is not None:
-            text = candidate
-    # Remove a leading language tag line (e.g., "sql", "SQL", "sql\n").
-    lines = text.splitlines()
-    if lines and lines[0].strip().lower() == "sql":
-        lines = lines[1:]
-    text = "\n".join(lines).strip()
-    # Drop an explicit "SQL:" or "SQL" prefix if still present.
     if text.lower().startswith("sql"):
         text = text[3:].lstrip(": ")
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
     return text.rstrip(";").strip()
 
 
-def run_e4(config_path: Path | str) -> None:
+def format_result(exec_result: dict[str, Any], max_rows: int = 5) -> str:
+    if not exec_result.get("ok"):
+        return f"Error: {exec_result.get('error', 'unknown error')}"
+    rows = exec_result.get("rows", [])
+    if not rows:
+        return "Empty result set (0 rows)."
+    header = exec_result.get("columns", [])
+    lines = []
+    if header:
+        lines.append(" | ".join(str(c) for c in header))
+    for row in rows[:max_rows]:
+        lines.append(" | ".join(str(c) if c is not None else "NULL" for c in row))
+    if len(rows) > max_rows:
+        lines.append(f"... ({len(rows) - max_rows} more rows)")
+    return "\n".join(lines)
+
+
+def run_e4_repair_from_base(config_path: Path | str) -> None:
     cfg = load_config(config_path)
     run_id = cfg["run_id"]
     run_dir = Path(cfg["output"]["run_dir"].format(run_id=run_id))
@@ -73,7 +73,6 @@ def run_e4(config_path: Path | str) -> None:
     for p in [run_dir, pred_path.parent, trace_path.parent, error_path.parent, metrics_path.parent, prompt_snapshot_dir]:
         p.mkdir(parents=True, exist_ok=True)
 
-    shutil.copy(cfg["prompt"]["generate"], prompt_snapshot_dir / Path(cfg["prompt"]["generate"]).name)
     shutil.copy(cfg["prompt"]["repair"], prompt_snapshot_dir / Path(cfg["prompt"]["repair"]).name)
     shutil.copy(config_path, run_dir / "config.yaml")
 
@@ -96,17 +95,23 @@ def run_e4(config_path: Path | str) -> None:
         api_key_env=cfg["model"]["api_key_env"],
     )
 
-    generate_template = open(cfg["prompt"]["generate"], "r", encoding="utf-8").read()
     repair_template = open(cfg["prompt"]["repair"], "r", encoding="utf-8").read()
 
     with open(cfg["dataset"]["source"], "r", encoding="utf-8") as f:
         examples = json.load(f)
 
-    max_repairs = cfg["agent"].get("max_repairs", 2)
+    base_preds: dict[int, dict[str, Any]] = {}
+    base_pred_path = Path(cfg["base_predictions"])
+    with open(base_pred_path, "r", encoding="utf-8") as f:
+        for line in f:
+            o = json.loads(line)
+            base_preds[o["question_id"]] = o
+
+    max_repairs = cfg["agent"].get("max_repairs", 1)
     predictions = []
     traces = []
     errors = []
-    repair_stats = {"attempted": 0, "success": 0, "damage": 0}
+    repair_stats = {"attempted": 0, "repaired": 0, "damage": 0, "unchanged": 0}
     total_start = time.time()
 
     for idx, ex in enumerate(examples):
@@ -125,88 +130,85 @@ def run_e4(config_path: Path | str) -> None:
         )
         schema = db.get_schema()
 
-        prompt = render_prompt(
-            generate_template,
-            db_id=db_id,
-            schema=schema,
-            evidence=evidence_block,
-            question=question,
-        )
-        messages = [
-            {"role": "system", "content": "You are an expert SQL assistant."},
-            {"role": "user", "content": prompt},
-        ]
-
-        try:
-            completion = client.chat_completion(
-                messages=messages,
-                temperature=cfg["model"]["temperature"],
-                top_p=cfg["model"]["top_p"],
-                max_tokens=cfg["model"]["max_tokens"],
-            )
-            raw_output, _ = client.extract_content(completion)
-            pred_sql = extract_sql(raw_output)
-            gen_latency = completion["latency_seconds"]
-            gen_request_id = completion["response"].get("id")
-        except Exception as e:
-            errors.append({"question_id": qid, "stage": "generation", "error": str(e)})
-            pred_sql = ""
-            raw_output = ""
-            gen_latency = 0.0
-            gen_request_id = None
-
+        base_item = base_preds.get(qid, {})
+        pred_sql = base_item.get("pred_sql", "")
+        base_ex = base_item.get("ex", None)  # may be missing
         exec_result = db.execute(pred_sql) if pred_sql else {"ok": False, "error": "empty prediction"}
-        repair_history = [{"sql": pred_sql, "result": exec_result}]
 
-        # Repair loop
-        repairs_done = 0
+        repair_history = [{"sql": pred_sql, "result": exec_result, "stage": "base"}]
+        repaired = False
+
+        # Determine if base prediction is already correct using official evaluator.
+        # We do a quick local execution comparison.
+        def is_correct(sql: str) -> bool:
+            try:
+                gold_rows = db.execute(gold_sql).get("rows")
+                res = db.execute(sql)
+                if not res.get("ok"):
+                    return False
+                pred_rows = res.get("rows")
+                # Reuse official comparison
+                from evaluation.bird_official_eval import _compare
+                return _compare(pred_rows, gold_rows)
+            except Exception:
+                return False
+
+        correct_before = is_correct(pred_sql)
+
         for r in range(max_repairs):
-            if exec_result["ok"] and exec_result.get("rows"):
+            if correct_before:
                 break
             repair_stats["attempted"] += 1
-            repairs_done += 1
-            error_msg = exec_result.get("error") or "empty result set"
+            current_result = format_result(exec_result)
             repair_prompt = render_prompt(
                 repair_template,
                 db_id=db_id,
                 schema=schema,
                 evidence=evidence_block,
                 question=question,
-                failed_sql=pred_sql,
-                error=error_msg,
+                current_sql=pred_sql,
+                current_result=current_result,
             )
             try:
                 repair_completion = client.chat_completion(
                     messages=[
-                        {"role": "system", "content": "You are an expert SQL debugging assistant."},
+                        {"role": "system", "content": "You are an expert SQL repair assistant."},
                         {"role": "user", "content": repair_prompt},
                     ],
                     temperature=cfg["model"]["temperature"],
                     top_p=cfg["model"]["top_p"],
                     max_tokens=cfg["model"]["max_tokens"],
                 )
-                repair_raw, _ = client.extract_content(repair_completion)
+                repair_raw, usage = client.extract_content(repair_completion)
                 new_sql = extract_sql(repair_raw)
-                if new_sql and new_sql.lower() != pred_sql.lower():
-                    pred_sql = new_sql
-                    new_exec = db.execute(pred_sql)
-                    # Track repair success / damage
-                    old_ok = exec_result["ok"]
-                    new_ok = new_exec["ok"]
-                    if not old_ok and new_ok:
-                        repair_stats["success"] += 1
-                    elif old_ok and not new_ok:
-                        repair_stats["damage"] += 1
-                    exec_result = new_exec
-                    repair_history.append({"sql": pred_sql, "result": exec_result})
-                else:
+                if not new_sql or new_sql.lower() == pred_sql.lower():
+                    repair_stats["unchanged"] += 1
                     break
+                new_exec = db.execute(new_sql)
+                correct_after = is_correct(new_sql)
+                if correct_after and not correct_before:
+                    repair_stats["repaired"] += 1
+                elif not correct_after and correct_before:
+                    repair_stats["damage"] += 1
+                pred_sql = new_sql
+                exec_result = new_exec
+                correct_before = correct_after
+                repair_history.append({
+                    "sql": pred_sql,
+                    "result": exec_result,
+                    "stage": f"repair_{r+1}",
+                    "raw_output": repair_raw,
+                    "usage": usage,
+                    "request_id": repair_completion["response"].get("id"),
+                    "latency": repair_completion["latency_seconds"],
+                })
+                repaired = True
             except Exception as e:
-                errors.append({"question_id": qid, "stage": f"repair_{r}", "error": str(e)})
+                errors.append({"question_id": qid, "stage": f"repair_{r+1}", "error": str(e)})
                 break
 
-        if (idx + 1) % 5 == 0 or idx + 1 == len(examples):
-            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']} repairs={repairs_done}")
+        if (idx + 1) % 20 == 0 or idx + 1 == len(examples):
+            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']} repaired={repaired}")
 
         predictions.append({
             "question_id": qid,
@@ -215,10 +217,7 @@ def run_e4(config_path: Path | str) -> None:
             "pred_sql": pred_sql,
             "gold_sql": gold_sql,
             "valid": exec_result["ok"],
-            "raw_output": raw_output,
             "repair_history": repair_history,
-            "latency": gen_latency,
-            "request_id": gen_request_id,
         })
 
         traces.append({
@@ -287,5 +286,5 @@ def run_e4(config_path: Path | str) -> None:
 if __name__ == "__main__":
     import sys
 
-    config_path = sys.argv[1] if len(sys.argv) > 1 else "configs/e4_bird_dev20_glm5.2.yaml"
-    run_e4(config_path)
+    config_path = sys.argv[1] if len(sys.argv) > 1 else "configs/e4_bird_dev200_failures_glm5.2.yaml"
+    run_e4_repair_from_base(config_path)

@@ -38,13 +38,17 @@ def extract_sql(text: str) -> str:
     text = text.strip()
     if text.lower().startswith("sql"):
         text = text[3:].lstrip(": ")
-    if text.startswith("```"):
-        lines = text.splitlines()
-        if lines[0].startswith("```"):
-            lines = lines[1:]
-        if lines and lines[-1].startswith("```"):
-            lines = lines[:-1]
-        text = "\n".join(lines).strip()
+    # Extract content from the first markdown code block if present
+    if "```" in text:
+        start = text.find("```")
+        end = text.find("```", start + 3)
+        if start != -1 and end != -1:
+            block = text[start + 3 : end]
+            # Drop optional language tag line
+            lines = block.splitlines()
+            if lines and lines[0].strip().lower() in {"sql", "sqlite"}:
+                lines = lines[1:]
+            text = "\n".join(lines).strip()
     text = text.rstrip(";")
     return text
 

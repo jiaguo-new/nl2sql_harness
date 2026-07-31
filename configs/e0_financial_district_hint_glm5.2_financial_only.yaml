@@ -1,0 +1,39 @@
+run_id: e0_financial_district_hint_glm5.2_financial_only_20260724
+experiment: E0-FINANCIAL-HINT
+experiment_name: Direct SQL with financial district_id join hint (financial-only)
+description: Run GLM 5.2 on the BIRD dev financial-only subset using a prompt that strongly biases the financial database to use district_id joins between client and account, as observed in BIRD train examples.
+
+dataset:
+  name: BIRD
+  split: dev
+  source: /tmp/bird_dev_financial.json
+  db_root: /home/dameng/bird_dev/dev_databases
+  data_manifest: manifests/data_bird_dev_200.json
+
+model:
+  provider: openai-compatible
+  base_url: https://open.bigmodel.cn/api/paas/v4/
+  model_name: glm-5.2
+  api_key_env: GLM_API_KEY
+  temperature: 0
+  top_p: 1.0
+  max_tokens: 4096
+
+prompt:
+  template: prompts/e0_direct_sql_financial_district_hint.md
+
+execution:
+  timeout_seconds: 30
+  max_rows: 100
+
+output:
+  run_dir: runs/{run_id}
+  predictions: predictions/{run_id}/predictions.jsonl
+  tool_traces: traces/{run_id}/tool_traces.jsonl
+  errors: errors/{run_id}/errors.jsonl
+  metrics: metrics/{run_id}/metrics.json
+
+compliance:
+  no_gold_in_prompt: true
+  no_test_data: true
+  save_api_request_id: true

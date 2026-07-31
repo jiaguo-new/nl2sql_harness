@@ -1,10 +1,8 @@
-"""E4 Execution Repair Agent: generate -> execute -> repair -> execute."""
+"""E1 Structured Spec Agent: generate a structured query specification, then convert it to SQL."""
 
 from __future__ import annotations
 
 import json
-import os
-import re
 import shutil
 import time
 from datetime import datetime, timezone
@@ -30,37 +28,41 @@ def render_prompt(template: str, **kwargs: Any) -> str:
     return text
 
 
+def extract_spec(text: str) -> str:
+    """Extract text between <spec> ... </spec> tags."""
+    text = text.strip()
+    start_tag = "<spec>"
+    end_tag = "</spec>"
+    start = text.find(start_tag)
+    end = text.find(end_tag)
+    if start != -1 and end != -1 and end > start:
+        return text[start + len(start_tag) : end].strip()
+    # Fallback: strip code fences and return the whole text
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
+    return text
+
+
 def extract_sql(text: str) -> str:
     text = text.strip()
-    # Remove reasoning tags that some models (e.g., GLM-5.2) emit before the SQL.
-    text = re.sub(r"<reasoning>.*?</reasoning>", "", text, flags=re.DOTALL | re.IGNORECASE)
-    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.IGNORECASE)
-    text = text.strip()
-    # Prefer the last fenced code block if present; this handles headers
-    # like "## SQL" that may appear before the opening fence.
-    if "```" in text:
-        parts = text.split("```")
-        # Pick the last non-empty fenced segment (the final empty string after
-        # a closing fence is ignored; otherwise the trailing part is used).
-        candidate = None
-        for part in reversed(parts[1:]):  # skip text before first fence
-            if part.strip():
-                candidate = part.strip()
-                break
-        if candidate is not None:
-            text = candidate
-    # Remove a leading language tag line (e.g., "sql", "SQL", "sql\n").
-    lines = text.splitlines()
-    if lines and lines[0].strip().lower() == "sql":
-        lines = lines[1:]
-    text = "\n".join(lines).strip()
-    # Drop an explicit "SQL:" or "SQL" prefix if still present.
     if text.lower().startswith("sql"):
         text = text[3:].lstrip(": ")
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].startswith("```"):
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
     return text.rstrip(";").strip()
 
 
-def run_e4(config_path: Path | str) -> None:
+def run_e1(config_path: Path | str) -> None:
     cfg = load_config(config_path)
     run_id = cfg["run_id"]
     run_dir = Path(cfg["output"]["run_dir"].format(run_id=run_id))
@@ -68,15 +70,17 @@ def run_e4(config_path: Path | str) -> None:
     trace_path = Path(cfg["output"]["tool_traces"].format(run_id=run_id))
     error_path = Path(cfg["output"]["errors"].format(run_id=run_id))
     metrics_path = Path(cfg["output"]["metrics"].format(run_id=run_id))
-    prompt_snapshot_dir = run_dir / "prompt_snapshot"
 
+    prompt_snapshot_dir = run_dir / "prompt_snapshot"
     for p in [run_dir, pred_path.parent, trace_path.parent, error_path.parent, metrics_path.parent, prompt_snapshot_dir]:
         p.mkdir(parents=True, exist_ok=True)
 
-    shutil.copy(cfg["prompt"]["generate"], prompt_snapshot_dir / Path(cfg["prompt"]["generate"]).name)
-    shutil.copy(cfg["prompt"]["repair"], prompt_snapshot_dir / Path(cfg["prompt"]["repair"]).name)
+    # Snapshot prompts and config
+    for tmpl in cfg["prompt"].values():
+        shutil.copy(tmpl, prompt_snapshot_dir / Path(tmpl).name)
     shutil.copy(config_path, run_dir / "config.yaml")
 
+    # Data manifest
     data_manifest = {
         "dataset": cfg["dataset"]["name"],
         "split": cfg["dataset"]["split"],
@@ -96,17 +100,15 @@ def run_e4(config_path: Path | str) -> None:
         api_key_env=cfg["model"]["api_key_env"],
     )
 
-    generate_template = open(cfg["prompt"]["generate"], "r", encoding="utf-8").read()
-    repair_template = open(cfg["prompt"]["repair"], "r", encoding="utf-8").read()
+    spec_prompt_template = open(cfg["prompt"]["generate_spec"], "r", encoding="utf-8").read()
+    sql_prompt_template = open(cfg["prompt"]["spec_to_sql"], "r", encoding="utf-8").read()
 
     with open(cfg["dataset"]["source"], "r", encoding="utf-8") as f:
         examples = json.load(f)
 
-    max_repairs = cfg["agent"].get("max_repairs", 2)
     predictions = []
     traces = []
     errors = []
-    repair_stats = {"attempted": 0, "success": 0, "damage": 0}
     total_start = time.time()
 
     for idx, ex in enumerate(examples):
@@ -125,88 +127,67 @@ def run_e4(config_path: Path | str) -> None:
         )
         schema = db.get_schema()
 
-        prompt = render_prompt(
-            generate_template,
+        # Stage 1: structured specification
+        spec_prompt = render_prompt(
+            spec_prompt_template,
             db_id=db_id,
             schema=schema,
             evidence=evidence_block,
             question=question,
         )
-        messages = [
-            {"role": "system", "content": "You are an expert SQL assistant."},
-            {"role": "user", "content": prompt},
-        ]
-
         try:
-            completion = client.chat_completion(
-                messages=messages,
+            spec_completion = client.chat_completion(
+                messages=[
+                    {"role": "system", "content": "You are an expert database query analyst."},
+                    {"role": "user", "content": spec_prompt},
+                ],
                 temperature=cfg["model"]["temperature"],
                 top_p=cfg["model"]["top_p"],
                 max_tokens=cfg["model"]["max_tokens"],
             )
-            raw_output, _ = client.extract_content(completion)
-            pred_sql = extract_sql(raw_output)
-            gen_latency = completion["latency_seconds"]
-            gen_request_id = completion["response"].get("id")
+            spec_raw, spec_usage = client.extract_content(spec_completion)
+            spec = extract_spec(spec_raw)
+            spec_latency = spec_completion["latency_seconds"]
+            spec_request_id = spec_completion["response"].get("id")
         except Exception as e:
-            errors.append({"question_id": qid, "stage": "generation", "error": str(e)})
+            errors.append({"question_id": qid, "stage": "spec_generation", "error": str(e)})
+            spec = ""
+            spec_raw = ""
+            spec_usage = None
+            spec_latency = 0.0
+            spec_request_id = None
+
+        # Stage 2: SQL from spec
+        sql_prompt = render_prompt(
+            sql_prompt_template,
+            db_id=db_id,
+            schema=schema,
+            evidence=evidence_block,
+            spec=spec,
+        )
+        try:
+            sql_completion = client.chat_completion(
+                messages=[
+                    {"role": "system", "content": "You are an expert SQL assistant."},
+                    {"role": "user", "content": sql_prompt},
+                ],
+                temperature=cfg["model"]["temperature"],
+                top_p=cfg["model"]["top_p"],
+                max_tokens=cfg["model"]["max_tokens"],
+            )
+            sql_raw, sql_usage = client.extract_content(sql_completion)
+            pred_sql = extract_sql(sql_raw)
+            sql_latency = sql_completion["latency_seconds"]
+            sql_request_id = sql_completion["response"].get("id")
+        except Exception as e:
+            errors.append({"question_id": qid, "stage": "sql_generation", "error": str(e)})
             pred_sql = ""
-            raw_output = ""
-            gen_latency = 0.0
-            gen_request_id = None
+            sql_raw = ""
+            sql_usage = None
+            sql_latency = 0.0
+            sql_request_id = None
 
         exec_result = db.execute(pred_sql) if pred_sql else {"ok": False, "error": "empty prediction"}
-        repair_history = [{"sql": pred_sql, "result": exec_result}]
-
-        # Repair loop
-        repairs_done = 0
-        for r in range(max_repairs):
-            if exec_result["ok"] and exec_result.get("rows"):
-                break
-            repair_stats["attempted"] += 1
-            repairs_done += 1
-            error_msg = exec_result.get("error") or "empty result set"
-            repair_prompt = render_prompt(
-                repair_template,
-                db_id=db_id,
-                schema=schema,
-                evidence=evidence_block,
-                question=question,
-                failed_sql=pred_sql,
-                error=error_msg,
-            )
-            try:
-                repair_completion = client.chat_completion(
-                    messages=[
-                        {"role": "system", "content": "You are an expert SQL debugging assistant."},
-                        {"role": "user", "content": repair_prompt},
-                    ],
-                    temperature=cfg["model"]["temperature"],
-                    top_p=cfg["model"]["top_p"],
-                    max_tokens=cfg["model"]["max_tokens"],
-                )
-                repair_raw, _ = client.extract_content(repair_completion)
-                new_sql = extract_sql(repair_raw)
-                if new_sql and new_sql.lower() != pred_sql.lower():
-                    pred_sql = new_sql
-                    new_exec = db.execute(pred_sql)
-                    # Track repair success / damage
-                    old_ok = exec_result["ok"]
-                    new_ok = new_exec["ok"]
-                    if not old_ok and new_ok:
-                        repair_stats["success"] += 1
-                    elif old_ok and not new_ok:
-                        repair_stats["damage"] += 1
-                    exec_result = new_exec
-                    repair_history.append({"sql": pred_sql, "result": exec_result})
-                else:
-                    break
-            except Exception as e:
-                errors.append({"question_id": qid, "stage": f"repair_{r}", "error": str(e)})
-                break
-
-        if (idx + 1) % 5 == 0 or idx + 1 == len(examples):
-            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']} repairs={repairs_done}")
 
         predictions.append({
             "question_id": qid,
@@ -215,20 +196,25 @@ def run_e4(config_path: Path | str) -> None:
             "pred_sql": pred_sql,
             "gold_sql": gold_sql,
             "valid": exec_result["ok"],
-            "raw_output": raw_output,
-            "repair_history": repair_history,
-            "latency": gen_latency,
-            "request_id": gen_request_id,
+            "spec": spec,
+            "raw_outputs": {"spec": spec_raw, "sql": sql_raw},
+            "latencies": {"spec": spec_latency, "sql": sql_latency},
+            "request_ids": {"spec": spec_request_id, "sql": sql_request_id},
+            "usages": {"spec": spec_usage, "sql": sql_usage},
         })
 
         traces.append({
             "question_id": qid,
             "db_id": db_id,
             "tools": [
-                {"tool": "execute_sql", "input": h["sql"], "output": h["result"]}
-                for h in repair_history
+                {"tool": "generate_spec", "input": question, "output": spec},
+                {"tool": "spec_to_sql", "input": spec, "output": pred_sql},
+                {"tool": "execute_sql", "input": pred_sql, "output": exec_result},
             ],
         })
+
+        if (idx + 1) % 5 == 0 or idx + 1 == len(examples):
+            print(f"  [{idx+1}/{len(examples)}] qid={qid} valid={exec_result['ok']}")
 
     total_time = time.time() - total_start
 
@@ -240,13 +226,13 @@ def run_e4(config_path: Path | str) -> None:
         for t in traces:
             f.write(json.dumps(t, ensure_ascii=False) + "\n")
 
+    # Official-style evaluation
     summary = evaluate_predictions(
         dev_path=cfg["dataset"]["source"],
         pred_path=pred_path,
         db_root=cfg["dataset"]["db_root"],
         output_path=metrics_path.parent / "bird_official_eval.json",
     )
-    summary["repair_stats"] = repair_stats
 
     for i, pred in enumerate(predictions):
         if not summary["per_query"][i]["ex"]:
@@ -257,6 +243,7 @@ def run_e4(config_path: Path | str) -> None:
                 "pred_sql": pred["pred_sql"],
                 "gold_sql": pred["gold_sql"],
                 "valid": pred["valid"],
+                "spec": pred["spec"],
             })
 
     with open(error_path, "w", encoding="utf-8") as f:
@@ -281,11 +268,10 @@ def run_e4(config_path: Path | str) -> None:
 
     print(f"Run {run_id} complete.")
     print(f"Metrics: EX={summary['ex_rate']:.2f}%, Valid={summary['valid_rate']:.2f}%")
-    print(f"Repair stats: {repair_stats}")
 
 
 if __name__ == "__main__":
     import sys
 
-    config_path = sys.argv[1] if len(sys.argv) > 1 else "configs/e4_bird_dev20_glm5.2.yaml"
-    run_e4(config_path)
+    config_path = sys.argv[1] if len(sys.argv) > 1 else "configs/e1_bird_dev_glm5.2.yaml"
+    run_e1(config_path)
