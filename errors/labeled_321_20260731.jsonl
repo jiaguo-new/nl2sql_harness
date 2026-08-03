@@ -1,0 +1,321 @@
+{"qid": 21, "db_id": "california_schools", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 23, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=s.school, s.street gold_sel=t1.school, t1.streetabr"}
+{"qid": 25, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[\"'riverside%'\"] pred_only=[\"'riverside'\"]"}
+{"qid": 26, "db_id": "california_schools", "tag": "exec_error", "detail": "no such column: f.Free Meal Count (Ages 15-17)"}
+{"qid": 27, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[\"'1991'\", \"'2000'\"] pred_only=[\"'2000-01-01'\", \"'1991-12-31'\"]"}
+{"qid": 28, "db_id": "california_schools", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 33, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=s.school, s.website gold_sel=t2.website, t1.`school name`"}
+{"qid": 36, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=s.admfname1 || ' ' || s.admlname1 as ful gold_sel=t2.admfname1, t2.admlname1, t2.admfname2"}
+{"qid": 49, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=s.county, s.school, s.closeddate gold_sel=distinct county, school, closeddate"}
+{"qid": 53, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=sum(s.numtsttakr) as totaltesttakers gold_sel=t1.numtsttakr"}
+{"qid": 56, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[\"'ca'\"] pred_only=[\"'california'\"]"}
+{"qid": 58, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=school, phone, ext gold_sel=phone, ext, school"}
+{"qid": 62, "db_id": "california_schools", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=count(t2.school)"}
+{"qid": 63, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"' '\"]"}
+{"qid": 65, "db_id": "california_schools", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 70, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'%district community day school%'\"]"}
+{"qid": 72, "db_id": "california_schools", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'2014-2015'\"]"}
+{"qid": 82, "db_id": "california_schools", "tag": "where_logic_error", "detail": ""}
+{"qid": 84, "db_id": "california_schools", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 92, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=count(distinct t1.district_id) gold_sel=distinct t2.district_id"}
+{"qid": 96, "db_id": "financial", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 99, "db_id": "financial", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 102, "db_id": "financial", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 106, "db_id": "financial", "tag": "join_path_error", "detail": "pred 3 joins, gold 1 joins"}
+{"qid": 113, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=c.birth_date gold_sel=t3.birth_date"}
+{"qid": 115, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when c.gender = 'm' then 1 gold_sel=cast(sum(t1.gender = 'm') as real) * 100"}
+{"qid": 125, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=d.a3 as district,\n    d.a2 as state,\n    gold_sel=cast((t3.a13 - t3.a12) as real) * 100 / "}
+{"qid": 129, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=d.a2 as district_name, sum(t.amount) as  gold_sel=t1.district_id"}
+{"qid": 130, "db_id": "financial", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 132, "db_id": "financial", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 133, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=a3 as branch_location, a2 as district_na gold_sel=district_id, a2"}
+{"qid": 142, "db_id": "financial", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 143, "db_id": "financial", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 145, "db_id": "financial", "tag": "join_path_error", "detail": "pred 3 joins, gold 1 joins"}
+{"qid": 153, "db_id": "financial", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 155, "db_id": "financial", "tag": "where_value_error", "detail": "gold_only=[\"'%y'\", \"'1998'\"] pred_only=[\"'1998-01-01'\"]"}
+{"qid": 159, "db_id": "financial", "tag": "exec_error", "detail": "no such column: client_id"}
+{"qid": 162, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=t2.a3 gold_sel=t2.district_id, t1.a3"}
+{"qid": 164, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=t2.client_id, t2.gender, t2.birth_date gold_sel=t3.client_id"}
+{"qid": 165, "db_id": "financial", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 169, "db_id": "financial", "tag": "join_path_error", "detail": "pred 2 joins, gold 3 joins"}
+{"qid": 172, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=sum(type = 'owner') , sum(type = 'dispon"}
+{"qid": 176, "db_id": "financial", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 179, "db_id": "financial", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 180, "db_id": "financial", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 181, "db_id": "financial", "tag": "column_selection_error", "detail": "pred_sel=c.client_id gold_sel=t1.client_id"}
+{"qid": 182, "db_id": "financial", "tag": "where_value_error", "detail": "gold_only=[\"'1974'\", \"'%y'\"] pred_only=[\"'1976-12-31'\", \"'1974-01-01'\"]"}
+{"qid": 186, "db_id": "financial", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 192, "db_id": "financial", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 193, "db_id": "financial", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 197, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 198, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 201, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 205, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=distinct molecule_id gold_sel=t.atom_id"}
+{"qid": 207, "db_id": "toxicology", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 211, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 212, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=element gold_sel=t.element"}
+{"qid": 215, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 217, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 218, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=(1.0 - cast(sum(case when a.element = 'f gold_sel=cast(count(distinct case when t1.element"}
+{"qid": 219, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 221, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 0 joins"}
+{"qid": 223, "db_id": "toxicology", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 231, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=bond_type, \n    count(bond_type) as bond gold_sel=t.bond_type"}
+{"qid": 234, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 237, "db_id": "toxicology", "tag": "where_value_error", "detail": "gold_only=[\"'yes'\", \"'no'\"] pred_only=[\"'carcinogenic'\", \"'not carcinogenic'\"]"}
+{"qid": 247, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 251, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=element gold_sel=t.element"}
+{"qid": 252, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 254, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 259, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=count(distinct a.element) gold_sel=count(distinct t.element)"}
+{"qid": 263, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when a.element = 'cl' then gold_sel=cast(count(case when t.element = 'cl' th"}
+{"qid": 267, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 269, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=count(distinct b.bond_id) gold_sel=count(t3.bond_id)"}
+{"qid": 271, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 281, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=a.element, count(*) as tally gold_sel=distinct t1.element"}
+{"qid": 282, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 284, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 296, "db_id": "toxicology", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 310, "db_id": "toxicology", "tag": "where_value_error", "detail": "gold_only=[\"'='\"] pred_only=[\"' = '\"]"}
+{"qid": 311, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 3 joins, gold 1 joins"}
+{"qid": 317, "db_id": "toxicology", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when t1.label = '+' and t2 gold_sel=count(case when t2.label = '+' and t1.el"}
+{"qid": 319, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 326, "db_id": "toxicology", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 328, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 330, "db_id": "toxicology", "tag": "exec_error", "detail": "no such column: c.molecule_id"}
+{"qid": 337, "db_id": "toxicology", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 338, "db_id": "toxicology", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 340, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 341, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=* gold_sel=id"}
+{"qid": 342, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=facename gold_sel=name"}
+{"qid": 343, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=name gold_sel=id"}
+{"qid": 344, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=c.name gold_sel=distinct t1.id"}
+{"qid": 347, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'yes'\", \"'no'\"]"}
+{"qid": 349, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=c.name, c.artist, c.ispromo gold_sel=t1.name, t1.artist, t1.ispromo"}
+{"qid": 357, "db_id": "card_games", "tag": "where_logic_error", "detail": ""}
+{"qid": 359, "db_id": "card_games", "tag": "where_logic_error", "detail": ""}
+{"qid": 360, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 2 joins, gold 0 joins"}
+{"qid": 386, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=count(distinct c.id) as future_frame_cou gold_sel=count(t1.id)"}
+{"qid": 387, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=name, colors gold_sel=id, colors"}
+{"qid": 388, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 389, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=c.name, r.date gold_sel=t1.id, t2.date"}
+{"qid": 392, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=c.name gold_sel=distinct t1.name"}
+{"qid": 398, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"''\", \"'/'\"]"}
+{"qid": 399, "db_id": "card_games", "tag": "where_logic_error", "detail": ""}
+{"qid": 403, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=f.name, \n       (cast(sum(case when f.la gold_sel=( select cast(sum(case when language = '"}
+{"qid": 406, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 408, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 416, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'%*%'\"] pred_only=[\"'*'\"]"}
+{"qid": 417, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=cast(count(case when t1.language = 'japa gold_sel=cast(sum(case when t2.language = 'japane"}
+{"qid": 431, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 432, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=s.name gold_sel=t1.id"}
+{"qid": 433, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when fd.language = 'chines gold_sel=cast(sum(case when t2.language = 'chines"}
+{"qid": 437, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=name gold_sel=id"}
+{"qid": 441, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 442, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 443, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 444, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=fd.name, c.type gold_sel=distinct t1.name, t1.type"}
+{"qid": 445, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'colorpie'\"] pred_only=[]"}
+{"qid": 446, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 447, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 448, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=fd.name, c.type gold_sel=distinct t1.name, t1.type"}
+{"qid": 450, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=sum(case when artist = 'aaron miller' an"}
+{"qid": 452, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=name gold_sel=distinct name"}
+{"qid": 454, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'%*%'\"] pred_only=[\"'*'\"]"}
+{"qid": 458, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'black'\"]"}
+{"qid": 465, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'yes'\", \"'s chosen'\"] pred_only=[\"'%ancestor'\", \"'s chosen%'\"]"}
+{"qid": 472, "db_id": "card_games", "tag": "exec_error", "detail": "no such column: s.setCode"}
+{"qid": 479, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'%*%'\"] pred_only=[\"'*'\"]"}
+{"qid": 484, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=fd.name gold_sel=t2.name"}
+{"qid": 487, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 494, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=c.name as card_name,\n    r.text as rulin gold_sel=t2.text , case when t1.hascontentwarning"}
+{"qid": 500, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 512, "db_id": "card_games", "tag": "where_value_error", "detail": "gold_only=[\"'%*%'\"] pred_only=[\"'*'\"]"}
+{"qid": 514, "db_id": "card_games", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 515, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 519, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 523, "db_id": "card_games", "tag": "column_selection_error", "detail": "pred_sel=avg(count(*)) over () as average_sets_pe gold_sel=(cast(sum(t1.id) as real) / count(t1.id)"}
+{"qid": 529, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 530, "db_id": "card_games", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 533, "db_id": "codebase_community", "tag": "where_value_error", "detail": "gold_only=[\"'2014-09-01'\"] pred_only=[\"'2014-09-01 00:00:00'\"]"}
+{"qid": 581, "db_id": "codebase_community", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 582, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 583, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=sum(p.score), u.websiteurl gold_sel=sum(t1.score), t2.websiteurl"}
+{"qid": 584, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=c.text gold_sel=t2.comment"}
+{"qid": 586, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=u.displayname gold_sel=t3.displayname, t1.title"}
+{"qid": 587, "db_id": "codebase_community", "tag": "where_value_error", "detail": "gold_only=[\"'<humor>'\"] pred_only=[\"'%<humor>%'\", \"'%humor%>'\"]"}
+{"qid": 592, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(userid) gold_sel=userid"}
+{"qid": 595, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 596, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=b.name gold_sel=name"}
+{"qid": 600, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=p.id, p.title, p.viewcount gold_sel=t1.viewcount"}
+{"qid": 602, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=p.id as postid, p.owneruserid as userid gold_sel=postid, userid"}
+{"qid": 603, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=sum(favoritecount) gold_sel=sum(distinct favoritecount)"}
+{"qid": 610, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=badges.name gold_sel=t2.name"}
+{"qid": 628, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=displayname, views gold_sel=id, displayname"}
+{"qid": 630, "db_id": "codebase_community", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 631, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 632, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 635, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 2 joins, gold 3 joins"}
+{"qid": 639, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 640, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 646, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=p.title, c.userdisplayname gold_sel=t1.title, t2.userdisplayname"}
+{"qid": 649, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(ph.id) as posthistorycount,\n    ma gold_sel=t1.id, t2.lasteditdate"}
+{"qid": 667, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=p.title gold_sel=t1.title"}
+{"qid": 679, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 682, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 685, "db_id": "codebase_community", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 686, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=id"}
+{"qid": 687, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(c.id) as commentcount gold_sel=count(t2.id)"}
+{"qid": 689, "db_id": "codebase_community", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 692, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=julianday(b.date) - julianday(u.creation gold_sel=t1.date - t2.creationdate"}
+{"qid": 693, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 694, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 701, "db_id": "codebase_community", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 706, "db_id": "codebase_community", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 709, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=count(t1.id)"}
+{"qid": 710, "db_id": "codebase_community", "tag": "column_selection_error", "detail": "pred_sel=count(c.id) gold_sel=count(t1.id)"}
+{"qid": 720, "db_id": "superhero", "tag": "column_selection_error", "detail": "pred_sel=s.full_name gold_sel=distinct t1.full_name"}
+{"qid": 788, "db_id": "superhero", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when t2.gender = 'female'  gold_sel=cast(count(case when t2.publisher_name ="}
+{"qid": 805, "db_id": "superhero", "tag": "column_selection_error", "detail": "pred_sel=full_name gold_sel=distinct full_name"}
+{"qid": 811, "db_id": "superhero", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 828, "db_id": "superhero", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 852, "db_id": "formula_1", "tag": "where_value_error", "detail": "gold_only=[\"'monaco'\", \"'japan'\"] pred_only=[\"'asia'\", \"'europe'\"]"}
+{"qid": 857, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 860, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 861, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 866, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 872, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 876, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(distinct driverid) as finished_dri gold_sel=count(t2.driverid)"}
+{"qid": 888, "db_id": "formula_1", "tag": "where_value_error", "detail": "gold_only=[\"'european grand prix'\"] pred_only=[\"'%european grand prix%'\"]"}
+{"qid": 889, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=max(r.year) as last_year gold_sel=t2.date"}
+{"qid": 891, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname gold_sel=t3.forename, t3.surname"}
+{"qid": 893, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, r.points gold_sel=t3.forename, t3.surname, t2.points"}
+{"qid": 894, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, r.name, l.time gold_sel=t2.milliseconds, t1.forename, t1.surname"}
+{"qid": 895, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=avg(milliseconds) as average_lap_time gold_sel=avg(t2.milliseconds)"}
+{"qid": 896, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=cast(count(case when t1.position > 1 the gold_sel=cast(count(case when t2.position <> 1 th"}
+{"qid": 897, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, d.nationality, av gold_sel=t1.forename, t1.surname, t1.nationality,"}
+{"qid": 898, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=forename, surname, 2022 - strftime('%y', gold_sel=strftime('%y', current_timestamp) - strf"}
+{"qid": 903, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(*) as win_count gold_sel=sum(t2.wins)"}
+{"qid": 908, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=r.name as race_name, r.year, c.location  gold_sel=t3.lap, t2.name, t2.year, t1.location"}
+{"qid": 921, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=t1.url gold_sel=distinct t1.url"}
+{"qid": 922, "db_id": "formula_1", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 927, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname gold_sel=t1.forename, t1.surname"}
+{"qid": 928, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.driverref gold_sel=t3.forename, t3.surname, t3.driverref"}
+{"qid": 930, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 2 joins, gold 0 joins"}
+{"qid": 936, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=min(milliseconds) as fastest_lap gold_sel=t1.fastestlap"}
+{"qid": 943, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=cast(count(case when t.time is not null  gold_sel=cast(sum(iif(t1.time is not null, 1, 0))"}
+{"qid": 951, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(distinct cr.constructorid) gold_sel=count(t1.raceid)"}
+{"qid": 955, "db_id": "formula_1", "tag": "exec_error", "detail": "no such column: r.year"}
+{"qid": 958, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname gold_sel=t2.forename, t2.surname, t1.fastestlapti"}
+{"qid": 963, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(distinct d.driverid) gold_sel=count(t1.driverid)"}
+{"qid": 966, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(distinct driverid) gold_sel=count(driverid)"}
+{"qid": 970, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, min(l.time) as ea gold_sel=t2.driverid"}
+{"qid": 973, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, max(l.time) as la gold_sel=t2.driverid"}
+{"qid": 974, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=t1.year gold_sel=t2.year"}
+{"qid": 979, "db_id": "formula_1", "tag": "where_logic_error", "detail": ""}
+{"qid": 982, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=count(t1.driverid)"}
+{"qid": 984, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=c.url gold_sel=t1.url"}
+{"qid": 985, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 986, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=r.name, lt.milliseconds gold_sel=t1.milliseconds"}
+{"qid": 987, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 989, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 993, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=location, country, lat, lng gold_sel=country, lat, lng"}
+{"qid": 995, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 3 joins, gold 2 joins"}
+{"qid": 998, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=wins gold_sel=sum(case when points = 91 then wins else"}
+{"qid": 1000, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=c.location || ', ' || c.country as full_ gold_sel=t1.location"}
+{"qid": 1004, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=d.forename, d.surname, ds.wins gold_sel=sum(t1.wins)"}
+{"qid": 1006, "db_id": "formula_1", "tag": "where_value_error", "detail": "gold_only=[\"'.'\", \"':'\"] pred_only=[]"}
+{"qid": 1010, "db_id": "formula_1", "tag": "column_selection_error", "detail": "pred_sel=min(milliseconds) as lap_record gold_sel=t1.time"}
+{"qid": 1011, "db_id": "formula_1", "tag": "where_value_error", "detail": "gold_only=[\"'.'\", \"':'\"] pred_only=[\"' '\"]"}
+{"qid": 1012, "db_id": "formula_1", "tag": "join_path_error", "detail": "pred 3 joins, gold 1 joins"}
+{"qid": 1021, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=player_name, height gold_sel=player_name"}
+{"qid": 1024, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=player_api_id, max(crossing) as max_cros gold_sel=id"}
+{"qid": 1026, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=t.team_long_name gold_sel=teamdetails.team_long_name"}
+{"qid": 1027, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=player_name gold_sel=t2.player_name"}
+{"qid": 1028, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=t2.team_long_name gold_sel=teaminfo.team_long_name"}
+{"qid": 1029, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=ta.buildupplayspeed gold_sel=t1.buildupplayspeed"}
+{"qid": 1041, "db_id": "european_football_2", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 1058, "db_id": "european_football_2", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 1064, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=player.player_name gold_sel=distinct t1.id, t1.player_name"}
+{"qid": 1068, "db_id": "european_football_2", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'%y'\"]"}
+{"qid": 1091, "db_id": "european_football_2", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'%m'\", \"'04'\"]"}
+{"qid": 1093, "db_id": "european_football_2", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'%y'\"]"}
+{"qid": 1094, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=((max(case when t1.player_name = 'ariel  gold_sel=(sum(case when t1.player_name = 'ariel b"}
+{"qid": 1107, "db_id": "european_football_2", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 1113, "db_id": "european_football_2", "tag": "where_value_error", "detail": "gold_only=[\"'2015-09-10'\"] pred_only=[\"'2015-09-10 00:00:00'\"]"}
+{"qid": 1119, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=sum(case when t1.player_name = 'aaron le gold_sel=sum(t2.home_team_goal)"}
+{"qid": 1120, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=sum(case when t2.player_name = 'daan smi gold_sel=sum(t2.away_team_goal)"}
+{"qid": 1121, "db_id": "european_football_2", "tag": "where_value_error", "detail": "gold_only=[\"'localtime'\"] pred_only=[\"'%y'\", \"'%m-%d'\"]"}
+{"qid": 1122, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=player_name gold_sel=distinct t1.player_name"}
+{"qid": 1126, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=distinct p.player_name gold_sel=t3.player_name"}
+{"qid": 1131, "db_id": "european_football_2", "tag": "join_path_error", "detail": "pred 0 joins, gold 2 joins"}
+{"qid": 1135, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=distinct player_api_id gold_sel=id"}
+{"qid": 1144, "db_id": "european_football_2", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 1148, "db_id": "european_football_2", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when p.height < 180 and pa gold_sel=cast(count(case when t2.overall_rating >"}
+{"qid": 1149, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'outpatient'\", \"'in-patient'\"]"}
+{"qid": 1152, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=cast(sum(case when admission = '+' then  gold_sel=sum(case when admission = '+' then 1 els"}
+{"qid": 1166, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=t1.symptoms, t1.diagnosis gold_sel=t2.symptoms, t1.diagnosis"}
+{"qid": 1170, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'+'\"] pred_only=[]"}
+{"qid": 1172, "db_id": "thrombosis_prediction", "tag": "on_condition_error", "detail": "pred_on=t1.id = t2.id\n gold_on=t1.id = t2.id "}
+{"qid": 1174, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'1999'\"] pred_only=[]"}
+{"qid": 1179, "db_id": "thrombosis_prediction", "tag": "join_path_error", "detail": "pred 1 joins, gold 0 joins"}
+{"qid": 1185, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=sum(case when date like '1981-11-%' then gold_sel=cast((sum(case when t2.date like '1981-1"}
+{"qid": 1186, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'1997-12-31'\", \"'behcet'\"] pred_only=[\"'%behcet%'\", \"'1998-01-01'\"]"}
+{"qid": 1197, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=description, diagnosis gold_sel=`first date`, diagnosis"}
+{"qid": 1199, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct id) gold_sel=count(id)"}
+{"qid": 1204, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'%d'\"] pred_only=[]"}
+{"qid": 1205, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'f'\"] pred_only=[\"'no'\", \"'yes'\"]"}
+{"qid": 1211, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=distinct t1.id, cast(strftime('%y', curr gold_sel=distinct t1.id, strftime('%y', current_t"}
+{"qid": 1213, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'abnormal'\", \"'normal'\"] pred_only=[\"'yes'\", \"'no'\"]"}
+{"qid": 1217, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'abnormal'\", \"'normal'\"] pred_only=[\"'false'\", \"'true'\"]"}
+{"qid": 1219, "db_id": "thrombosis_prediction", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 1224, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=p.id, p.sex, p.birthday, l.`t-bil` gold_sel=t2.`t-bil`, t1.id, t1.sex, t1.birthday"}
+{"qid": 1225, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'m'\", \"'f'\"] pred_only=[]"}
+{"qid": 1233, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=t1.id, t2.glu gold_sel=distinct t1.id, t2.glu"}
+{"qid": 1236, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=t1.admission gold_sel=distinct t1.id, t1.admission"}
+{"qid": 1242, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'1984'\"] pred_only=[\"'1984%'\"]"}
+{"qid": 1243, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'now'\"]"}
+{"qid": 1245, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct l.id) gold_sel=count(t1.id)"}
+{"qid": 1247, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct patient.id) gold_sel=count(distinct t1.id)"}
+{"qid": 1248, "db_id": "thrombosis_prediction", "tag": "on_condition_error", "detail": "pred_on=t1.id = t2.id\n gold_on=t1.id = t2.id "}
+{"qid": 1257, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'18'\"] pred_only=[]"}
+{"qid": 1265, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'0'\", \"'negative'\"] pred_only=[\"'+-'\", \"'-'\"]"}
+{"qid": 1268, "db_id": "thrombosis_prediction", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 1269, "db_id": "thrombosis_prediction", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 1272, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'0'\", \"'negative'\"] pred_only=[\"'+-'\", \"'-'\"]"}
+{"qid": 1273, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'0'\", \"'negative'\"] pred_only=[\"'+-'\", \"'-'\"]"}
+{"qid": 1274, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'0'\", \"'negative'\"] pred_only=[\"'+-'\", \"'-'\"]"}
+{"qid": 1275, "db_id": "thrombosis_prediction", "tag": "where_value_error", "detail": "gold_only=[\"'0'\", \"'negative'\"] pred_only=[\"'+-'\", \"'-'\"]"}
+{"qid": 1279, "db_id": "thrombosis_prediction", "tag": "join_path_error", "detail": "pred 2 joins, gold 1 joins"}
+{"qid": 1286, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct t1.id) gold_sel=count(t1.id)"}
+{"qid": 1290, "db_id": "thrombosis_prediction", "tag": "where_logic_error", "detail": ""}
+{"qid": 1291, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct t1.id) gold_sel=count(t1.id)"}
+{"qid": 1300, "db_id": "thrombosis_prediction", "tag": "on_condition_error", "detail": "pred_on=t1.id = t2.id  gold_on=as t1 inner  t1.id = t2.id "}
+{"qid": 1308, "db_id": "thrombosis_prediction", "tag": "column_selection_error", "detail": "pred_sel=count(distinct l.id) gold_sel=count(t1.id)"}
+{"qid": 1322, "db_id": "student_club", "tag": "join_path_error", "detail": "pred 0 joins, gold 1 joins"}
+{"qid": 1352, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=count(*) gold_sel=count(t1.member_id)"}
+{"qid": 1370, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=expense.* gold_sel=t2.expense_id, t2.expense_description"}
+{"qid": 1388, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=member.first_name, member.last_name, inc gold_sel=t1.first_name, t1.last_name, t2.source"}
+{"qid": 1399, "db_id": "student_club", "tag": "where_value_error", "detail": "gold_only=[\"'yes'\"] pred_only=[]"}
+{"qid": 1404, "db_id": "student_club", "tag": "where_value_error", "detail": "gold_only=[] pred_only=[\"'true'\"]"}
+{"qid": 1405, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=b.category, b.amount gold_sel=sum(t2.amount), t2.category"}
+{"qid": 1407, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=budget_id, category, amount gold_sel=budget_id"}
+{"qid": 1427, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=t1.category gold_sel=distinct t2.category, t1.type"}
+{"qid": 1433, "db_id": "student_club", "tag": "where_logic_error", "detail": ""}
+{"qid": 1441, "db_id": "student_club", "tag": "where_value_error", "detail": "gold_only=[\"'member'\", \"'%education%'\"] pred_only=[\"'education'\"]"}
+{"qid": 1446, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=sum(type = 'po box') * 100.0 / count(zip gold_sel=cast(sum(case when type = 'po box' then "}
+{"qid": 1451, "db_id": "student_club", "tag": "column_selection_error", "detail": "pred_sel=m.first_name, m.last_name, e.cost gold_sel=t2.member_id"}
+{"qid": 1481, "db_id": "debit_card_specializing", "tag": "join_path_error", "detail": "pred 6 joins, gold 1 joins"}
+{"qid": 1482, "db_id": "debit_card_specializing", "tag": "where_value_error", "detail": "gold_only=[\"'2012%'\", \"'2013%'\"] pred_only=[\"'201301'\", \"'201201'\"]"}
+{"qid": 1491, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=country, count(gasstationid) as totalval gold_sel=country , ( select count(gasstationid)"}
+{"qid": 1498, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=max(consumption) as highestmonthlyconsum gold_sel=sum(consumption)"}
+{"qid": 1503, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=distinct p.description gold_sel=distinct t1.productid, t3.description"}
+{"qid": 1510, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=avg(t.amount * t.price) as average_total gold_sel=avg(t1.price)"}
+{"qid": 1511, "db_id": "debit_card_specializing", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 1520, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=t2.date, t2.consumption gold_sel=t1.customerid, t2.date, t2.consumption"}
+{"qid": 1524, "db_id": "debit_card_specializing", "tag": "empty_result_gold_nonempty", "detail": ""}
+{"qid": 1527, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=gasstationid, sum(amount * price) as rev gold_sel=gasstationid"}
+{"qid": 1529, "db_id": "debit_card_specializing", "tag": "join_path_error", "detail": "pred 1 joins, gold 2 joins"}
+{"qid": 1530, "db_id": "debit_card_specializing", "tag": "on_condition_error", "detail": "pred_on=from transactions_1k t1\n t1.productid =  gold_on=from transactions_1k as t1  t1.productid"}
+{"qid": 1531, "db_id": "debit_card_specializing", "tag": "column_selection_error", "detail": "pred_sel=t1.customerid, avg(t1.price / t1.amount) gold_sel=t2.customerid, sum(t2.price / t2.amount)"}
