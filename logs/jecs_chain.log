@@ -1,0 +1,11 @@
+todo: 431
+  [50/431] {'jecs_consensus': 31, 'jecs_judge_diff_struct': 14, 'jecs_judge_same_struct': 5}
+  [100/431] {'jecs_consensus': 59, 'jecs_judge_diff_struct': 31, 'jecs_judge_same_struct': 10}
+  [150/431] {'jecs_consensus': 86, 'jecs_judge_diff_struct': 43, 'jecs_judge_same_struct': 20, 'base': 1}
+  [200/431] {'jecs_consensus': 112, 'jecs_judge_diff_struct': 58, 'jecs_judge_same_struct': 27, 'base': 3}
+  [250/431] {'jecs_consensus': 141, 'jecs_judge_diff_struct': 76, 'jecs_judge_same_struct': 30, 'base': 3}
+  [300/431] {'jecs_consensus': 172, 'jecs_judge_diff_struct': 83, 'jecs_judge_same_struct': 42, 'base': 3}
+  [350/431] {'jecs_consensus': 206, 'jecs_judge_diff_struct': 92, 'jecs_judge_same_struct': 48, 'base': 4}
+  [400/431] {'jecs_consensus': 242, 'jecs_judge_diff_struct': 96, 'jecs_judge_same_struct': 58, 'base': 4}
+done: 431 -> predictions/clean_chain_jecs_20260805/predictions.jsonl
+chosen distribution: {'jecs_consensus': 258, 'jecs_judge_diff_struct': 105, 'jecs_judge_same_struct': 64, 'base': 4}
