@@ -1,5 +1,28 @@
 # NL2SQL Database Agent Harness
 
+> ⚠️ **2026-08-05 数据泄露审计（修订版）**
+>
+> 经审计发现，历史 k5 retrieval few-shot 使用的语料 `/home/dameng/bird_dev/dev_train1234.json`
+> 实为 **dev 集的 1234 题子集**（1233/1234 与 dev 重叠），导致 dev gold SQL 经 prompt 泄露。
+>
+> **严重污染（作废）：**
+> - `e5b_retrieval_k5_v2_merged_detvg_20260725` — 86.31%（dev gold 直接进 prompt）
+> - `e6_hybrid_k5_emptyfix_ormv2_20260727` — 86.90%（建立在 86.31% 之上）
+>
+> **轻微污染（已修复）：**
+> - `coder32b_orm_best_20260731` 原 79.07% —— 选择器 `select_compliant_merged4.py`
+>   的 `candidates[1:]` 已丢弃 k5，band 计算不含 k5；经逐题核验，1213 条正确答案中
+>   仅 **5 题**（qid 264/636/883/1128/1512）的 SQL 只在 k5 候选存在、merged4 没有，
+>   属真泄露命中（其余 219 条 pred==k5 是多模型独立写出相同 SQL 的假阳性）。
+>   修复后回退到 merged4 基座预测 → `/home/dameng/project/nl2sql_harness_final/predictions/predictions.jsonl`
+>   独立复评 **EX = 1208/1534 = 78.75%**，0 残留真泄露。harness 贡献真实。
+>
+> **当前权威合规分数：EX 1208/1534 = 78.75%**（`nl2sql_harness_final`）。
+> 另有无 k5 依赖的纯 4 模型 ORM 选择基线 `compliant_clean4_ormband_20260805` = 69.23%
+> （`reports/compliance_clean4_baseline_20260805.md`、`reports/audit_clean4_lineage_20260805.json`）。
+>
+> 详见 AGENTS.md §4（数据红线）与 §15（判定来源红线）。
+
 为 Spider / BIRD 构建合规、可复现、可审计的 Database Agent 实验体系。
 
 ## 主要特点

@@ -1,0 +1,19 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "/home/dameng/bird_dev/dev.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": ["evaluation", "error_analysis"],
+  "forbidden_usage": [
+    "training",
+    "sft",
+    "rl",
+    "prompt_engineering",
+    "few_shot_selection",
+    "model_selection",
+    "retrieval_corpus_for_test"
+  ],
+  "leak_note": "The historical retrieval corpus /home/dameng/bird_dev/dev_train1234.json is a 1234-question subset of this dev split (1233/1234 questions overlap dev) and is FORBIDDEN for any prompt/few-shot/RAG use. This run does NOT use it. Candidate pool k5_detvg (traceable to that corpus) is excluded from selection.",
+  "loaded_at": "2026-08-05T05:09:00Z"
+}

@@ -1,0 +1,51 @@
+{
+  "run_id": "compliant_clean4_ormband_20260805",
+  "date": "2026-08-05",
+  "type": "compliant_baseline_rebuild",
+  "purpose": "Establish a leakage-free BIRD dev baseline after discovering that dev_train1234.json (used as the k5 retrieval few-shot corpus) is a subset of the dev split, causing dev gold SQL to enter prompts and inflating prior numbers (86.31% / 86.90% / 79.07%) — all now invalidated.",
+  "method": "Reuse the already-scored candidate pool runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl, but DROP candidate index 0 (model=k5_detvg, which is 100% traceable to the dev-gold-fed retrieval run e5b_retrieval_k5_v2_merged_detvg_20260725) and re-run ORM-v2 band selection (delta=0.1, result-hash group size tie-break) over the remaining four clean model pools only.",
+  "candidate_sources": {
+    "included": ["agentar-32b", "omnisql-14b", "omnisql-921", "qwen3-14b"],
+    "excluded_leak": "k5_detvg (candidate index 0) — 1534/1534 questions traceable to predictions/e5b_retrieval_k5_v2_merged_detvg_20260725, whose every record carries 5 retrieved_examples drawn from dev_train1234.json = dev minus a 300-question heldout (1233/1234 overlap with dev).",
+    "orm": "qwen3-14b-orm-v2-merged-bf16 (trained only on train-split candidate execution labels; no dev data)"
+  },
+  "metrics": {
+    "total": 1534,
+    "ex": 1062,
+    "ex_rate": 69.23076923076923,
+    "em": 134,
+    "valid": 1533,
+    "valid_rate": 99.9348109517601,
+    "join_total": 1140,
+    "join_ex": 769,
+    "join_ex_rate": 67.45614035087719,
+    "source_file": "metrics/compliant_clean4_ormband_20260805/bird_official_eval.json"
+  },
+  "selection_model_distribution": {
+    "agentar": 863,
+    "omnisql": 393,
+    "omnisql-921": 142,
+    "qwen3": 136
+  },
+  "compliance": {
+    "no_dev_gold_in_prompt": true,
+    "no_k5_detvg_in_selection": true,
+    "final_vs_leaked_baseline_overlap": "226/1534 (14.73%) — within expected trivial-SQL overlap",
+    "leak_audit_report": "reports/audit_clean4_lineage_20260805.json",
+    "audit_status": "PASS",
+    "manual_prediction_edits": 0
+  },
+  "comparison_to_invalidated_runs": {
+    "invalidated_86_31": "e5b_retrieval_k5_v2_merged_detvg_20260725 — retrieval corpus dev_train1234.json is dev subset",
+    "invalidated_86_90": "e6_hybrid_k5_emptyfix_ormv2_20260727 — built on the 86.31% baseline",
+    "invalidated_79_07": "coder32b_orm_best_20260731 — selection pool contained k5_detvg leak candidate"
+  },
+  "artifacts": {
+    "predictions": "predictions/compliant_clean4_ormband_20260805/predictions.jsonl",
+    "metrics": "metrics/compliant_clean4_ormband_20260805/bird_official_eval.json",
+    "selector": "scripts/select_compliant_merged4.py",
+    "audit": "scripts/audit_clean_pool_lineage.py",
+    "audit_report": "reports/audit_clean4_lineage_20260805.json",
+    "scored_pool_source": "runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl"
+  }
+}

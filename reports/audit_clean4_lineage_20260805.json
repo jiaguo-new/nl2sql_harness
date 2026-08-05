@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "name": "pred_count_1534",
+      "ok": true,
+      "detail": "lines=1534"
+    },
+    {
+      "name": "leaked_baseline_loaded",
+      "ok": true,
+      "detail": "lines=1534"
+    },
+    {
+      "name": "pool_k5_is_at_index0_only",
+      "ok": true,
+      "detail": "pool_lines=1534 idx0_k5=1534 k5_at_other_idx=0"
+    },
+    {
+      "name": "pool_prompts_have_no_fewshot_block",
+      "ok": true,
+      "detail": "prompts_with_##_Examples=0"
+    },
+    {
+      "name": "no_k5_detvg_in_selection",
+      "ok": true,
+      "detail": "k5_detvg_selected=0"
+    },
+    {
+      "name": "selection_model_distribution_logged",
+      "ok": true,
+      "detail": "chosen_model_counts={'omnisql': 393, 'agentar': 863, 'qwen3': 136, 'omnisql-921': 142}"
+    },
+    {
+      "name": "final_vs_leaked_overlap_not_abnormal",
+      "ok": true,
+      "detail": "overlap=226/1534 (14.73%); high overlap on trivial SQL is expected, near-100% would indicate the clean run just re-emits the leak"
+    },
+    {
+      "name": "reconstructed_selection_matches_pred",
+      "ok": true,
+      "detail": "sql_mismatch=0 (0-2 expected from float/whitespace edges)"
+    }
+  ],
+  "status": "PASS",
+  "summary": {
+    "pred_file": "predictions/compliant_clean4_ormband_20260805/predictions.jsonl",
+    "scored_pool": "runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl",
+    "leaked_baseline": "predictions/e5b_retrieval_k5_v2_merged_detvg_20260725/predictions.jsonl",
+    "chosen_model_distribution": {
+      "omnisql": 393,
+      "agentar": 863,
+      "qwen3": 136,
+      "omnisql-921": 142
+    },
+    "k5_detvg_selected": 0,
+    "final_vs_leaked_overlap": "226/1534 (14.73%)"
+  }
+}
