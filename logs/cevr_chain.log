@@ -1,0 +1,16 @@
+todo: 330
+  [25/330] {'no_cte_structure': 25}
+  [50/330] {'no_cte_structure': 50}
+  [75/330] {'no_cte_structure': 75}
+  [100/330] {'no_cte_structure': 100}
+  [125/330] {'no_cte_structure': 125}
+  [150/330] {'no_cte_structure': 150}
+  [175/330] {'no_cte_structure': 175}
+  [200/330] {'no_cte_structure': 200}
+  [225/330] {'no_cte_structure': 225}
+  [250/330] {'no_cte_structure': 250}
+  [275/330] {'no_cte_structure': 275}
+  [300/330] {'no_cte_structure': 300}
+  [325/330] {'no_cte_structure': 325}
+done: 330 -> predictions/cevr_repair_20260805/predictions.jsonl
+chosen: {'no_cte_structure': 330}

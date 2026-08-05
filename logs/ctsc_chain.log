@@ -1,0 +1,17 @@
+building template library from train...
+templates: 9428
+todo: 333
+  [25/333]
+  [50/333]
+  [75/333]
+  [100/333]
+  [125/333]
+  [150/333]
+  [175/333]
+  [200/333]
+  [225/333]
+  [250/333]
+  [275/333]
+  [300/333]
+  [325/333]
+done: 333 -> predictions/ctsc_regen_20260805/predictions.jsonl
