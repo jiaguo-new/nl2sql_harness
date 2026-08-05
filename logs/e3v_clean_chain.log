@@ -1,0 +1,21 @@
+fail-qids: 467 questions
+todo: 467
+  [25/467] 0s ETA 3s
+  [50/467] 0s ETA 2s
+  [75/467] 0s ETA 2s
+  [100/467] 1s ETA 5s
+  [125/467] 2s ETA 6s
+  [150/467] 4s ETA 9s
+  [175/467] 8s ETA 13s
+  [200/467] 20s ETA 27s
+  [225/467] 29s ETA 31s
+  [250/467] 32s ETA 28s
+  [275/467] 54s ETA 38s
+  [300/467] 54s ETA 30s
+  [325/467] 55s ETA 24s
+  [350/467] 79s ETA 26s
+  [375/467] 80s ETA 20s
+  [400/467] 84s ETA 14s
+  [425/467] 91s ETA 9s
+  [450/467] 92s ETA 3s
+done: 467 -> /home/dameng/project/nl2sql_harness_clean/predictions/clean_chain_e3v_20260805/predictions.jsonl

@@ -1,0 +1,16 @@
+todo: 373
+  [25/373] 65s
+  [50/373] 131s
+  [75/373] 224s
+  [100/373] 293s
+  [125/373] 335s
+  [150/373] 411s
+  [175/373] 464s
+  [200/373] 520s
+  [225/373] 574s
+  [250/373] 666s
+  [275/373] 723s
+  [300/373] 817s
+  [325/373] 871s
+  [350/373] 927s
+done: 373 -> /home/dameng/project/nl2sql_harness_clean/predictions/clean_chain_regen_20260805/predictions.jsonl

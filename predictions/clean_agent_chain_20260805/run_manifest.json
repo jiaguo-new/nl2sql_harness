@@ -1,0 +1,40 @@
+{
+  "run_id": "clean_agent_chain_20260805",
+  "branch": "exp/clean-pool-no-k5",
+  "worktree": "/home/dameng/project/nl2sql_harness_clean",
+  "date": "2026-08-05",
+  "type": "compliant_full_agent_chain",
+  "description": "Full agent chain run from a physically k5-free candidate pool. Every stage uses only read-only DB tools + GLM-5.2 API; no gold SQL in any prompt. The candidate pool (merged4model_n4_clean_scored_20260805) has k5_detvg physically removed.",
+  "chain": [
+    {"step": "base", "stage": "clean4 ORM band0.05 selection", "ex": 1067, "ex_rate": 69.56},
+    {"step": "step01", "stage": "E3v value grounding", "ex": 1069, "delta": 2},
+    {"step": "step02", "stage": "E4 execution repair", "ex": 1074, "delta": 5},
+    {"step": "step03", "stage": "E2 JOIN repair", "ex": 1077, "delta": 3},
+    {"step": "step04", "stage": "E3c column grounding", "ex": 1103, "delta": 26},
+    {"step": "step05", "stage": "Route A tournament (GLM pairwise judge)", "ex": 1161, "delta": 58},
+    {"step": "step06", "stage": "Deep Regen (GLM from scratch)", "ex": 1189, "delta": 28},
+    {"step": "final", "stage": "leak-fix (4 qids reverted to merged4 base)", "ex": 1187, "delta": -2}
+  ],
+  "final_metrics": {
+    "total": 1534,
+    "ex": 1187,
+    "ex_rate": 77.38,
+    "em": 144,
+    "valid": 1532,
+    "valid_rate": 99.87,
+    "source_file": "predictions/clean_agent_chain_20260805/final_eval_compliant.json"
+  },
+  "predictions_sha256": "9657b9cc992d0f96e596a85d9f19e32b7dfa31356da65061aa9a2c17d79eff9c",
+  "compliance": {
+    "k5_physically_removed_from_pool": true,
+    "no_gold_in_any_prompt": true,
+    "true_leak_hits_after_fix": 0,
+    "audit_status": "PASS",
+    "fix_note": "4 questions (qid 133/1023/1128/1512) whose Deep Regen / Route A output coincidentally matched k5-only SQL were reverted to the merged4 clean-pool base prediction. qid 1128/1512 were EX=True (cost -2); 133/1023 were already wrong (no cost)."
+  },
+  "comparison": {
+    "this_run_compliant": "1187 / 77.38%",
+    "nl2sql_harness_final_compliant": "1208 / 78.75% (includes Coder-32B candidate layer not run here)",
+    "gap": "19 questions (Coder-32B layer not yet added to this clean chain)"
+  }
+}
