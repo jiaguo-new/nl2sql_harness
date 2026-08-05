@@ -1,0 +1,24 @@
+{
+  "pool": "runs/merged4model_n4_clean_scored_20260805.jsonl",
+  "checks": {
+    "k5_detvg_remaining": 0,
+    "questions": 1534,
+    "model_distribution": {
+      "agentar": 6136,
+      "omnisql": 6136,
+      "omnisql-921": 6136,
+      "qwen3": 6136
+    },
+    "fewshot_blocks_in_prompts": 0,
+    "cands_per_q": {
+      "min": 16,
+      "max": 16
+    }
+  },
+  "selection_reproducibility": {
+    "band_0.05_EX": "1067/1534 = 69.56% (reproduces peer claim)",
+    "band_0.1_EX": "1062/1534 = 69.23% (reproduces compliant_clean4)"
+  },
+  "manifest_status": "PASS",
+  "conclusion": "Physically k5-free. Selection-layer results identical to the convention-drop approach, confirming k5 never influenced selection. This is the sanctioned pool for all compliant selection going forward."
+}

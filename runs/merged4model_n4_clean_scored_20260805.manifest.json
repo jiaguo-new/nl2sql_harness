@@ -1,0 +1,22 @@
+{
+  "pool": "runs/merged4model_n4_clean_scored_20260805.jsonl",
+  "source_pool": "/home/dameng/project/nl2sql_harness/runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl",
+  "operation": "physical removal of all candidates with model == 'k5_detvg'",
+  "leak_rationale": "k5_detvg candidates are 100% traceable to predictions/e5b_retrieval_k5_v2_merged_detvg_20260725, whose every record carries 5 retrieved_examples drawn from dev_train1234.json (a 1234-question subset of the dev split; 1233/1234 overlap with dev). Keeping k5 in the selection pool risks leak hits entering the final prediction (5 such hits were found in coder32b_orm_best_20260731).",
+  "guarantees": {
+    "questions": 1534,
+    "k5_detvg_candidates_dropped": 1534,
+    "k5_detvg_remaining": 0,
+    "questions_empty_after_drop": 0,
+    "prompts_with_fewshot_examples_block": 0,
+    "kept_model_distribution": {
+      "agentar": 6136,
+      "omnisql": 6136,
+      "omnisql-921": 6136,
+      "qwen3": 6136
+    }
+  },
+  "status": "PASS",
+  "sanctioned_use": "ONLY selection input for compliant runs",
+  "deprecated_source": "runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl (keep for audit, do not select from)"
+}

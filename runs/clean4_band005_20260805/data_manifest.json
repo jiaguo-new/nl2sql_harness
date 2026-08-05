@@ -1,0 +1,14 @@
+{
+  "dataset": "BIRD",
+  "split": "dev",
+  "source": "/home/dameng/bird_dev/dev.json",
+  "db_root": "/home/dameng/bird_dev/dev_databases",
+  "contains_gold": true,
+  "allowed_usage": ["evaluation", "error_analysis"],
+  "forbidden_usage": [
+    "training", "sft", "rl", "prompt_engineering", "few_shot_selection",
+    "model_selection", "retrieval_corpus_for_test"
+  ],
+  "leak_note": "dev_train1234.json (dev subset) is FORBIDDEN. This run uses a physically k5-free pool; the leaked k5_detvg candidate source is excluded at pool-build time, not by selector convention.",
+  "loaded_at": "2026-08-05T05:45:00Z"
+}

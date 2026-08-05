@@ -1,0 +1,31 @@
+{
+  "run_id": "clean4_band005_20260805",
+  "branch": "exp/clean-pool-no-k5",
+  "worktree": "/home/dameng/project/nl2sql_harness_clean",
+  "date": "2026-08-05",
+  "type": "compliant_baseline_clean_pool",
+  "description": "ORM-v2 band selection (band=0.05) over a PHYSICALLY k5-free candidate pool. k5_detvg was removed at pool-build time (not by selector convention), eliminating any path for dev-gold-fed candidates to enter the final prediction.",
+  "pool": {
+    "file": "runs/merged4model_n4_clean_scored_20260805.jsonl",
+    "sha256": "556f2cc3c4ac3554392d131c30a91d41a6f35cbaaeabaca75bf1badac1086ec4",
+    "k5_detvg_remaining": 0,
+    "source_pool_deprecated": "runs/merged4model_n4_plus_k5_all_scored_vllm.jsonl"
+  },
+  "metrics": {
+    "total": 1534,
+    "ex": 1067,
+    "ex_rate": 69.62164250325945,
+    "valid": 1533,
+    "valid_rate": 99.9348109517601,
+    "source_file": "metrics/clean4_band005_20260805/bird_official_eval.json"
+  },
+  "selection_model_distribution": {"agentar": 863, "omnisql": 390, "qwen3": 139, "omnisql-921": 142},
+  "compliance": {
+    "k5_physically_removed": true,
+    "selector_guard_refuses_k5": true,
+    "no_dev_gold_in_prompt": true,
+    "leak_audit": "reports/audit_clean_pool_20260805.json",
+    "manual_prediction_edits": 0
+  },
+  "predictions_sha256": "3032f0aeece3dc4893c51afe99303b695e6c0edc6f89b0a0ec42ebd02bafda77"
+}
